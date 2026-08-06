@@ -1,0 +1,36 @@
+---
+import Head from '../components/Head.astro'
+import TV from '../components/TV/TV.astro'
+import { LOCALE_CODES } from '../config/site'
+import { localeFromPath } from '../i18n/routes'
+
+interface Props {
+  title: string
+  description: string
+  socialImage?: string
+  socialImageAlt?: string
+  ogType?: 'website' | 'profile'
+  schemas?: object[]
+  noindex?: boolean
+}
+
+const props: Props = Astro.props
+const locale = localeFromPath(Astro.url.pathname)
+---
+
+<html lang={LOCALE_CODES[locale]}>
+  <Head {...props} />
+  <body>
+    <TV>
+      <slot />
+    </TV>
+  </body>
+</html>
+
+<script>
+  import { initHotkeys } from '../modules/keyboard'
+  import { setupClientNavigation } from '../modules/navigation'
+
+  initHotkeys()
+  setupClientNavigation()
+</script>

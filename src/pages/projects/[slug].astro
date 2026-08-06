@@ -1,0 +1,37 @@
+---
+import TVLayout from '../../layouts/TVLayout.astro'
+import ProjectDossier from '../../components/ProjectDossier.astro'
+import { allProjects, localizeProject } from '../../data/projects'
+import type { Project } from '../../data/projects'
+import { projectSchema } from '../../utils/seo'
+
+export function getStaticPaths() {
+  return allProjects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }))
+}
+
+interface Props {
+  project: Project
+}
+
+const { project } = Astro.props
+const locale = 'en'
+const lp = localizeProject(project, locale)
+
+const title = `${project.name} — Project by Olwtelet (Isaac Rodrigues)`
+const description = lp.overview ?? lp.summary
+const socialImage = `/assets/og/project-${project.slug}-${locale}.png`
+const socialImageAlt = `${project.name} — signal file from the portfolio of Olwtelet (Isaac Rodrigues)`
+---
+
+<TVLayout
+  title={title}
+  description={description}
+  socialImage={socialImage}
+  socialImageAlt={socialImageAlt}
+  schemas={[projectSchema(lp, locale)]}
+>
+  <ProjectDossier project={project} locale={locale} />
+</TVLayout>

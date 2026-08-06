@@ -1,0 +1,149 @@
+---
+import type { Project } from '../data/projects'
+import { localizeProject, fileNumber } from '../data/projects'
+import type { Locale } from '../config/site'
+import { projectRoute } from '../i18n/routes'
+import { useTranslations } from '../i18n/translations'
+
+interface Props {
+  projects: Project[]
+  locale: Locale
+}
+
+const { projects, locale }: Props = Astro.props
+const t = useTranslations(locale)
+---
+
+<ul class="project-list">
+  {
+    projects.map((project) => {
+      const lp = localizeProject(project, locale)
+      const href = projectRoute(project.slug)[locale]
+      const externalUrl = lp.websiteUrl || lp.repositoryUrl
+      const externalLabel = lp.websiteUrl
+        ? t.dossier.openWebsite
+        : t.dossier.viewSource
+      return (
+        <li class="project-list__item">
+          <a
+            class="project-list__main"
+            href={href}
+            data-project-link
+            data-slug={project.slug}
+          >
+            <span class="project-list__name">
+              <span class="project-list__number" aria-hidden="true">
+                {fileNumber(project)} /{' '}
+              </span>
+              {project.name}
+            </span>
+            <small class="project-list__summary">{lp.summary}</small>
+            <span class="project-list__meta">
+              {lp.status && (
+                <span>
+                  {t.dossier.status}: {t.status[lp.status]}
+                </span>
+              )}
+              {lp.year && <span>{lp.year}</span>}
+            </span>
+            <span class="project-list__open" aria-hidden="true">
+              [{t.listing.openFile} ►]
+            </span>
+          </a>
+          {externalUrl && (
+            <a
+              class="project-list__external"
+              href={externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {externalLabel} ↗
+            </a>
+          )}
+        </li>
+      )
+    })
+  }
+</ul>
+
+<style>
+  .project-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.4rem;
+
+    @media (min-width: 580px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .project-list__main {
+    display: block;
+    /* neutralize the global link rainbow: selection here is an OSD block */
+    background-image: none !important;
+
+    &:hover,
+    &:focus {
+      outline: none;
+
+      & .project-list__name {
+        background-color: var(--text-secondary);
+        color: #000;
+        text-shadow: none;
+      }
+
+      & .project-list__open {
+        color: var(--text-secondary);
+
+        &::after {
+          content: '';
+          animation: blink 0.8s step-end infinite;
+        }
+      }
+    }
+  }
+
+  .project-list__name {
+    font-size: var(--font-size-secondary);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .project-list__number {
+    color: var(--text-primary);
+  }
+
+  .project-list__summary {
+    display: block;
+    margin-top: 0.4rem;
+    color: var(--text-primary);
+    font-size: var(--font-size-primary);
+  }
+
+  .project-list__meta {
+    display: flex;
+    gap: 1.5ch;
+    flex-wrap: wrap;
+    margin-top: 0.3rem;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .project-list__open {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    transition: color 0.15s;
+  }
+
+  .project-list__external {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+  }
+</style>

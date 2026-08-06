@@ -1,0 +1,269 @@
+---
+import type { Project } from '../data/projects'
+import { localizeProject, fileNumber, nextProject } from '../data/projects'
+import type { Locale } from '../config/site'
+import { projectRoute, routes } from '../i18n/routes'
+import { useTranslations } from '../i18n/translations'
+
+interface Props {
+  project: Project
+  locale: Locale
+}
+
+const { project, locale }: Props = Astro.props
+const t = useTranslations(locale)
+const lp = localizeProject(project, locale)
+const num = fileNumber(project)
+const next = nextProject(project)
+
+const returnPath =
+  project.collection === 'open-source'
+    ? routes.openSource[locale]
+    : routes.websites[locale]
+
+const sections = [
+  { title: t.dossier.overview, text: lp.overview },
+  { title: t.dossier.problem, text: lp.problem },
+  { title: t.dossier.myRole, text: lp.roleDescription },
+  { title: t.dossier.approach, text: lp.approach },
+].filter((s) => Boolean(s.text))
+---
+
+<article class="dossier" data-dossier data-return-url={returnPath}>
+  <header class="dossier__header">
+    <p class="dossier__file">{t.dossier.signalFile} {num}</p>
+    <h1 class="dossier__title" tabindex="-1">{project.name}</h1>
+    <dl class="dossier__data">
+      {
+        lp.status && (
+          <div class="dossier__row">
+            <dt>{t.dossier.status}</dt>
+            <dd>{t.status[lp.status]}</dd>
+          </div>
+        )
+      }
+      {
+        lp.year && (
+          <div class="dossier__row">
+            <dt>{t.dossier.year}</dt>
+            <dd>{lp.year}</dd>
+          </div>
+        )
+      }
+      {
+        lp.role && (
+          <div class="dossier__row">
+            <dt>{t.dossier.role}</dt>
+            <dd>{lp.role}</dd>
+          </div>
+        )
+      }
+      <div class="dossier__row">
+        <dt>{t.dossier.category}</dt>
+        <dd>{t.category[lp.category]}</dd>
+      </div>
+    </dl>
+  </header>
+
+  {
+    sections.map((section) => (
+      <section class="dossier__section">
+        <h2>{section.title}</h2>
+        <p>{section.text}</p>
+      </section>
+    ))
+  }
+
+  {
+    lp.highlights && lp.highlights.length > 0 && (
+      <section class="dossier__section">
+        <h2>{t.dossier.features}</h2>
+        <ul class="dossier__list">
+          {lp.highlights.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    lp.stack && lp.stack.length > 0 && (
+      <section class="dossier__section">
+        <h2>{t.dossier.stack}</h2>
+        <p class="dossier__stack">{lp.stack.join(' / ')}</p>
+      </section>
+    )
+  }
+
+  <footer class="dossier__footer">
+    <h2>{t.dossier.links}</h2>
+    <ul class="dossier__links">
+      {
+        lp.websiteUrl && (
+          <li>
+            <a href={lp.websiteUrl} target="_blank" rel="noopener noreferrer">
+              {t.dossier.openWebsite} ↗
+            </a>
+          </li>
+        )
+      }
+      {
+        lp.repositoryUrl && (
+          <li>
+            <a
+              href={lp.repositoryUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t.dossier.viewSource} ↗
+            </a>
+          </li>
+        )
+      }
+      <li>
+        <a href={returnPath}>◄ {t.dossier.return}</a>
+      </li>
+      <li>
+        <a href={projectRoute(next.slug)[locale]}
+          >{t.dossier.nextFile} {fileNumber(next)} ►</a
+        >
+      </li>
+    </ul>
+    <p class="dossier__esc" aria-hidden="true">{t.dossier.escHint}</p>
+  </footer>
+</article>
+
+<style>
+  .dossier {
+    max-width: 46rem;
+  }
+
+  .dossier__file {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2ch;
+    color: var(--text-primary);
+
+    &::before {
+      content: '■ ';
+      color: var(--text-secondary);
+      animation: blink 1.4s step-end infinite;
+    }
+  }
+
+  .dossier__title {
+    font-size: var(--font-size-secondary);
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin: 0.2rem 0 1.2rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .dossier__data {
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    margin-bottom: 2rem;
+  }
+
+  .dossier__row {
+    display: grid;
+    grid-template-columns: minmax(9ch, 12ch) 1fr;
+    gap: 1ch;
+    padding: 0.3rem 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.18);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+
+    & dt {
+      color: var(--text-primary);
+
+      &::after {
+        content: ':';
+      }
+    }
+
+    & dd {
+      color: var(--text-secondary);
+    }
+  }
+
+  .dossier__section {
+    margin-bottom: 1.8rem;
+
+    & h2 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2ch;
+      color: var(--text-secondary);
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      padding-top: 0.5rem;
+      margin-bottom: 0.6rem;
+
+      &::before {
+        content: '▸ ';
+      }
+    }
+
+    & p {
+      color: var(--text-primary);
+    }
+  }
+
+  .dossier__list {
+    color: var(--text-primary);
+
+    & li {
+      padding-left: 2ch;
+      position: relative;
+
+      &::before {
+        content: '·';
+        position: absolute;
+        left: 0.5ch;
+        color: var(--text-secondary);
+      }
+    }
+  }
+
+  .dossier__stack {
+    text-transform: uppercase;
+  }
+
+  .dossier__footer {
+    margin-top: 2.4rem;
+
+    & h2 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2ch;
+      color: var(--text-secondary);
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      padding-top: 0.5rem;
+      margin-bottom: 0.6rem;
+
+      &::before {
+        content: '▸ ';
+      }
+    }
+  }
+
+  .dossier__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2.5ch;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+  }
+
+  .dossier__esc {
+    margin-top: 1.6rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.2ch;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+</style>

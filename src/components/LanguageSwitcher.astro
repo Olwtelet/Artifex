@@ -1,0 +1,72 @@
+---
+import type { Locale } from '../config/site'
+import { useTranslations } from '../i18n/translations'
+import { homeFor } from '../i18n/routes'
+
+interface Props {
+  locale: Locale
+  /** Equivalent page in the other locale; falls back to its home. */
+  alternatePath: string | null
+}
+
+const { locale, alternatePath }: Props = Astro.props
+const t = useTranslations(locale)
+
+const otherLocale: Locale = locale === 'en' ? 'pt-br' : 'en'
+const otherHreflang = otherLocale === 'en' ? 'en' : 'pt-BR'
+const targetPath = alternatePath ?? homeFor(otherLocale)
+
+const labels: Record<Locale, string> = { en: 'EN', 'pt-br': 'PT-BR' }
+---
+
+<div class="lang-switch" data-lang-switch aria-label={t.lang.label}>
+  <span class="lang-switch__label" aria-hidden="true">AUDIO:</span>
+  <span class="lang-switch__current">{labels[locale]}</span>
+  <span class="lang-switch__sep" aria-hidden="true">/</span>
+  <a
+    href={targetPath}
+    hreflang={otherHreflang}
+    lang={otherHreflang}
+    aria-label={t.lang.switchTo}
+    data-lang={otherLocale}>{labels[otherLocale]}</a
+  >
+</div>
+
+<style>
+  .lang-switch {
+    display: flex;
+    justify-content: inherit;
+    gap: 0.5ch;
+    align-items: baseline;
+  }
+
+  .lang-switch__label {
+    color: var(--text-primary);
+  }
+
+  .lang-switch__current {
+    color: var(--text-secondary);
+
+    &::before {
+      content: '►';
+      font-size: 0.8em;
+      margin-right: 0.3ch;
+    }
+  }
+</style>
+
+<script>
+  // Remember the visitor's explicit choice for convenience only —
+  // no automatic redirects happen based on this value.
+  document.addEventListener('click', (event) => {
+    const target = event.target as Element | null
+    const link = target?.closest?.('[data-lang-switch] a[data-lang]')
+    if (link instanceof HTMLElement && link.dataset.lang) {
+      try {
+        localStorage.setItem('preferred-lang', link.dataset.lang)
+      } catch {
+        /* storage unavailable — nothing to do */
+      }
+    }
+  })
+</script>

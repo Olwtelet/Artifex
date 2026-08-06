@@ -1,0 +1,15 @@
+---
+import TVLayout from '../../layouts/TVLayout.astro'
+import PlaylistList from '../../components/PlaylistList.astro'
+
+const title = 'Playlists de Olwtelet (Isaac Rodrigues)'
+const description =
+  'As playlists que Olwtelet (Isaac Rodrigues) monta para focar, programar e atravessar o dia — rock brasileiro, faixas de estrada e rádio de madrugada.'
+---
+
+<TVLayout title={title} description={description}>
+  <article>
+    <h1 class="index-title">PLAYLISTS · TOCANDO AGORA</h1>
+    <PlaylistList locale="pt-br" />
+  </article>
+</TVLayout>

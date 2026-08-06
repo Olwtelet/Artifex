@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://olwtelet.vercel.app/sitemap-index.xml

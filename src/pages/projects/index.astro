@@ -1,0 +1,29 @@
+---
+import TVLayout from '../../layouts/TVLayout.astro'
+import ProjectList from '../../components/ProjectList.astro'
+import { allProjects, getProjectsByCollection } from '../../data/projects'
+import { useTranslations } from '../../i18n/translations'
+
+const locale = 'en'
+const t = useTranslations(locale)
+const openSource = getProjectsByCollection('open-source')
+const websites = getProjectsByCollection('websites')
+const count = String(allProjects.length).padStart(2, '0')
+
+const title = 'Project Archive — Olwtelet (Isaac Rodrigues)'
+const description =
+  'The complete project archive of Olwtelet (Isaac Rodrigues) — open-source tools, client websites, and community platforms, each recorded as its own signal file.'
+---
+
+<TVLayout title={title} description={description}>
+  <article>
+    <h1 class="index-title">
+      SIGNAL ARCHIVE · {count}
+      {t.listing.files}
+    </h1>
+    <h2 class="index-subtitle">OPEN SOURCE</h2>
+    <ProjectList projects={openSource} locale={locale} />
+    <h2 class="index-subtitle spacer-t">WEBSITES</h2>
+    <ProjectList projects={websites} locale={locale} />
+  </article>
+</TVLayout>

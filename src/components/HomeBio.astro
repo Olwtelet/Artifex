@@ -1,0 +1,91 @@
+---
+import { SITE } from '../config/site'
+import type { Locale } from '../config/site'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale }: Props = Astro.props
+const headline = `${SITE.displayName} · ${SITE.author} — ${SITE.tagline[locale]}`
+const prefix = locale === 'en' ? 'NOW RECEIVING:' : 'RECEBENDO AGORA:'
+---
+
+<article class="bio">
+  <h1 class="bio__signal">
+    <span aria-hidden="true">{prefix}&nbsp;</span>{headline}
+  </h1>
+  <slot />
+</article>
+
+<style is:global>
+  .bio__signal {
+    font-size: 0.72rem;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.2ch;
+    color: var(--text-primary);
+    margin-bottom: 1.6rem;
+
+    & span::before {
+      content: '● ';
+      color: #f00;
+      animation: blink 1.4s step-end infinite;
+    }
+  }
+
+  .bio p + p {
+    margin-top: 1.2rem;
+  }
+
+  .bio__photo {
+    position: relative;
+    color: var(--text-secondary);
+    border-bottom: 1px dashed var(--text-primary);
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: var(--layer-me-hover);
+      top: calc(100% + 1em);
+      left: 1rem;
+      width: 14rem;
+      padding-bottom: 14rem;
+      visibility: hidden;
+      background-size: cover;
+    }
+
+    &:hover::after,
+    &:focus::after,
+    &[aria-pressed='true']::after {
+      background-image: url(/assets/images/me.jpg);
+      transition: visibility 0s 0.2s;
+      visibility: visible;
+    }
+
+    html.webp &:hover::after,
+    html.webp &:focus::after,
+    html.webp &[aria-pressed='true']::after {
+      background-image: url(/assets/images/me.webp);
+    }
+  }
+</style>
+
+<script>
+  // Toggle for the photo easter egg so it works on touch, not only hover.
+  // Delegated once; survives ClientRouter swaps.
+  document.addEventListener('click', (event) => {
+    const target = event.target as Element | null
+    const toggle = target?.closest?.('.js-photo-toggle')
+
+    document.querySelectorAll('.js-photo-toggle').forEach((button) => {
+      if (button === toggle) {
+        const pressed = button.getAttribute('aria-pressed') === 'true'
+        button.setAttribute('aria-pressed', String(!pressed))
+      } else {
+        button.setAttribute('aria-pressed', 'false')
+      }
+    })
+  })
+</script>

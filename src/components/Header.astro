@@ -1,0 +1,218 @@
+---
+import HeaderControls from './HeaderControls.svelte'
+import LanguageSwitcher from './LanguageSwitcher.astro'
+import {
+  localeFromPath,
+  normalizePath,
+  alternatePathFor,
+  routes,
+} from '../i18n/routes'
+import { useTranslations } from '../i18n/translations'
+
+const currentPath = normalizePath(Astro.url.pathname)
+const locale = localeFromPath(currentPath)
+const t = useTranslations(locale)
+const homePath = routes.home[locale]
+const isHome = currentPath === homePath
+
+const otherLocale = locale === 'en' ? ('pt-br' as const) : ('en' as const)
+const alternatePath = alternatePathFor(currentPath, otherLocale)
+
+// List of primary navigation pages for the home screen menu.
+const homeNav = [
+  { label: t.nav.openSource, href: routes.openSource[locale] },
+  { label: t.nav.websites, href: routes.websites[locale] },
+]
+
+// Build breadcrumb segments for inner pages, accumulating hrefs.
+// The locale prefix (pt-br) is folded into the root "OLW" crumb.
+let breadcrumb: { label: string; href: string }[] = []
+if (!isHome) {
+  const parts = currentPath.split('/').filter(Boolean)
+  const items = []
+  const acc = []
+  for (const part of parts) {
+    acc.push(part)
+    if (part === 'pt-br') continue
+    const href = '/' + acc.join('/') + '/'
+    items.push({ label: part, href })
+  }
+  breadcrumb = items
+}
+
+// The editable final breadcrumb label used by the text navigation.
+const currentPageLabel = breadcrumb[breadcrumb.length - 1]?.label || 'home'
+
+const dateLocale = locale === 'pt-br' ? 'pt-BR' : 'en-US'
+const buildTimeDate = new Intl.DateTimeFormat(dateLocale, {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+}).format(new Date())
+---
+
+<header class="header">
+  <div class="header__container">
+    <nav class="nav">
+      {
+        isHome ? (
+          <>
+            <ul class="nav__breadcrumb">
+              <li>OLW</li>
+            </ul>
+            <ul class="nav__menu">
+              {homeNav.map((item) => (
+                <li>
+                  <a href={item.href}>{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <ul class="nav__breadcrumb">
+            <li>
+              <a href={homePath}>OLW</a>
+            </li>
+            {breadcrumb.slice(0, -1).map((b) => (
+              <li>
+                <a href={b.href}>{b.label}</a>
+              </li>
+            ))}
+            <li
+              class="js-text-nav text-nav"
+              contenteditable
+              role="textbox"
+              aria-label={t.header.textNavLabel}
+              data-original-text={currentPageLabel}
+            >
+              {currentPageLabel}
+            </li>
+          </ul>
+        )
+      }
+    </nav>
+
+    <div class="header__info">
+      <div class="js-header-date">
+        {buildTimeDate}
+      </div>
+      <div transition:persist="channel-controls">
+        <HeaderControls client:only="svelte" transition:persist />
+      </div>
+      <LanguageSwitcher locale={locale} alternatePath={alternatePath} />
+      <noscript>
+        <div>CHANNEL 00</div>
+      </noscript>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: relative;
+    min-height: 300px;
+    height: 50vh;
+    margin-bottom: 2.07rem;
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  .header__container {
+    position: sticky;
+    top: 100px;
+  }
+
+  @media (min-width: 500px) {
+    .header__container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .header__info {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
+
+  .nav__breadcrumb {
+    display: flex;
+    align-items: center;
+    min-height: 28px;
+
+    & li {
+      &:not(:last-child)::after {
+        content: ' /';
+        margin-right: 1ch;
+      }
+
+      &:last-child {
+        display: flex;
+        align-items: center;
+
+        &::after {
+          margin-left: 0.5ch;
+          content: '►';
+          font-size: 1.2em;
+        }
+
+        &:focus-within::after {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav {
+      margin-bottom: 2rem;
+    }
+
+    .nav__menu li {
+      margin-top: 0.6rem;
+    }
+  }
+
+  .text-nav {
+    position: relative;
+    caret-color: transparent;
+    user-select: text;
+    cursor: var(--cursor-pointer);
+
+    &:focus {
+      outline: none;
+
+      &::before {
+        content: '_';
+        position: absolute;
+        bottom: 0;
+        left: calc(var(--caret-position, -9999) * 1ch);
+        animation: blink 0.8s step-end infinite;
+      }
+    }
+  }
+</style>
+
+<script>
+  import { initTextNav } from '../modules/textNav'
+
+  // update to the browser's current date, matching the page locale
+  function updateHeaderDate() {
+    const dateEl = document.querySelector('.js-header-date')
+
+    if (dateEl) {
+      const lang = document.documentElement.lang || 'en'
+      dateEl.innerHTML = new Intl.DateTimeFormat(lang, {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      }).format(new Date())
+    }
+  }
+
+  updateHeaderDate()
+  document.addEventListener('astro:page-load', updateHeaderDate)
+
+  initTextNav()
+</script>

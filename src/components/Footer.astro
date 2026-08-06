@@ -1,0 +1,39 @@
+---
+import SpaceTrigger from './SpaceTrigger.svelte'
+import { SITE } from '../config/site'
+import { localeFromPath, routes } from '../i18n/routes'
+import { useTranslations } from '../i18n/translations'
+
+const locale = localeFromPath(Astro.url.pathname)
+const t = useTranslations(locale)
+---
+
+<footer class="footer" id="footer">
+  <ul class="link-list">
+    <li>
+      <a href={routes.resume[locale]} target="_blank" rel="noopener noreferrer"
+        >{t.footer.resume}</a
+      >
+    </li>
+    <li>
+      <a href={`mailto:${SITE.email}`}>{t.footer.email}</a>
+    </li>
+    <li>
+      <a href={SITE.social.linkedin} rel="noopener noreferrer" target="_blank"
+        >{t.footer.linkedin}</a
+      >
+    </li>
+  </ul>
+  <SpaceTrigger client:only="svelte" transition:persist />
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-self: flex-end;
+    margin-top: 160px;
+    padding-bottom: var(--gui-bottom);
+  }
+</style>

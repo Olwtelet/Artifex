@@ -1,0 +1,220 @@
+---
+import '../styles/main.css'
+import { ClientRouter } from 'astro:transitions'
+
+import { SITE, LOCALE_CODES, OG_LOCALES, DEFAULT_LOCALE } from '../config/site'
+import type { Locale } from '../config/site'
+import {
+  localeFromPath,
+  normalizePath,
+  alternatesForPath,
+} from '../i18n/routes'
+import {
+  absoluteUrl,
+  serializeJsonLd,
+  breadcrumbSchema,
+  jsonLdDocument,
+} from '../utils/seo'
+
+interface Props {
+  /** Full, already-localized page title. */
+  title: string
+  /** Specific, already-localized meta description. */
+  description: string
+  /** Site-relative path of the social image (1200x630). */
+  socialImage?: string
+  socialImageAlt?: string
+  ogType?: 'website' | 'profile'
+  /** Extra JSON-LD nodes merged into the page @graph. */
+  schemas?: object[]
+  noindex?: boolean
+}
+
+const {
+  title,
+  description,
+  socialImage,
+  socialImageAlt,
+  ogType = 'website',
+  schemas = [],
+  noindex = false,
+}: Props = Astro.props
+
+const path = normalizePath(Astro.url.pathname)
+const locale: Locale = localeFromPath(path)
+const otherLocale: Locale = locale === 'en' ? 'pt-br' : 'en'
+
+const canonicalUrl = absoluteUrl(path)
+const alternates = alternatesForPath(path)
+
+const metaDescription = description.trim()
+const image = socialImage || SITE.ogImage[locale]
+const imageUrl = absoluteUrl(image)
+const imageAlt =
+  socialImageAlt ||
+  `${SITE.displayName} — ${SITE.author}, ${SITE.jobTitle[locale]}`
+
+// Breadcrumb structured data for inner pages (home has its own schemas).
+const isHome = path === '/' || path === '/pt-br/'
+const jsonLdNodes = [...schemas]
+if (!isHome && !noindex) {
+  const segments = path.split('/').filter(Boolean)
+  const crumbs: { name: string; path: string }[] = [
+    {
+      name: SITE.displayName,
+      path: locale === DEFAULT_LOCALE ? '/' : '/pt-br/',
+    },
+  ]
+  const acc: string[] = []
+  for (const segment of segments) {
+    acc.push(segment)
+    if (segment === 'pt-br') continue
+    crumbs.push({ name: segment, path: '/' + acc.join('/') + '/' })
+  }
+  jsonLdNodes.push(breadcrumbSchema(crumbs))
+}
+---
+
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,viewport-fit=cover"
+  />
+  <title>{title}</title>
+  <meta name="description" content={metaDescription} />
+  <meta name="author" content={SITE.author} />
+  <meta
+    name="robots"
+    content={noindex
+      ? 'noindex, nofollow'
+      : 'index, follow, max-image-preview:large'}
+  />
+  <meta name="theme-color" content="#000000" />
+  <link rel="canonical" href={canonicalUrl} />
+
+  {
+    !noindex && alternates.en && (
+      <link
+        rel="alternate"
+        hreflang={LOCALE_CODES.en}
+        href={absoluteUrl(alternates.en)}
+      />
+    )
+  }
+  {
+    !noindex && alternates['pt-br'] && (
+      <link
+        rel="alternate"
+        hreflang={LOCALE_CODES['pt-br']}
+        href={absoluteUrl(alternates['pt-br'])}
+      />
+    )
+  }
+  {
+    !noindex && alternates.en && (
+      <link
+        rel="alternate"
+        hreflang="x-default"
+        href={absoluteUrl(alternates.en)}
+      />
+    )
+  }
+
+  <!-- Open Graph -->
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={metaDescription} />
+  <meta property="og:site_name" content={SITE.displayName} />
+  <meta property="og:locale" content={OG_LOCALES[locale]} />
+  <meta property="og:locale:alternate" content={OG_LOCALES[otherLocale]} />
+  <meta property="og:image" content={imageUrl} />
+  <meta property="og:image:alt" content={imageAlt} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={metaDescription} />
+  <meta name="twitter:image" content={imageUrl} />
+  <meta name="twitter:image:alt" content={imageAlt} />
+
+  {
+    jsonLdNodes.length > 0 && (
+      <script
+        is:inline
+        type="application/ld+json"
+        set:html={serializeJsonLd(jsonLdDocument(jsonLdNodes))}
+      />
+    )
+  }
+
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Preloads: only assets visible on first paint -->
+  <link
+    rel="preload"
+    href="/assets/fonts/VCROSDMono.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  />
+  <link rel="preload" as="image" href="/assets/images/effect-static.webp" />
+  <link rel="preload" as="image" href="/assets/images/effect-artifacts.webp" />
+  <link rel="preload" as="image" href="/assets/images/rainbow-static.webp" />
+
+  <!-- from https://github.com/djpogo/avif-webp-css-support/ -->
+  <script>
+    const webpImage =
+      'data:image/webp;base64,UklGRi4AAABXRUJQVlA4TCEAAAAvAUAAEB8wA' +
+      'iMwAgSSNtse/cXjxyCCmrYNWPwmHRH9jwMA'
+    const avifImage =
+      'data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUEAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAF0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgS0AAAAAABNjb2xybmNseAACAAIAAIAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAAGVtZGF0EgAKBzgAPtAgIAkyUBAAAPWc41TP///4gHBX9H8XVK7gGeDllq8TYARA+8Tfsv7L+zPE24eIoIzE0WhHbrqcrTK9VEgEG/hwgB5rdCbvP8g3KYPdV88CvPJnptgQ'
+
+    function alreadyTested(format: string) {
+      if (!!window.sessionStorage) {
+        return JSON.parse(
+          window.sessionStorage.getItem(format + 'Support') ?? 'null'
+        )
+      }
+      return null
+    }
+
+    function addClass(format: string, support: boolean) {
+      if (support) {
+        document.documentElement.classList.add(format)
+      }
+      window.sessionStorage.setItem(format + 'Support', JSON.stringify(support))
+    }
+
+    function testFormat(
+      format: string,
+      imageSrc: string,
+      callback: (format: string, support: boolean) => void
+    ) {
+      const tested = alreadyTested(format)
+      if (tested === null) {
+        const image = new Image()
+        image.onload = image.onerror = function () {
+          callback(format, image.height === 2)
+        }
+        image.src = imageSrc
+        return
+      }
+      addClass(format, tested)
+    }
+    testFormat('webp', webpImage, addClass)
+    testFormat('avif', avifImage, addClass)
+  </script>
+
+  <ClientRouter />
+</head>

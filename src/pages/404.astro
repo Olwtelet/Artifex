@@ -1,0 +1,61 @@
+---
+import TVLayout from '../layouts/TVLayout.astro'
+import { routes } from '../i18n/routes'
+
+// Vercel serves a single static 404 page for every missing URL,
+// so this screen carries both languages.
+const title = 'NO SIGNAL — 404 — Olwtelet'
+const description =
+  'Error 404 — channel not found. This page does not exist. / Erro 404 — canal não encontrado. Esta página não existe.'
+---
+
+<TVLayout title={title} description={description} noindex>
+  <article class="no-signal">
+    <p class="no-signal__status" aria-hidden="true">ERROR 404</p>
+    <h1 class="no-signal__title big-text glitchy-text">NO SIGNAL</h1>
+    <div class="no-signal__lang">
+      <p>
+        CHANNEL NOT FOUND — THE PAGE YOU TUNED INTO DOES NOT EXIST.
+        <br />
+        <a href={routes.home.en}>RETURN TO CHANNEL 00</a>
+      </p>
+      <p lang="pt-BR">
+        CANAL NÃO ENCONTRADO — A PÁGINA QUE VOCÊ SINTONIZOU NÃO EXISTE.
+        <br />
+        <a href={routes.home['pt-br']}>VOLTAR AO CANAL 00</a>
+      </p>
+    </div>
+  </article>
+</TVLayout>
+
+<style>
+  .no-signal {
+    text-align: center;
+    margin: auto;
+    max-width: 34rem;
+  }
+
+  .no-signal__status {
+    font-size: 0.8rem;
+    letter-spacing: 0.3ch;
+    text-transform: uppercase;
+
+    &::before {
+      content: '■ ';
+      color: #f00;
+      animation: blink 0.8s step-end infinite;
+    }
+  }
+
+  .no-signal__title {
+    color: var(--text-secondary);
+    margin: 0.4rem 0 1.6rem;
+  }
+
+  .no-signal__lang {
+    display: grid;
+    gap: 1.4rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+  }
+</style>

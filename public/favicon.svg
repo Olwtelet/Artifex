@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#000000"/>
+  <g stroke="#f1f2f6" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M20 6 L32 18 L46 4"/>
+    <rect x="6" y="18" width="52" height="40" rx="3"/>
+  </g>
+  <!-- SMPTE color bars on the screen -->
+  <g>
+    <rect x="12" y="24" width="8" height="28" fill="#c0c0c0"/>
+    <rect x="20" y="24" width="8" height="28" fill="#c0c000"/>
+    <rect x="28" y="24" width="8" height="28" fill="#00c0c0"/>
+    <rect x="36" y="24" width="8" height="28" fill="#00c000"/>
+    <rect x="44" y="24" width="8" height="28" fill="#c000c0"/>
+  </g>
+  <!-- scanlines -->
+  <g fill="#000000" opacity="0.25">
+    <rect x="12" y="26" width="40" height="1.5"/>
+    <rect x="12" y="30" width="40" height="1.5"/>
+    <rect x="12" y="34" width="40" height="1.5"/>
+    <rect x="12" y="38" width="40" height="1.5"/>
+    <rect x="12" y="42" width="40" height="1.5"/>
+    <rect x="12" y="46" width="40" height="1.5"/>
+    <rect x="12" y="50" width="40" height="1.5"/>
+  </g>
+</svg>

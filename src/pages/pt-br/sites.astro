@@ -1,0 +1,25 @@
+---
+import TVLayout from '../../layouts/TVLayout.astro'
+import ProjectList from '../../components/ProjectList.astro'
+import { getProjectsByCollection } from '../../data/projects'
+import { useTranslations } from '../../i18n/translations'
+
+const locale = 'pt-br'
+const t = useTranslations(locale)
+const projects = getProjectsByCollection('websites')
+const count = String(projects.length).padStart(2, '0')
+
+const title = 'Sites — Olwtelet (Isaac Rodrigues)'
+const description =
+  'Sites criados por Olwtelet (Isaac Rodrigues) — trabalhos para clientes, páginas institucionais e plataformas de comunidade feitos com Astro e TypeScript, cada um com seu arquivo de sinal.'
+---
+
+<TVLayout title={title} description={description}>
+  <article>
+    <h1 class="index-title">
+      {t.listing.channelIndex} — SITES · {count}
+      {t.listing.files}
+    </h1>
+    <ProjectList projects={projects} locale={locale} />
+  </article>
+</TVLayout>
