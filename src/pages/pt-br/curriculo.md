@@ -25,9 +25,11 @@ Sou estudante de Ciência da Computação e desenvolvedor full-stack em Brasíli
 
 ### Alguns Projetos
 
+- **[`Argus`](https://github.com/Olwtelet/Argus)**: plataforma self-hosted de inteligência de fontes abertas que normaliza dezenas de feeds públicos — aeronaves, embarcações, satélites, dados sísmicos e de infraestrutura — em um único mapa ao vivo. Backend Python/FastAPI, painel Next.js com MapLibre GL, casca desktop em Tauri, imagens Docker, AGPL-3.0.
+- **[`AuroraCore`](https://github.com/Olwtelet/AuroraCore)**: agente de programação em Rust, fork do Codex da OpenAI, com harnesses trocáveis em tempo de execução, ajustados para extrair bons resultados de modelos de baixo custo entre Kimi, DeepSeek, Claude e Qwen. Fala MCP e o Agent Client Protocol.
+- **[`AgentForge`](https://github.com/Olwtelet/AgentForge)**: ~90 exemplos executáveis implementando o mesmo agente em dez frameworks, com contrato compartilhado e bancada de benchmark medindo latência, uso de tokens e taxa de falha em pé de igualdade.
 - **[`Filmes HD Online Grátis`](https://filmeshdonlinegratis.vercel.app)**: plataforma de curadoria de cinema e arquivo da comunidade — Astro, TypeScript e Supabase com entrada pelo Discord, autorização por RLS no servidor e um design system baseado na carta de ajuste SMPTE. Nenhuma rota passa de 13 KB de JavaScript.
-- **[`Resumex`](https://github.com/Olwtelet/Resumex)**: pipeline de automação que coleta posts do Reddit, pontua o potencial de vídeo curto e renderiza os vídeos de ponta a ponta.
-- **[`AgentForge`](https://github.com/Olwtelet/AgentForge)**: bancada para construir, testar e comparar frameworks de IA multiagente com fluxos de RAG.
+- **[`Resumex`](https://github.com/Olwtelet/Resumex)**: pipeline totalmente offline que transforma um arquivo de história em vídeo vertical pronto, derivando o tempo das legendas da síntese de voz e renderizando em uma única passada determinística do FFmpeg.
 - **[`Obsidian Second Brain`](https://github.com/Olwtelet/Obsidian-Second-Brain)**: cofre público com fundamentos de CC, cheatsheets de estruturas de dados e registros diários de estudo.
 
 ### Experiência Profissional
@@ -45,6 +47,15 @@ Sou estudante de Ciência da Computação e desenvolvedor full-stack em Brasíli
 
 - Construí o site de um escritório brasileiro de direito civil e empresarial usando Astro, TypeScript e Tailwind CSS.
 - Foco em fundamentos de SEO, carregamento rápido e apresentação clara das áreas de atuação.
+
+**[CT Thalita Rodrigues](https://thalitacademy.vercel.app/)**: site de centro de treinamento de tênis
+
+<!-- TODO(owner): adicionar a data de entrega e confirmar se foi um trabalho
+     pago para cliente ou feito para a família, para o enquadramento ficar exato. -->
+
+- Construí o site de um centro de treinamento de tênis e beach tennis em Brasília usando Next.js e React.
+- Implementei o caminho de agendamento da aula experimental e a passagem para o WhatsApp, que trazem as novas matrículas.
+- Estruturei a área de conteúdo contínuo — guias de técnica, vídeos de treino, inscrição e resultados de torneios — para os alunos já matriculados.
 
 **[Instituto Politécnico do Brasil](https://instituto-politecnico-do-brasil.vercel.app/)**: site institucional de ONG (jan 2026)
 

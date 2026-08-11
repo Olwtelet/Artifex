@@ -103,6 +103,24 @@ function header({ leftLabel, rightLabel }) {
   ${plainText({ x: W - 300, y: 96, size: 28, text: rightLabel, fill: '#a0a0a0', spacing: 4 })}`
 }
 
+/**
+ * Join a stack list, dropping trailing entries that would run past the frame.
+ * At 28px monospace roughly 46 characters fit inside the safe area.
+ */
+const STACK_MAX_CHARS = 46
+
+function fitStack(stack) {
+  const parts = []
+  for (const item of stack) {
+    const candidate = [...parts, item].join(' / ')
+    if (parts.length > 0 && candidate.length > STACK_MAX_CHARS) {
+      return parts.join(' / ') + ' / …'
+    }
+    parts.push(item)
+  }
+  return parts.join(' / ')
+}
+
 /** Wrap a long name into lines that fit the frame at a given font size. */
 function fitName(name) {
   if (name.length <= 14) return { size: 92, lines: [name] }
@@ -164,7 +182,7 @@ function projectSvg(project, locale) {
 
   const meta = []
   meta.push(t.category[lp.category])
-  if (lp.stack?.length) meta.push(lp.stack.join(' / '))
+  if (lp.stack?.length) meta.push(fitStack(lp.stack))
   const statusLine = lp.status
     ? `${t.dossier.status}: ${t.status[lp.status]}${lp.year ? ` · ${lp.year}` : ''}`
     : lp.year || ''
