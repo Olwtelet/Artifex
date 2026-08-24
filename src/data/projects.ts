@@ -117,53 +117,6 @@ export const allProjects: Project[] = [
     repositoryUrl: 'https://github.com/Olwtelet/Argus',
   },
   {
-    slug: 'auroracore',
-    name: 'AuroraCore',
-    collection: 'open-source',
-    category: 'open-source',
-    status: 'work-in-progress',
-    role: {
-      en: 'Creator and maintainer',
-      'pt-br': 'Criador e mantenedor',
-    },
-    summary: {
-      en: 'Rust coding agent tuned to get strong results out of low-cost models',
-      'pt-br':
-        'Agente de programação em Rust ajustado para extrair bons resultados de modelos de baixo custo',
-    },
-    overview: {
-      en: 'AuroraCore is a coding agent written in Rust — a fork of OpenAI’s Codex that reimplements the agent harness with a different priority: getting strong performance out of cheap models rather than assuming the most expensive one is available. It runs against Kimi, DeepSeek, Claude, Qwen, and other providers.',
-      'pt-br':
-        'O AuroraCore é um agente de programação escrito em Rust — um fork do Codex da OpenAI que reimplementa o harness do agente com outra prioridade: extrair bom desempenho de modelos baratos em vez de assumir que o mais caro está disponível. Ele funciona com Kimi, DeepSeek, Claude, Qwen e outros provedores.',
-    },
-    problem: {
-      en: 'A coding agent’s results depend as much on its harness — how it frames the task, tools, and context — as on the model behind it. A harness tuned for one frontier model tends to waste tokens and lose accuracy when pointed at a cheaper one.',
-      'pt-br':
-        'O resultado de um agente de programação depende tanto do harness — como ele enquadra a tarefa, as ferramentas e o contexto — quanto do modelo por trás. Um harness afinado para um modelo de fronteira tende a desperdiçar tokens e perder precisão quando apontado para um mais barato.',
-    },
-    approach: {
-      en: 'Harnesses are swappable at runtime through a `/harness` command, so the same agent can emulate the native, claude-code, kimi-code, or swe-agent shapes depending on what the model responds best to. The project deliberately builds on shared standards — AGENTS.md, `.agents/skills` directories, MCP, and the Agent Client Protocol — so that, as the README puts it, it "should fit into your existing agent setup instead of trapping it".',
-      'pt-br':
-        'Os harnesses são trocáveis em tempo de execução por um comando `/harness`, então o mesmo agente pode emular os formatos native, claude-code, kimi-code ou swe-agent conforme o que o modelo responde melhor. O projeto se apoia deliberadamente em padrões compartilhados — AGENTS.md, diretórios `.agents/skills`, MCP e o Agent Client Protocol — para que, como diz o README, ele "caiba no seu setup de agentes existente em vez de prendê-lo".',
-    },
-    highlights: {
-      en: [
-        'Swap agent harnesses at runtime to match the provider in use',
-        'Sandboxed command execution on macOS, Linux, and Windows',
-        'Speaks the Agent Client Protocol and stays compatible with the Codex SDK',
-        'Ships a QA skill for driving web and native applications',
-      ],
-      'pt-br': [
-        'Troca de harness em tempo de execução para casar com o provedor em uso',
-        'Execução de comandos em sandbox no macOS, Linux e Windows',
-        'Fala o Agent Client Protocol e mantém compatibilidade com o SDK do Codex',
-        'Inclui uma skill de QA para dirigir aplicações web e nativas',
-      ],
-    },
-    stack: ['Rust', 'TypeScript', 'Bazel', 'MCP'],
-    repositoryUrl: 'https://github.com/Olwtelet/AuroraCore',
-  },
-  {
     slug: 'agentforge',
     name: 'AgentForge',
     collection: 'open-source',

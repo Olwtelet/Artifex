@@ -26,7 +26,6 @@ I'm a Computer Science student and full-stack developer based in Brasília, Braz
 ### Some Projects
 
 - **[`Argus`](https://github.com/Olwtelet/Argus)**: self-hosted open-source intelligence platform that normalizes dozens of public feeds — aircraft, vessels, satellites, seismic and infrastructure data — onto one live map. Python/FastAPI backend, Next.js dashboard with MapLibre GL, Tauri desktop shell, Docker images, AGPL-3.0.
-- **[`AuroraCore`](https://github.com/Olwtelet/AuroraCore)**: coding agent in Rust, forked from OpenAI Codex, with runtime-swappable agent harnesses tuned to get strong results from low-cost models across Kimi, DeepSeek, Claude, and Qwen. Speaks MCP and the Agent Client Protocol.
 - **[`AgentForge`](https://github.com/Olwtelet/AgentForge)**: ~90 runnable examples implementing the same agent across ten frameworks, with a shared agent contract and benchmark harness measuring latency, token usage, and failure rate on equal footing.
 - **[`Filmes HD Online Grátis`](https://filmeshdonlinegratis.vercel.app)**: film curation platform and community archive — Astro, TypeScript, and Supabase with Discord sign-in, server-side RLS authorization, and an SMPTE test-card design system. No route ships more than 13 KB of JavaScript.
 - **[`Resumex`](https://github.com/Olwtelet/Resumex)**: fully offline pipeline that turns a story file into a finished vertical video, deriving caption timing from the speech synthesis output and rendering in a single deterministic FFmpeg pass.
