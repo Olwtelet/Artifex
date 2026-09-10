@@ -145,12 +145,12 @@ function homeSvg(locale) {
     locale === 'en'
       ? {
           role: 'FULL-STACK DEVELOPER',
-          areas: 'APPLIED AI / WEB / AUTOMATION',
+          areas: 'APPLIED AI / WEB / AUTOMATION / SECURITY',
           place: 'BRASÍLIA, BRAZIL',
         }
       : {
           role: 'DESENVOLVEDOR FULL-STACK',
-          areas: 'IA APLICADA / WEB / AUTOMAÇÃO',
+          areas: 'IA APLICADA / WEB / AUTOMAÇÃO / SEGURANÇA',
           place: 'BRASÍLIA, BRASIL',
         }
 

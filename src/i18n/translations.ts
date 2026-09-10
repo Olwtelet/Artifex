@@ -82,6 +82,9 @@ const translations = {
       outro:
         'These playlists help me go through my day-to-day life and to focus on literally anything. They are constant work-in-progress.',
     },
+    certificates: {
+      outro: 'Each certificate opens its official verification page.',
+    },
   },
   'pt-br': {
     skipToContent: 'Pular para o conteúdo',
@@ -159,6 +162,9 @@ const translations = {
     playlists: {
       outro:
         'Essas playlists me ajudam a atravessar o dia a dia e a focar em literalmente qualquer coisa. Elas são um trabalho em progresso constante.',
+    },
+    certificates: {
+      outro: 'Cada certificado abre a sua página oficial de verificação.',
     },
   },
 } as const

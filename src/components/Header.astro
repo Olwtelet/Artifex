@@ -25,7 +25,7 @@ const homeNav = [
 ]
 
 // Build breadcrumb segments for inner pages, accumulating hrefs.
-// The locale prefix (pt-br) is folded into the root "OLW" crumb.
+// The locale prefix (en) is folded into the root "OLW" crumb.
 let breadcrumb: { label: string; href: string }[] = []
 if (!isHome) {
   const parts = currentPath.split('/').filter(Boolean)
@@ -33,7 +33,7 @@ if (!isHome) {
   const acc = []
   for (const part of parts) {
     acc.push(part)
-    if (part === 'pt-br') continue
+    if (acc.length === 1 && part === 'en') continue
     const href = '/' + acc.join('/') + '/'
     items.push({ label: part, href })
   }
@@ -202,7 +202,7 @@ const buildTimeDate = new Intl.DateTimeFormat(dateLocale, {
     const dateEl = document.querySelector('.js-header-date')
 
     if (dateEl) {
-      const lang = document.documentElement.lang || 'en'
+      const lang = document.documentElement.lang || 'pt-BR'
       dateEl.innerHTML = new Intl.DateTimeFormat(lang, {
         month: 'short',
         day: 'numeric',

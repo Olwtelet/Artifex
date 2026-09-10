@@ -1,6 +1,6 @@
 # olwtelet.dev
 
-Personal website of **Isaac Rodrigues** — Computer Science student and full-stack developer focused on applied AI. Built as a TV/off-air-inspired interactive experience, showcasing projects, open-source work, and a bit of personality.
+Personal website of **Isaac Rodrigues** — Computer Science student and full-stack developer focused on applied AI and cybersecurity. Built as a TV/off-air-inspired interactive experience, showcasing projects, open-source work, certificates, and a bit of personality.
 
 🔗 [olwtelet.vercel.app](https://olwtelet.vercel.app)
 
@@ -8,7 +8,7 @@ Personal website of **Isaac Rodrigues** — Computer Science student and full-st
 
 ## ✨ Overview
 
-This is **Portfolio V2**, a full rebuild of my personal site adapted from a TV/CRT-themed template. It moves away from a traditional portfolio layout in favor of a more expressive, retro-terminal experience — complete with channel-switching navigation, static/noise effects, an editable text-based breadcrumb, per-project "signal file" dossiers, and a fully bilingual (EN / PT-BR) statically-rendered structure.
+This is **Portfolio V2**, a full rebuild of my personal site adapted from a TV/CRT-themed template. It moves away from a traditional portfolio layout in favor of a more expressive, retro-terminal experience — complete with channel-switching navigation, static/noise effects, an editable text-based breadcrumb, per-project "signal file" dossiers, a certificate gallery, and a fully bilingual (PT-BR / EN) statically-rendered structure.
 
 ## 🛠 Tech Stack
 
@@ -29,6 +29,7 @@ olwtelet.dev
 │   ├── assets
 │   │   ├── fonts
 │   │   ├── images
+│   │   │   ├── .certificates  # certificate thumbnails (960x720 JPEG + WebP)
 │   │   │   └── .playlist      # Spotify playlist cover art
 │   │   ├── og                 # generated Open Graph images (1200x630)
 │   │   └── videos
@@ -38,13 +39,13 @@ olwtelet.dev
 ├── scripts                    # generate-icons, generate-og, optimize-images
 │
 ├── src
-│   ├── components             # Header, Footer, ProjectList, ProjectDossier, TV effects, etc.
+│   ├── components             # Header, Footer, ProjectList, ProjectDossier, CertificateGallery, TV effects, etc.
 │   ├── config                 # site.ts — single source of truth for site metadata
-│   ├── data                   # projects.ts, playlists.ts — typed, localized content
+│   ├── data                   # projects.ts, certificates.ts, playlists.ts — typed content
 │   ├── i18n                   # routes.ts (locale route map), translations.ts (UI strings)
 │   ├── layouts                # TVLayout, MarkdownLayout
 │   ├── modules                # Shared logic: navigation, keyboard, TV state
-│   ├── pages                  # English routes + pt-br/ mirrored routes
+│   ├── pages                  # Portuguese routes (default) + en/ mirrored routes
 │   ├── styles
 │   └── utils                  # seo.ts — canonical/JSON-LD helpers
 │
@@ -55,15 +56,20 @@ olwtelet.dev
 
 ## 🧭 Site Sections
 
-| Section     | English             | Português                   |
-| ----------- | ------------------- | --------------------------- |
-| Home        | `/`                 | `/pt-br/`                   |
-| Open Source | `/open-source/`     | `/pt-br/codigo-aberto/`     |
-| Websites    | `/websites/`        | `/pt-br/sites/`             |
-| Archive     | `/projects/`        | `/pt-br/projetos/`          |
-| Project     | `/projects/[slug]/` | `/pt-br/projetos/[slug]/`   |
-| Playlists   | `/playlists/`       | `/pt-br/playlists/`         |
-| Resume      | `/resume/`          | `/pt-br/curriculo/`         |
+Portuguese is the default language and lives at the root; English lives under `/en/`.
+
+| Section      | Português           | English                |
+| ------------ | ------------------- | ---------------------- |
+| Home         | `/`                 | `/en/`                 |
+| Open Source  | `/codigo-aberto/`   | `/en/open-source/`     |
+| Websites     | `/sites/`           | `/en/websites/`        |
+| Archive      | `/projetos/`        | `/en/projects/`        |
+| Project      | `/projetos/[slug]/` | `/en/projects/[slug]/` |
+| Playlists    | `/playlists/`       | `/en/playlists/`       |
+| Certificates | `/certificados/`    | `/en/certificates/`    |
+| Resume       | `/curriculo/`       | `/en/resume/`          |
+
+Older URLs keep working: `/pt-br/…` redirects to the matching Portuguese page at the root, and the former English `/open-source/`, `/websites/`, `/projects/`, `/projects/[slug]/` and `/resume/` redirect to their `/en/` equivalents. `/` and `/playlists/` now serve the Portuguese pages (English: `/en/` and `/en/playlists/`).
 
 ## ⚡ Quick Start
 
@@ -120,10 +126,10 @@ Deployed on [Vercel](https://vercel.com), with automatic builds triggered on eve
 
 **Isaac Rodrigues** ([@Olwtelet](https://github.com/olwtelet))
 
-Full-Stack Developer building web products, automation tools, and applied AI experiments — currently exploring AI agents, RAG pipelines, and agent-based systems.
+Full-Stack Developer building web products, automation tools, and applied AI experiments — currently exploring AI agents, RAG pipelines, and application security.
 
 - [GitHub](https://github.com/olwtelet)
-- [LinkedIn](https://www.linkedin.com/in/isaac-r-a8a777368/)
+- [LinkedIn](https://www.linkedin.com/in/olwtelet/)
 - [Bluesky](https://bsky.app/profile/Olwtelet.dev)
 - [Instagram](https://instagram.com/olwtelets)
 - [Email](mailto:olwtelet@outlook.com)

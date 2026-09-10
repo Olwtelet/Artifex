@@ -4,20 +4,20 @@ import ProjectList from '../../components/ProjectList.astro'
 import { getProjectsByCollection } from '../../data/projects'
 import { useTranslations } from '../../i18n/translations'
 
-const locale = 'pt-br'
+const locale = 'en'
 const t = useTranslations(locale)
-const projects = getProjectsByCollection('open-source')
+const projects = getProjectsByCollection('websites')
 const count = String(projects.length).padStart(2, '0')
 
-const title = 'Código Aberto — Olwtelet (Isaac Rodrigues)'
+const title = 'Websites — Olwtelet (Isaac Rodrigues)'
 const description =
-  'Projetos de código aberto de Olwtelet (Isaac Rodrigues) — pipelines de automação, experimentos de IA multiagente e um cofre público de estudos, cada um com seu arquivo de sinal.'
+  'Websites built by Olwtelet (Isaac Rodrigues) — client work, institutional pages, and community platforms made with Astro and TypeScript, each with its own signal file.'
 ---
 
 <TVLayout title={title} description={description}>
   <article>
     <h1 class="index-title">
-      {t.listing.channelIndex} — CÓDIGO ABERTO · {count}
+      {t.listing.channelIndex} — WEBSITES · {count}
       {t.listing.files}
     </h1>
     <ProjectList projects={projects} locale={locale} />

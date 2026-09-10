@@ -20,65 +20,73 @@ const SHARED_EXTERNAL = [
 ]
 
 export const PAGES = {
-  en: [
-    {
-      aliases: ['open-source', 'oss', 'opensource'],
-      url: '/open-source/',
-    },
-    {
-      aliases: ['websites', 'sites'],
-      url: '/websites/',
-    },
-    {
-      aliases: ['playlists', 'music'],
-      url: '/playlists/',
-    },
-    {
-      aliases: ['projects', 'archive'],
-      url: '/projects/',
-    },
-    {
-      aliases: ['resume', 'cv'],
-      url: '/resume/',
-      external: true,
-    },
-    {
-      aliases: ['home', 'index'],
-      url: '/',
-    },
-    ...SHARED_EXTERNAL,
-  ],
   'pt-br': [
     {
       aliases: ['codigo-aberto', 'código-aberto', 'oss', 'opensource'],
-      url: '/pt-br/codigo-aberto/',
+      url: '/codigo-aberto/',
     },
     {
       aliases: ['sites', 'websites'],
-      url: '/pt-br/sites/',
+      url: '/sites/',
     },
     {
       aliases: ['playlists', 'musica', 'música'],
-      url: '/pt-br/playlists/',
+      url: '/playlists/',
+    },
+    {
+      aliases: ['certificados', 'certificacoes', 'certificações', 'certs'],
+      url: '/certificados/',
     },
     {
       aliases: ['projetos', 'arquivo'],
-      url: '/pt-br/projetos/',
+      url: '/projetos/',
     },
     {
       aliases: ['curriculo', 'currículo', 'cv'],
-      url: '/pt-br/curriculo/',
+      url: '/curriculo/',
       external: true,
     },
     {
       aliases: ['home', 'inicio', 'início'],
-      url: '/pt-br/',
+      url: '/',
+    },
+    ...SHARED_EXTERNAL,
+  ],
+  en: [
+    {
+      aliases: ['open-source', 'oss', 'opensource'],
+      url: '/en/open-source/',
+    },
+    {
+      aliases: ['websites', 'sites'],
+      url: '/en/websites/',
+    },
+    {
+      aliases: ['playlists', 'music'],
+      url: '/en/playlists/',
+    },
+    {
+      aliases: ['certificates', 'certifications', 'certs'],
+      url: '/en/certificates/',
+    },
+    {
+      aliases: ['projects', 'archive'],
+      url: '/en/projects/',
+    },
+    {
+      aliases: ['resume', 'cv'],
+      url: '/en/resume/',
+      external: true,
+    },
+    {
+      aliases: ['home', 'index'],
+      url: '/en/',
     },
     ...SHARED_EXTERNAL,
   ],
 }
 
 export function pagesForCurrentLocale() {
-  const lang = document.documentElement.lang || 'en'
-  return lang.toLowerCase().startsWith('pt') ? PAGES['pt-br'] : PAGES.en
+  const lang = document.documentElement.lang || 'pt-BR'
+  return lang.toLowerCase().startsWith('en') ? PAGES.en : PAGES['pt-br']
 }

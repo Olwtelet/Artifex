@@ -1,0 +1,182 @@
+---
+import { certificates } from '../data/certificates'
+import type { Locale } from '../config/site'
+import { LOCALE_CODES } from '../config/site'
+import { useTranslations } from '../i18n/translations'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale }: Props = Astro.props
+const t = useTranslations(locale)
+const pageLang = LOCALE_CODES[locale]
+
+// Short month without the abbreviation dot ("set", "Sep"); CSS uppercases it.
+const monthFormat = new Intl.DateTimeFormat(pageLang, {
+  month: 'short',
+  timeZone: 'UTC',
+})
+
+function issuedLabel(isoDate: string): string {
+  const date = new Date(`${isoDate}T00:00:00Z`)
+  return `${monthFormat.format(date).replace('.', '')} ${date.getUTCFullYear()}`
+}
+---
+
+<ul class="certificate-gallery">
+  {
+    certificates.map((certificate) => {
+      const image = `/assets/images/.certificates/${certificate.slug}`
+      return (
+        <li>
+          <a
+            class="certificate-card"
+            href={certificate.verifyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <picture class="certificate-card__thumb">
+              <source srcset={`${image}.webp`} type="image/webp" />
+              <img
+                src={`${image}.jpg`}
+                alt=""
+                width="960"
+                height="720"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <span
+              class="certificate-card__name"
+              lang={
+                certificate.lang === pageLang ? undefined : certificate.lang
+              }
+            >
+              {certificate.name}
+            </span>
+            <small class="certificate-card__meta">
+              {certificate.issuer} ·{' '}
+              <time datetime={certificate.issued}>
+                {issuedLabel(certificate.issued)}
+              </time>
+            </small>
+          </a>
+          <div
+            class="certificate-backdrop"
+            style={`--image:url(${image}.jpg)`}
+            aria-hidden="true"
+          />
+        </li>
+      )
+    })
+  }
+</ul>
+
+<p class="big-text">{t.certificates.outro}</p>
+
+<style>
+  .certificate-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+    gap: 2.6rem 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .certificate-card {
+    display: block;
+    /* the whole card is the selection target: skip the link rainbow */
+    background-image: none !important;
+
+    /* wrap the global URL pop-up inside the card instead of clipping it at the screen edge */
+    &[href]::after {
+      min-width: 0;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    &:hover,
+    &:focus {
+      outline: none;
+
+      & img {
+        filter: none;
+        outline: 2px solid var(--text-secondary);
+      }
+
+      & .certificate-card__name {
+        background-color: var(--text-secondary);
+        color: #000;
+        text-shadow: none;
+      }
+    }
+  }
+
+  .certificate-card__thumb {
+    display: block;
+    margin-bottom: 0.7rem;
+
+    & img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      outline-offset: 4px;
+      filter: saturate(0.35) brightness(0.8);
+      transition: filter 0.2s;
+    }
+  }
+
+  .certificate-card__name {
+    font-size: 0.9rem;
+    line-height: 1.15;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .certificate-card__meta {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  /* Same channel-static backdrop the playlists use on hover/focus. */
+  .certificate-backdrop {
+    opacity: 0.3;
+    visibility: hidden;
+
+    &,
+    &::before {
+      background-size: cover;
+      background-position: center;
+      position: fixed;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    &::before {
+      content: '';
+      background-image: url(/assets/images/effect-static.gif);
+      transition: opacity 0.4s;
+
+      html.webp & {
+        background-image: url(/assets/images/effect-static.webp);
+      }
+    }
+
+    .certificate-card:is(:hover, :focus) + & {
+      visibility: visible;
+      background-image: var(--image);
+
+      &::before {
+        opacity: 0.2;
+      }
+    }
+  }
+</style>

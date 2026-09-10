@@ -1,0 +1,24 @@
+---
+import TVLayout from '../../layouts/TVLayout.astro'
+import CertificateGallery from '../../components/CertificateGallery.astro'
+import { certificates } from '../../data/certificates'
+import { useTranslations } from '../../i18n/translations'
+
+const locale = 'en'
+const t = useTranslations(locale)
+const count = String(certificates.length).padStart(2, '0')
+
+const title = 'Certificates — Olwtelet (Isaac Rodrigues)'
+const description =
+  'Certificates earned by Olwtelet (Isaac Rodrigues) in cybersecurity, building with Claude, and programming logic — from Google, Anthropic, and Udemy, each linked to its official verification page.'
+---
+
+<TVLayout title={title} description={description}>
+  <article>
+    <h1 class="index-title">
+      CERTIFICATES · {count}
+      {t.listing.files}
+    </h1>
+    <CertificateGallery locale={locale} />
+  </article>
+</TVLayout>

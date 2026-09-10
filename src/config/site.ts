@@ -1,17 +1,18 @@
-export type Locale = 'en' | 'pt-br'
+export type Locale = 'pt-br' | 'en'
 
-export const LOCALES: Locale[] = ['en', 'pt-br']
-export const DEFAULT_LOCALE: Locale = 'en'
+export const LOCALES: Locale[] = ['pt-br', 'en']
+/** Portuguese is served unprefixed at the root; English lives under /en/. */
+export const DEFAULT_LOCALE: Locale = 'pt-br'
 
 /** BCP 47 language codes used for hreflang / og:locale */
 export const LOCALE_CODES: Record<Locale, string> = {
-  en: 'en',
   'pt-br': 'pt-BR',
+  en: 'en',
 }
 
 export const OG_LOCALES: Record<Locale, string> = {
-  en: 'en_US',
   'pt-br': 'pt_BR',
+  en: 'en_US',
 }
 
 export const SITE = {
@@ -21,12 +22,13 @@ export const SITE = {
   url: 'https://olwtelet.vercel.app',
   email: 'olwtelet@outlook.com',
   jobTitle: {
-    en: 'Full-Stack Developer',
     'pt-br': 'Desenvolvedor Full-Stack',
+    en: 'Full-Stack Developer',
   } satisfies Record<Locale, string>,
   tagline: {
-    en: 'Full-Stack Developer focused on applied AI',
-    'pt-br': 'Desenvolvedor Full-Stack com foco em IA aplicada',
+    'pt-br':
+      'Desenvolvedor Full-Stack com foco em IA aplicada e cibersegurança',
+    en: 'Full-Stack Developer focused on applied AI and cybersecurity',
   } satisfies Record<Locale, string>,
   location: {
     city: 'Brasília',
@@ -35,27 +37,35 @@ export const SITE = {
   },
   social: {
     github: 'https://github.com/olwtelet',
-    linkedin: 'https://www.linkedin.com/in/isaac-r-a8a777368/',
+    linkedin: 'https://www.linkedin.com/in/olwtelet/',
     bluesky: 'https://bsky.app/profile/Olwtelet.dev',
     instagram: 'https://instagram.com/olwtelets',
+    orcid: 'https://orcid.org/0009-0008-2485-7398',
   },
-  /** Areas actually demonstrated by repository projects — used by Person.knowsAbout */
+  /** Areas demonstrated by projects, client work, and verifiable certificates — used by Person.knowsAbout */
   knowsAbout: [
     'TypeScript',
     'JavaScript',
     'Python',
+    'SQL',
     'React',
+    'Next.js',
     'Astro',
     'Svelte',
     'Node.js',
+    'FastAPI',
+    'Docker',
+    'Linux',
     'Web development',
     'Automation',
     'Applied AI',
     'Retrieval-augmented generation',
     'Multi-agent systems',
+    'Cybersecurity',
+    'Application security',
   ],
   ogImage: {
-    en: '/assets/og/home-en.png',
     'pt-br': '/assets/og/home-pt-br.png',
+    en: '/assets/og/home-en.png',
   } satisfies Record<Locale, string>,
 } as const

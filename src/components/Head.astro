@@ -55,20 +55,21 @@ const imageAlt =
   `${SITE.displayName} — ${SITE.author}, ${SITE.jobTitle[locale]}`
 
 // Breadcrumb structured data for inner pages (home has its own schemas).
-const isHome = path === '/' || path === '/pt-br/'
+const isHome = path === '/' || path === '/en/'
 const jsonLdNodes = [...schemas]
 if (!isHome && !noindex) {
   const segments = path.split('/').filter(Boolean)
   const crumbs: { name: string; path: string }[] = [
     {
       name: SITE.displayName,
-      path: locale === DEFAULT_LOCALE ? '/' : '/pt-br/',
+      path: locale === DEFAULT_LOCALE ? '/' : '/en/',
     },
   ]
   const acc: string[] = []
   for (const segment of segments) {
     acc.push(segment)
-    if (segment === 'pt-br') continue
+    // the /en/ locale prefix is folded into the root crumb
+    if (acc.length === 1 && segment === 'en') continue
     crumbs.push({ name: segment, path: '/' + acc.join('/') + '/' })
   }
   jsonLdNodes.push(breadcrumbSchema(crumbs))
@@ -112,11 +113,11 @@ if (!isHome && !noindex) {
     )
   }
   {
-    !noindex && alternates.en && (
+    !noindex && alternates[DEFAULT_LOCALE] && (
       <link
         rel="alternate"
         hreflang="x-default"
-        href={absoluteUrl(alternates.en)}
+        href={absoluteUrl(alternates[DEFAULT_LOCALE])}
       />
     )
   }

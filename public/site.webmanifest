@@ -1,7 +1,8 @@
 {
   "name": "Olwtelet — Isaac Rodrigues",
   "short_name": "Olwtelet",
-  "description": "Portfolio of Isaac Rodrigues (Olwtelet), a full-stack developer in Brasília building web products, automation tools, and applied AI experiments.",
+  "description": "Portfólio de Isaac Rodrigues (Olwtelet), desenvolvedor full-stack em Brasília com foco em IA aplicada e cibersegurança.",
+  "lang": "pt-BR",
   "start_url": "/",
   "display": "minimal-ui",
   "background_color": "#000000",

@@ -4,25 +4,25 @@ import { routes } from '../i18n/routes'
 
 // Vercel serves a single static 404 page for every missing URL,
 // so this screen carries both languages.
-const title = 'NO SIGNAL — 404 — Olwtelet'
+const title = 'SEM SINAL — 404 — Olwtelet'
 const description =
-  'Error 404 — channel not found. This page does not exist. / Erro 404 — canal não encontrado. Esta página não existe.'
+  'Erro 404 — canal não encontrado. Esta página não existe. / Error 404 — channel not found. This page does not exist.'
 ---
 
 <TVLayout title={title} description={description} noindex>
   <article class="no-signal">
-    <p class="no-signal__status" aria-hidden="true">ERROR 404</p>
-    <h1 class="no-signal__title big-text glitchy-text">NO SIGNAL</h1>
+    <p class="no-signal__status" aria-hidden="true">ERRO 404</p>
+    <h1 class="no-signal__title big-text glitchy-text">SEM SINAL</h1>
     <div class="no-signal__lang">
       <p>
-        CHANNEL NOT FOUND — THE PAGE YOU TUNED INTO DOES NOT EXIST.
-        <br />
-        <a href={routes.home.en}>RETURN TO CHANNEL 00</a>
-      </p>
-      <p lang="pt-BR">
         CANAL NÃO ENCONTRADO — A PÁGINA QUE VOCÊ SINTONIZOU NÃO EXISTE.
         <br />
         <a href={routes.home['pt-br']}>VOLTAR AO CANAL 00</a>
+      </p>
+      <p lang="en">
+        CHANNEL NOT FOUND — THE PAGE YOU TUNED INTO DOES NOT EXIST.
+        <br />
+        <a href={routes.home.en}>RETURN TO CHANNEL 00</a>
       </p>
     </div>
   </article>

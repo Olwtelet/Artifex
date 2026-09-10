@@ -1,0 +1,15 @@
+---
+import TVLayout from '../../layouts/TVLayout.astro'
+import PlaylistList from '../../components/PlaylistList.astro'
+
+const title = 'Playlists — Olwtelet (Isaac Rodrigues)'
+const description =
+  'The playlists Olwtelet (Isaac Rodrigues) curates to focus, code, and drive through the day — Brazilian rock, road-trip tracks, and late-night radio.'
+---
+
+<TVLayout title={title} description={description}>
+  <article>
+    <h1 class="index-title">PLAYLISTS · NOW PLAYING</h1>
+    <PlaylistList locale="en" />
+  </article>
+</TVLayout>

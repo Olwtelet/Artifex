@@ -93,7 +93,8 @@ export const allProjects: Project[] = [
         'OSINT aggregation of regional news through GDELT and public Telegram channels',
         'Infonet — a peer-to-peer layer that syncs events between nodes with end-to-end encryption',
         'Ground change detection from SAR radar imagery',
-        'Official Docker images and signature-verified desktop updates',
+        'Security by design: AES-GCM encryption, fail-closed trust, and signature-verified desktop updates',
+        'Official Docker images with local, LAN, and headless run modes',
       ],
       'pt-br': [
         'Camadas independentes de mapa para aeronaves, embarcações, satélites, imagens orbitais e infraestrutura',
@@ -101,7 +102,8 @@ export const allProjects: Project[] = [
         'Agregação de OSINT com notícias regionais via GDELT e canais públicos do Telegram',
         'Infonet — uma camada peer-to-peer que sincroniza eventos entre nós com criptografia ponta a ponta',
         'Detecção de mudanças no solo a partir de imagens de radar SAR',
-        'Imagens Docker oficiais e atualizações desktop verificadas por assinatura',
+        'Segurança desde a arquitetura: criptografia AES-GCM, confiança fail-closed e atualizações desktop verificadas por assinatura',
+        'Imagens Docker oficiais com modos de execução local, LAN e headless',
       ],
     },
     stack: [
@@ -145,18 +147,18 @@ export const allProjects: Project[] = [
     highlights: {
       en: [
         'Capability matrix tracking tools, streaming, memory, human-in-the-loop, multi-agent, RAG, MCP, tracing, and evals across frameworks',
-        'Benchmark harness measuring latency, token usage, and failure rate on equal footing',
+        'Benchmark harness that pins the model, temperature, prompts, and tools, then measures latency, token usage, tool calls, and failure rate',
         'Each example is a self-contained project with pinned dependencies',
-        'CI runs linting, compilation, and secret scanning on every change',
+        'CI runs linting, compilation, offline unit tests, and secret scanning on every change',
       ],
       'pt-br': [
         'Matriz de capacidades acompanhando ferramentas, streaming, memória, human-in-the-loop, multiagente, RAG, MCP, tracing e evals entre os frameworks',
-        'Bancada de benchmark medindo latência, uso de tokens e taxa de falha em pé de igualdade',
+        'Bancada de benchmark que fixa modelo, temperatura, prompts e ferramentas e mede latência, uso de tokens, chamadas de ferramentas e taxa de falha',
         'Cada exemplo é um projeto independente, com dependências fixadas',
-        'CI roda lint, compilação e varredura de segredos a cada mudança',
+        'CI roda lint, compilação, testes unitários offline e varredura de segredos a cada mudança',
       ],
     },
-    stack: ['Python', 'uv', 'pytest', 'LLMs', 'RAG', 'MCP'],
+    stack: ['Python', 'uv', 'pytest', 'LLMs', 'RAG', 'MCP', 'Streamlit'],
     repositoryUrl: 'https://github.com/Olwtelet/AgentForge',
   },
   {
@@ -218,7 +220,7 @@ export const allProjects: Project[] = [
       'pt-br':
         'Um cofre público do Obsidian onde guardo o que estou aprendendo: fundamentos de ciência da computação, notas de JavaScript, TypeScript, React, Python e C, um "Grimorie" de trechos resolvidos, recortes salvos e registros diários dos meus estudos independentes. É organizado com Zettelkasten e PARA, para que as notas se liguem umas às outras em vez de ficarem paradas em pastas, e cresce continuamente em vez de ser concluído.',
     },
-    stack: ['Obsidian', 'Markdown'],
+    stack: ['Obsidian', 'Markdown', 'Git'],
     repositoryUrl: 'https://github.com/Olwtelet/Obsidian-Second-Brain',
   },
   {
@@ -339,10 +341,11 @@ export const allProjects: Project[] = [
     collection: 'websites',
     category: 'client-work',
     status: 'online',
-    // TODO(owner): confirm the year this was delivered, and whether this was
-    // a paid client engagement or work done for family, so the resume can
-    // describe the relationship accurately.
-    role: role.fullStack,
+    year: '2026',
+    role: {
+      en: 'Full-Stack Developer & UI/UX Designer',
+      'pt-br': 'Desenvolvedor Full-Stack & UI/UX Designer',
+    },
     summary: {
       en: 'Website for a tennis and beach tennis training centre in Brasília',
       'pt-br':
@@ -359,9 +362,9 @@ export const allProjects: Project[] = [
         'Um centro de treinamento vive da aula experimental: tudo no site precisa levar o visitante curioso a agendar uma, sem deixar de servir os alunos já matriculados, que voltam para ver horários, resultados de torneios e material de técnica.',
     },
     approach: {
-      en: 'The site is built with Next.js and splits into two jobs at once: a conversion path that ends in a scheduled trial lesson or a WhatsApp conversation, and an ongoing content area — technique guides, training videos, articles, tournament registration and results — that gives enrolled students a reason to return.',
+      en: 'The site is built with Next.js and splits into two jobs at once: a conversion path that ends in a scheduled trial lesson or a WhatsApp conversation, and an ongoing content area — technique guides, training videos, articles, tournament registration and results — that gives enrolled students a reason to return. Reusable components and design tokens keep the sports identity consistent, and a separate data layer leaves room for Supabase-backed authentication, profiles, and content management.',
       'pt-br':
-        'O site é feito com Next.js e cumpre duas funções ao mesmo tempo: um caminho de conversão que termina em uma aula experimental agendada ou em uma conversa no WhatsApp, e uma área de conteúdo contínuo — guias de técnica, vídeos de treino, artigos, inscrição e resultados de torneios — que dá aos alunos matriculados um motivo para voltar.',
+        'O site é feito com Next.js e cumpre duas funções ao mesmo tempo: um caminho de conversão que termina em uma aula experimental agendada ou em uma conversa no WhatsApp, e uma área de conteúdo contínuo — guias de técnica, vídeos de treino, artigos, inscrição e resultados de torneios — que dá aos alunos matriculados um motivo para voltar. Componentes reutilizáveis e design tokens mantêm a identidade esportiva consistente, e uma camada de dados separada deixa espaço para autenticação, perfis e gestão de conteúdo com Supabase.',
     },
     highlights: {
       en: [
@@ -429,6 +432,35 @@ export const allProjects: Project[] = [
     },
     stack: ['Astro', 'TypeScript', 'Supabase', 'PostgreSQL', 'CSS'],
     websiteUrl: 'https://filmeshdonlinegratis.vercel.app',
+  },
+  {
+    slug: 'ordfall',
+    name: 'Ordfall',
+    collection: 'websites',
+    category: 'client-work',
+    status: 'active',
+    year: '2026',
+    role: {
+      en: 'Full-Stack Developer & Cybersecurity Analyst',
+      'pt-br': 'Desenvolvedor Full-Stack & Analista de Cibersegurança',
+    },
+    summary: {
+      en: 'Institutional website for a software engineering and cybersecurity company, plus ongoing security work',
+      'pt-br':
+        'Site institucional de uma empresa de engenharia de software e cibersegurança, com atuação contínua em segurança',
+    },
+    overview: {
+      en: 'The institutional website of Ordfall, a Brazilian company that builds and secures software for critical systems — secure AI, cloud security, cyber resilience, and data protection. The site presents those services in Portuguese and English.',
+      'pt-br':
+        'O site institucional da Ordfall, empresa brasileira que desenvolve e protege software para sistemas críticos — IA segura, segurança em nuvem, resiliência cibernética e proteção de dados. O site apresenta esses serviços em português e inglês.',
+    },
+    roleDescription: {
+      en: 'Beyond building the website, I work on the company’s software and security side: helping define scalable, maintainable architectures with security designed in from the start, reviewing code, dependencies, and security configurations for vulnerabilities, and supporting cloud, identity, and infrastructure controls.',
+      'pt-br':
+        'Além de construir o site, atuo no lado de software e segurança da empresa: ajudo a definir arquiteturas escaláveis e manuteníveis com segurança desde o desenho, reviso código, dependências e configurações de segurança em busca de vulnerabilidades e apoio controles de cloud, identidade e infraestrutura.',
+    },
+    stack: ['Next.js'],
+    websiteUrl: 'https://ordfall.vercel.app/',
   },
 ]
 

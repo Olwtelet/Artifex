@@ -19,7 +19,7 @@
   }
 
   function readLabels() {
-    return LABELS[document.documentElement.lang] ?? LABELS.en
+    return LABELS[document.documentElement.lang] ?? LABELS['pt-BR']
   }
 
   let labels = $state(readLabels())

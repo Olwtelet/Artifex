@@ -1,25 +1,27 @@
 import type { Locale } from '../config/site'
-import { DEFAULT_LOCALE } from '../config/site'
+import { DEFAULT_LOCALE, LOCALES } from '../config/site'
 
 export type LocalizedPath = Record<Locale, string>
 
 /**
  * Single source of truth for every localized route on the site.
- * English is unprefixed; Portuguese lives under /pt-br/ with translated segments.
+ * Portuguese is the default locale and lives unprefixed; English lives under
+ * /en/ with translated segments.
  */
 export const routes = {
-  home: { en: '/', 'pt-br': '/pt-br/' },
-  openSource: { en: '/open-source/', 'pt-br': '/pt-br/codigo-aberto/' },
-  websites: { en: '/websites/', 'pt-br': '/pt-br/sites/' },
-  playlists: { en: '/playlists/', 'pt-br': '/pt-br/playlists/' },
-  resume: { en: '/resume/', 'pt-br': '/pt-br/curriculo/' },
-  projects: { en: '/projects/', 'pt-br': '/pt-br/projetos/' },
+  home: { 'pt-br': '/', en: '/en/' },
+  openSource: { 'pt-br': '/codigo-aberto/', en: '/en/open-source/' },
+  websites: { 'pt-br': '/sites/', en: '/en/websites/' },
+  playlists: { 'pt-br': '/playlists/', en: '/en/playlists/' },
+  certificates: { 'pt-br': '/certificados/', en: '/en/certificates/' },
+  resume: { 'pt-br': '/curriculo/', en: '/en/resume/' },
+  projects: { 'pt-br': '/projetos/', en: '/en/projects/' },
 } satisfies Record<string, LocalizedPath>
 
 export function projectRoute(slug: string): LocalizedPath {
   return {
-    en: `/projects/${slug}/`,
-    'pt-br': `/pt-br/projetos/${slug}/`,
+    'pt-br': '/projetos/' + slug + '/',
+    en: '/en/projects/' + slug + '/',
   }
 }
 
@@ -32,12 +34,12 @@ export function normalizePath(pathname: string): string {
 
 export function localeFromPath(pathname: string): Locale {
   const path = normalizePath(pathname)
-  return path === '/pt-br/' || path.startsWith('/pt-br/') ? 'pt-br' : 'en'
+  return path.startsWith('/en/') ? 'en' : 'pt-br'
 }
 
 const PROJECT_PATTERNS: Record<Locale, RegExp> = {
-  en: /^\/projects\/([^/]+)\/$/,
-  'pt-br': /^\/pt-br\/projetos\/([^/]+)\/$/,
+  'pt-br': /^\/projetos\/([^/]+)\/$/,
+  en: /^\/en\/projects\/([^/]+)\/$/,
 }
 
 /**
@@ -65,7 +67,7 @@ export function alternatePathFor(
 /** Map of locale -> equivalent absolute-path for the given page (only existing pairs). */
 export function alternatesForPath(pathname: string): Partial<LocalizedPath> {
   const result: Partial<LocalizedPath> = {}
-  for (const locale of ['en', 'pt-br'] as Locale[]) {
+  for (const locale of LOCALES) {
     const alt = alternatePathFor(pathname, locale)
     if (alt) result[locale] = alt
   }

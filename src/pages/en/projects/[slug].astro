@@ -1,9 +1,9 @@
 ---
-import TVLayout from '../../layouts/TVLayout.astro'
-import ProjectDossier from '../../components/ProjectDossier.astro'
-import { allProjects, localizeProject } from '../../data/projects'
-import type { Project } from '../../data/projects'
-import { projectSchema } from '../../utils/seo'
+import TVLayout from '../../../layouts/TVLayout.astro'
+import ProjectDossier from '../../../components/ProjectDossier.astro'
+import { allProjects, localizeProject } from '../../../data/projects'
+import type { Project } from '../../../data/projects'
+import { projectSchema } from '../../../utils/seo'
 
 export function getStaticPaths() {
   return allProjects.map((project) => ({
