@@ -59,7 +59,7 @@ Sou estudante de Ciência da Computação e desenvolvedor full-stack em Brasíli
 - Construí o site de um escritório brasileiro de direito civil e empresarial usando Astro, TypeScript e Tailwind CSS.
 - Foco em fundamentos de SEO, carregamento rápido e apresentação clara das áreas de atuação.
 
-**[CT Thalita Rodrigues](https://thalitacademy.vercel.app/)**: plataforma de centro de treinamento de tênis (ago 2026)
+**[CT Thalita Rodrigues](https://thalitarodrigues.com/)**: plataforma de centro de treinamento de tênis (ago 2026)
 
 - Construí a plataforma de um centro de treinamento de tênis e beach tennis em Brasília com Next.js 15, React 19 e TypeScript, usando componentes reutilizáveis e design tokens.
 - Desenhei uma identidade visual esportiva responsiva e implementei o caminho de agendamento da aula experimental e a passagem para o WhatsApp, que trazem as novas matrículas.

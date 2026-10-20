@@ -381,7 +381,7 @@ export const allProjects: Project[] = [
       ],
     },
     stack: ['Next.js', 'React', 'TypeScript'],
-    websiteUrl: 'https://thalitacademy.vercel.app/',
+    websiteUrl: 'https://thalitarodrigues.com/',
   },
   {
     slug: 'fhdog',

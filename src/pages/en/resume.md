@@ -59,7 +59,7 @@ I'm a Computer Science student and full-stack developer based in Brasília, Braz
 - Built the website for a Brazilian civil and corporate law firm using Astro, TypeScript, and Tailwind CSS.
 - Focused on SEO fundamentals, fast loads, and a clear presentation of practice areas.
 
-**[CT Thalita Rodrigues](https://thalitacademy.vercel.app/)**: tennis training centre platform (Aug 2026)
+**[CT Thalita Rodrigues](https://thalitarodrigues.com/)**: tennis training centre platform (Aug 2026)
 
 - Built the platform for a tennis and beach tennis training centre in Brasília with Next.js 15, React 19, and TypeScript, using reusable components and design tokens.
 - Designed a responsive sports identity and implemented the trial-lesson booking path and WhatsApp hand-off that drive new enrolments.
