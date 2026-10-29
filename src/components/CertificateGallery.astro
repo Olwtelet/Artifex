@@ -1,15 +1,13 @@
 ---
-import { certificates } from '../data/certificates'
+import { certificateGroups } from '../data/certificates'
 import type { Locale } from '../config/site'
 import { LOCALE_CODES } from '../config/site'
-import { useTranslations } from '../i18n/translations'
 
 interface Props {
   locale: Locale
 }
 
 const { locale }: Props = Astro.props
-const t = useTranslations(locale)
 const pageLang = LOCALE_CODES[locale]
 
 // Short month without the abbreviation dot ("set", "Sep"); CSS uppercases it.
@@ -24,63 +22,69 @@ function issuedLabel(isoDate: string): string {
 }
 ---
 
-<ul class="certificate-gallery">
-  {
-    certificates.map((certificate) => {
-      const image = `/assets/images/.certificates/${certificate.slug}`
-      return (
-        <li>
-          <a
-            class="certificate-card"
-            href={certificate.verifyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <picture class="certificate-card__thumb">
-              <source srcset={`${image}.webp`} type="image/webp" />
-              <img
-                src={`${image}.jpg`}
-                alt=""
-                width="960"
-                height="720"
-                loading="lazy"
-                decoding="async"
+{
+  certificateGroups.map((group) => (
+    <section class="certificate-group">
+      <h2 class="index-subtitle">{group.label}</h2>
+      <ul class="certificate-gallery">
+        {group.certificates.map((certificate) => {
+          const image = `/assets/images/.certificates/${certificate.slug}`
+          return (
+            <li>
+              <a
+                class="certificate-card"
+                href={certificate.verifyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <picture class="certificate-card__thumb">
+                  <source srcset={`${image}.webp`} type="image/webp" />
+                  <img
+                    src={`${image}.jpg`}
+                    alt=""
+                    width={group.thumbnail.width}
+                    height={group.thumbnail.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+                <span
+                  class="certificate-card__name"
+                  lang={
+                    certificate.lang === pageLang ? undefined : certificate.lang
+                  }
+                >
+                  {certificate.name}
+                </span>
+                <time
+                  class="certificate-card__date"
+                  datetime={certificate.issued}
+                >
+                  {issuedLabel(certificate.issued)}
+                </time>
+              </a>
+              <div
+                class="certificate-backdrop"
+                style={`--image:url(${image}.jpg)`}
+                aria-hidden="true"
               />
-            </picture>
-            <span
-              class="certificate-card__name"
-              lang={
-                certificate.lang === pageLang ? undefined : certificate.lang
-              }
-            >
-              {certificate.name}
-            </span>
-            <small class="certificate-card__meta">
-              {certificate.issuer} ·{' '}
-              <time datetime={certificate.issued}>
-                {issuedLabel(certificate.issued)}
-              </time>
-            </small>
-          </a>
-          <div
-            class="certificate-backdrop"
-            style={`--image:url(${image}.jpg)`}
-            aria-hidden="true"
-          />
-        </li>
-      )
-    })
-  }
-</ul>
-
-<p class="big-text">{t.certificates.outro}</p>
+            </li>
+          )
+        })}
+      </ul>
+    </section>
+  ))
+}
 
 <style>
+  .certificate-group + .certificate-group {
+    margin-top: 3rem;
+  }
+
   .certificate-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
     gap: 2.6rem 1.8rem;
-    margin-bottom: 2rem;
   }
 
   .certificate-card {
@@ -120,8 +124,6 @@ function issuedLabel(isoDate: string): string {
       display: block;
       width: 100%;
       height: auto;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
       outline-offset: 4px;
       filter: saturate(0.35) brightness(0.8);
       transition: filter 0.2s;
@@ -135,7 +137,7 @@ function issuedLabel(isoDate: string): string {
     color: var(--text-secondary);
   }
 
-  .certificate-card__meta {
+  .certificate-card__date {
     display: block;
     margin-top: 0.35rem;
     font-size: 0.72rem;
@@ -143,7 +145,7 @@ function issuedLabel(isoDate: string): string {
     color: var(--text-primary);
   }
 
-  /* Same channel-static backdrop the playlists use on hover/focus. */
+  /* On hover/focus the certificate fills the screen behind the channel static. */
   .certificate-backdrop {
     opacity: 0.3;
     visibility: hidden;
