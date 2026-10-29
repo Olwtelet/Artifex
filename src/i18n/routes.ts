@@ -12,7 +12,6 @@ export const routes = {
   home: { 'pt-br': '/', en: '/en/' },
   openSource: { 'pt-br': '/codigo-aberto/', en: '/en/open-source/' },
   websites: { 'pt-br': '/sites/', en: '/en/websites/' },
-  playlists: { 'pt-br': '/playlists/', en: '/en/playlists/' },
   certificates: { 'pt-br': '/certificados/', en: '/en/certificates/' },
   resume: { 'pt-br': '/curriculo/', en: '/en/resume/' },
   projects: { 'pt-br': '/projetos/', en: '/en/projects/' },

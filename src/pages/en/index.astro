@@ -22,15 +22,19 @@ const schemas = [
 <TVLayout title={title} description={description} schemas={schemas}>
   <HomeBio locale={locale}>
     <p class="big-text">
-      Hi! I'm <button
-        type="button"
-        class="button-text bio__photo js-photo-toggle"
-        aria-pressed="false"
-        aria-label={t.bio.photoToggle}>Isaac Rodrigues</button
-      >, a Computer Science student and full-stack developer based in
-      <button class="button-text js-channel-trigger" data-channel="8"
-        >Brasília, Brazil</button
-      >.
+      Hi! I'm <span class="nowrap"
+        ><button
+          type="button"
+          class="button-text bio__photo js-photo-toggle"
+          aria-pressed="false"
+          aria-label={t.bio.photoToggle}>Isaac Rodrigues</button
+        >,</span
+      > a Computer Science student and full-stack developer based in
+      <span class="nowrap"
+        ><button class="button-text js-channel-trigger" data-channel="8"
+          >Brasília, Brazil</button
+        >.</span
+      >
     </p>
     <p class="big-text">
       I build web products, automation tools, and applied AI experiments — from
@@ -55,11 +59,15 @@ const schemas = [
       >.
     </p>
     <p class="big-text">
-      Outside of code, I spend an unreasonable amount of time curating
-      <a href={routes.playlists[locale]}>playlists</a>.
-      <button class="button-text js-channel-trigger" data-channel="1"
-        >Tune in</button
-      >, explore <a href={routes.projects[locale]}>my work</a> and
+      Outside of code, I spend an unreasonable amount of time curating playlists
+      <span class="nowrap"
+        ><span class="bio__soon">coming soon to this channel</span>.</span
+      >
+      <span class="nowrap"
+        ><button class="button-text js-channel-trigger" data-channel="1"
+          >Tune in</button
+        >,</span
+      > explore <a href={routes.projects[locale]}>my work</a> and
       <a href={routes.certificates[locale]}>certificates</a>, visit my
       <a href={SITE.social.github} target="_blank" rel="noopener noreferrer"
         >GitHub</a

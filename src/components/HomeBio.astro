@@ -38,6 +38,30 @@ const prefix = locale === 'en' ? 'NOW RECEIVING:' : 'RECEBENDO AGORA:'
     margin-top: 1.2rem;
   }
 
+  /* keep punctuation on the same line as the button or tag right before it */
+  .bio .nowrap {
+    white-space: nowrap;
+  }
+
+  /* OSD-style tag for something that is not on air yet */
+  .bio__soon {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0.15em 0.6ch;
+    border: 1px solid currentColor;
+    font-size: 0.72rem;
+    letter-spacing: 0.2ch;
+    line-height: 1.2;
+    white-space: nowrap;
+    color: var(--text-primary);
+
+    &::before {
+      content: '▮ ';
+      color: var(--text-secondary);
+      animation: blink 1.4s step-end infinite;
+    }
+  }
+
   .bio__photo {
     position: relative;
     color: var(--text-secondary);

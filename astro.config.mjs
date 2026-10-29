@@ -15,7 +15,6 @@ const legacyRedirects = {
   '/pt-br': '/',
   '/pt-br/codigo-aberto': '/codigo-aberto/',
   '/pt-br/sites': '/sites/',
-  '/pt-br/playlists': '/playlists/',
   '/pt-br/curriculo': '/curriculo/',
   '/pt-br/projetos': '/projetos/',
   '/open-source': '/en/open-source/',

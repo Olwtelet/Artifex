@@ -30,10 +30,6 @@ export const PAGES = {
       url: '/sites/',
     },
     {
-      aliases: ['playlists', 'musica', 'música'],
-      url: '/playlists/',
-    },
-    {
       aliases: ['certificados', 'certificacoes', 'certificações', 'certs'],
       url: '/certificados/',
     },
@@ -60,10 +56,6 @@ export const PAGES = {
     {
       aliases: ['websites', 'sites'],
       url: '/en/websites/',
-    },
-    {
-      aliases: ['playlists', 'music'],
-      url: '/en/playlists/',
     },
     {
       aliases: ['certificates', 'certifications', 'certs'],
