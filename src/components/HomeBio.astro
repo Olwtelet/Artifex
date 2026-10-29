@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { locale }: Props = Astro.props
-const headline = `${SITE.displayName} · ${SITE.author} — ${SITE.tagline[locale]}`
+const headline = SITE.headline[locale]
 const prefix = locale === 'en' ? 'NOW RECEIVING:' : 'RECEBENDO AGORA:'
 ---
 

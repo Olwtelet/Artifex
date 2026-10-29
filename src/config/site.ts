@@ -19,16 +19,18 @@ export const SITE = {
   name: 'olwtelet',
   displayName: 'Olwtelet',
   author: 'Isaac Rodrigues',
+  /** Legal name as printed on certificates — another name for the same person. */
+  fullName: 'Isaac Rodrigues Barros',
   url: 'https://olwtelet.vercel.app',
   email: 'olwtelet@outlook.com',
   jobTitle: {
     'pt-br': 'Desenvolvedor Full-Stack',
     en: 'Full-Stack Developer',
   } satisfies Record<Locale, string>,
-  tagline: {
-    'pt-br':
-      'Desenvolvedor Full-Stack com foco em IA aplicada e cibersegurança',
-    en: 'Full-Stack Developer focused on applied AI and cybersecurity',
+  /** Home h1 — says outright that Olwtelet is Isaac Rodrigues. */
+  headline: {
+    'pt-br': 'Olwtelet é Isaac Rodrigues — software projetado para o ruído',
+    en: 'Olwtelet is Isaac Rodrigues — software designed for the noise',
   } satisfies Record<Locale, string>,
   location: {
     city: 'Brasília',

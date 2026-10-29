@@ -21,7 +21,8 @@ export function personSchema(locale: Locale) {
     '@type': 'Person',
     '@id': `${SITE.url}/#person`,
     name: SITE.author,
-    alternateName: SITE.displayName,
+    // "Olwtelet" is the gaming handle he works under — the same person
+    alternateName: [SITE.displayName, SITE.fullName],
     url: SITE.url,
     jobTitle: SITE.jobTitle[locale],
     email: `mailto:${SITE.email}`,
@@ -41,6 +42,7 @@ export function websiteSchema(locale: Locale) {
     '@type': 'WebSite',
     '@id': `${SITE.url}/#website`,
     name: SITE.displayName,
+    alternateName: SITE.author,
     url: SITE.url,
     inLanguage: LOCALE_CODES[locale],
     author: { '@id': `${SITE.url}/#person` },
