@@ -31,7 +31,6 @@ Sou estudante de Ciência da Computação e desenvolvedor full-stack em Brasíli
 
 - **[`Argus`](https://github.com/Olwtelet/Argus)**: plataforma self-hosted de inteligência de fontes abertas que normaliza dezenas de feeds públicos — aeronaves, embarcações, satélites, dados sísmicos e de infraestrutura — em um único mapa ao vivo. Backend Python/FastAPI, painel Next.js com MapLibre GL, casca desktop em Tauri, imagens Docker, AGPL-3.0.
 - **[`AgentForge`](https://github.com/Olwtelet/AgentForge)**: ~90 exemplos executáveis implementando o mesmo agente em dez frameworks, com contrato compartilhado e bancada de benchmark medindo latência, uso de tokens e taxa de falha em pé de igualdade.
-- **[`Filmes HD Online Grátis`](https://filmeshdonlinegratis.vercel.app)**: plataforma de curadoria de cinema e arquivo da comunidade — Astro, TypeScript e Supabase com entrada pelo Discord, autorização por RLS no servidor e um design system baseado na carta de ajuste SMPTE. Nenhuma rota passa de 13 KB de JavaScript.
 - **[`Resumex`](https://github.com/Olwtelet/Resumex)**: pipeline totalmente offline que transforma um arquivo de história em vídeo vertical pronto, derivando o tempo das legendas da síntese de voz e renderizando em uma única passada determinística do FFmpeg.
 - **[`Obsidian Second Brain`](https://github.com/Olwtelet/Obsidian-Second-Brain)**: cofre público com fundamentos de CC, cheatsheets de estruturas de dados e registros diários de estudo.
 

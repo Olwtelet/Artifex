@@ -384,56 +384,6 @@ export const allProjects: Project[] = [
     websiteUrl: 'https://thalitarodrigues.com/',
   },
   {
-    slug: 'fhdog',
-    name: 'Filmes HD Online Grátis',
-    collection: 'websites',
-    category: 'personal',
-    status: 'active',
-    year: '2026',
-    role: {
-      en: 'Design, development, and curation',
-      'pt-br': 'Design, desenvolvimento e curadoria',
-    },
-    summary: {
-      en: 'Film curation platform and community archive built on an SMPTE test-card design system',
-      'pt-br':
-        'Plataforma de curadoria de cinema e arquivo da comunidade, construída sobre a carta de ajuste SMPTE',
-    },
-    overview: {
-      en: 'A film curation site: one session every Saturday, hand-picked, with the reason for each choice on record. The site is the public archive of those choices — the screening itself happens live in the community Discord. It is not streaming: no film is hosted or distributed.',
-      'pt-br':
-        'Um site de curadoria de cinema: uma sessão por sábado, escolhida a dedo, com o motivo da escolha registrado. O site é o arquivo público dessas escolhas — a exibição em si acontece ao vivo, na sala do Discord da comunidade. Não é streaming: nenhum filme é hospedado ou distribuído.',
-    },
-    problem: {
-      en: 'A weekly watch party leaves nothing behind: the conversation scrolls away in Discord and the reason a film was chosen disappears with it. The site exists to be the memory the chat room does not keep.',
-      'pt-br':
-        'Uma sessão semanal não deixa nada para trás: a conversa some no scroll do Discord e o motivo de um filme ter sido escolhido vai junto. O site existe para ser a memória que a sala de chat não guarda.',
-    },
-    approach: {
-      en: 'The identity comes from the SMPTE color bars — the seven bars anchor the layout, the dark surfaces derive from the PLUGE grays, and each film’s curated tone maps to its nearest bar, tinting the whole page. Sessions are Markdown files validated by a zod schema at build time, so a malformed field breaks the build instead of shipping a broken page. Authorization is enforced server-side with Supabase RLS on every request.',
-      'pt-br':
-        'A identidade vem das barras de teste SMPTE — as sete barras ancoram o layout, as superfícies escuras derivam dos cinzas do PLUGE, e o tom curado de cada filme é mapeado para a barra de matiz mais próximo, tingindo a página inteira. As sessões são arquivos Markdown validados por um schema zod no build, então um campo malformado quebra o build em vez de virar uma página torta. A autorização é imposta no servidor com RLS do Supabase a cada requisição.',
-    },
-    highlights: {
-      en: [
-        'Sign-in only through Discord — the community server is the identity',
-        'Public profiles, favorites, watched lists, community ranking, and a PNG dossier export',
-        'Zero JavaScript by default: islands add ~7 KB on the home and no route ships more than 13 KB',
-        'The 217 KB Supabase SDK loads only when a session cookie exists',
-        'Focus rings, one h1 per page, native dialogs, and reduced-motion support across all routes',
-      ],
-      'pt-br': [
-        'Entrada somente pelo Discord — a identidade é a do servidor da comunidade',
-        'Perfis públicos, favoritos, assistidos, ranking da comunidade e exportação de dossiê em PNG',
-        'Zero JavaScript por padrão: as ilhas somam ~7 KB na home e nenhuma rota passa de 13 KB',
-        'O SDK do Supabase, de 217 KB, só carrega quando existe cookie de sessão',
-        'Anel de foco, um h1 por página, diálogos nativos e reduced-motion em todas as rotas',
-      ],
-    },
-    stack: ['Astro', 'TypeScript', 'Supabase', 'PostgreSQL', 'CSS'],
-    websiteUrl: 'https://filmeshdonlinegratis.vercel.app',
-  },
-  {
     slug: 'ordfall',
     name: 'Ordfall',
     collection: 'websites',
