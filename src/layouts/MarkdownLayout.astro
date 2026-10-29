@@ -31,6 +31,8 @@ const alternates = alternatesForPath(path)
 
 const pageTitle = frontmatter.title
 const pageDescription = frontmatter.description
+// the tab keeps the short title; link previews also carry the real name
+const shareTitle = `${pageTitle} — ${SITE.author}`
 const socialImage = absoluteUrl(SITE.ogImage[locale])
 const socialImageAlt = `${SITE.displayName} — ${SITE.author}, ${SITE.jobTitle[locale]}`
 
@@ -83,7 +85,7 @@ const langLinkTitle =
 
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="profile" />
-    <meta property="og:title" content={pageTitle} />
+    <meta property="og:title" content={shareTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:site_name" content={SITE.displayName} />
     <meta property="og:locale" content={OG_LOCALES[locale]} />
@@ -95,7 +97,7 @@ const langLinkTitle =
     <meta property="og:image:type" content="image/png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:title" content={shareTitle} />
     <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={socialImage} />
     <meta name="twitter:image:alt" content={socialImageAlt} />

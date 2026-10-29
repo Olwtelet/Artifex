@@ -20,7 +20,7 @@ const { project } = Astro.props
 const locale = 'pt-br'
 const lp = localizeProject(project, locale)
 
-const title = `${project.name} — Projeto de Olwtelet (Isaac Rodrigues)`
+const title = project.name
 const description = lp.overview ?? lp.summary
 const socialImage = `/assets/og/project-${project.slug}-${locale}.png`
 const socialImageAlt = `${project.name} — arquivo de sinal do portfólio de Olwtelet (Isaac Rodrigues)`

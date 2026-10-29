@@ -17,8 +17,10 @@ import {
 } from '../utils/seo'
 
 interface Props {
-  /** Full, already-localized page title. */
+  /** Short, already-localized tab title. */
   title: string
+  /** Title for link previews; defaults to "<title> — Olwtelet". */
+  socialTitle?: string
   /** Specific, already-localized meta description. */
   description: string
   /** Site-relative path of the social image (1200x630). */
@@ -32,6 +34,7 @@ interface Props {
 
 const {
   title,
+  socialTitle,
   description,
   socialImage,
   socialImageAlt,
@@ -48,6 +51,9 @@ const canonicalUrl = absoluteUrl(path)
 const alternates = alternatesForPath(path)
 
 const metaDescription = description.trim()
+const shareTitle =
+  socialTitle ??
+  (title === SITE.displayName ? title : `${title} — ${SITE.displayName}`)
 const image = socialImage || SITE.ogImage[locale]
 const imageUrl = absoluteUrl(image)
 const imageAlt =
@@ -125,7 +131,7 @@ if (!isHome && !noindex) {
   <!-- Open Graph -->
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:type" content={ogType} />
-  <meta property="og:title" content={title} />
+  <meta property="og:title" content={shareTitle} />
   <meta property="og:description" content={metaDescription} />
   <meta property="og:site_name" content={SITE.displayName} />
   <meta property="og:locale" content={OG_LOCALES[locale]} />
@@ -138,7 +144,7 @@ if (!isHome && !noindex) {
 
   <!-- Twitter / X card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={title} />
+  <meta name="twitter:title" content={shareTitle} />
   <meta name="twitter:description" content={metaDescription} />
   <meta name="twitter:image" content={imageUrl} />
   <meta name="twitter:image:alt" content={imageAlt} />
