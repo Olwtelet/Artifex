@@ -1,6 +1,6 @@
 ---
 layout: ../layouts/MarkdownLayout.astro
-title: 'Currículo — Olwtelet (Isaac Rodrigues)'
+title: 'Currículo'
 description: 'Currículo de Olwtelet (Isaac Rodrigues) — estudante de Ciência da Computação e desenvolvedor full-stack em Brasília que atua com produtos web, IA aplicada, automação e cibersegurança.'
 textNav:
   external: true
@@ -8,7 +8,7 @@ textNav:
 
 # Isaac Rodrigues
 
-Sou estudante de Ciência da Computação e desenvolvedor full-stack em Brasília, Brasil, com foco em IA aplicada e cibersegurança. Crio produtos web, ferramentas de automação e experimentos de IA — de sites para clientes a pipelines de RAG e sistemas baseados em agentes — e trato segurança como parte da arquitetura, não como etapa final. Trabalho principalmente com TypeScript, Python, React e Node.js, e gosto de levar um projeto do primeiro rascunho até o produto publicado e de continuar cuidando dele depois que entra em uso.
+Desenvolvedor full-stack e estudante de Ciência da Computação em Brasília, com foco em IA aplicada e cibersegurança. Online, uso o nome Olwtelet. Na Ordfall, construí o site institucional e atuo em segurança: análise de vulnerabilidades; revisão de código, dependências e configurações; e apoio à definição de arquiteturas seguras, do desenho à produção. Na Integratek, desenvolvo o site da empresa (Astro, TypeScript, Docker) e cuido de SEO, desempenho e acessibilidade. Também entrego sites para clientes e mantenho projetos de código aberto como Argus e AgentForge. Stack principal: TypeScript, Python, React, Next.js, Node.js e FastAPI.
 
 [GitHub](https://github.com/olwtelet)
 <br>

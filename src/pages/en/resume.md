@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/MarkdownLayout.astro
-title: 'Resume — Olwtelet (Isaac Rodrigues)'
+title: 'Resume'
 description: 'Resume of Olwtelet (Isaac Rodrigues) — Computer Science student and full-stack developer in Brasília, Brazil, working across web products, applied AI, automation, and cybersecurity.'
 textNav:
   external: true
@@ -8,7 +8,7 @@ textNav:
 
 # Isaac Rodrigues
 
-I'm a Computer Science student and full-stack developer based in Brasília, Brazil, focused on applied AI and cybersecurity. I build web products, automation tools, and AI experiments — from client websites to RAG pipelines and agent-based systems — and treat security as part of the architecture rather than a final step. I work mostly with TypeScript, Python, React, and Node.js, and I enjoy taking a project from the first sketch to a deployed product, then keeping it healthy once it is in use.
+Full-stack developer and Computer Science student in Brasília, Brazil, focused on applied AI and cybersecurity. Online, I go by Olwtelet. At Ordfall, I built the corporate website and work on security: vulnerability analysis; code, dependency and configuration review; and support in defining secure architectures, from design to production. At Integratek, I develop the company website (Astro, TypeScript, Docker), with ongoing SEO, performance and accessibility work. I also deliver client websites and maintain open-source projects such as Argus and AgentForge. Core stack: TypeScript, Python, React, Next.js, Node.js and FastAPI.
 
 [GitHub](https://github.com/olwtelet)
 <br>
