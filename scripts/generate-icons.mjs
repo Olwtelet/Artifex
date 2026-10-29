@@ -4,9 +4,11 @@
  *
  *   pnpm generate:icons
  *
- * The mark is dressed as a signal on the site's CRT: the red/cyan split of
- * .glitchy-text, plus a soft screen glow and scanlines on the large icons.
- * The tiny favicons stay flat so the A still reads at 16px.
+ * Tab favicons are transparent: favicon.svg prints the mark white on dark
+ * browser themes and black on light ones, and the PNG/ICO fallbacks (which
+ * cannot follow the theme) get a thin dark halo so they read on any tab.
+ * App icons keep the CRT screen — platforms need them opaque — with the
+ * red/cyan split of .glitchy-text, a soft glow and scanlines.
  *
  * Outputs (all in public/):
  *   favicon.svg, favicon.ico (16+32+48), favicon-16x16.png, favicon-32x32.png,
@@ -27,15 +29,18 @@ const publicDir = path.join(root, 'public')
 const S = 512
 
 /**
- * The mark centred on a black square.
- * - fill: share of the square's height taken by the A
- * - split: red/cyan offset in canvas units (0 keeps it flat white)
- * - crt: output size in px to draw the screen glow and scanlines for
+ * The mark centred on the canvas.
+ * - fill: share of the canvas height taken by the A
+ * - split: red/cyan offset in canvas units (0 keeps it flat)
+ * - crt: output size in px to draw the black screen, glow and scanlines for
  *   (scanline spacing is set in real pixels so it never aliases), or false
+ *   for a transparent background
+ * - adaptive: ink follows the viewer's colour scheme (SVG only)
+ * - halo: width of a dark outline in canvas units (0 for none)
  */
 function iconSvg(
   { viewBox: [vx, vy, vw, vh], d },
-  { fill, split = 0, crt = false }
+  { fill, split = 0, crt = false, adaptive = false, halo = 0 }
 ) {
   const k = (S * fill) / vh
   const tx = (S - vw * k) / 2 - vx * k
@@ -50,8 +55,13 @@ function iconSvg(
   }
   const period = crt ? (Math.max(3, Math.round(crt / 128)) * S) / crt : 0
 
-  // the path is defined once and drawn by every colour layer
+  // the path is defined once and drawn by every layer
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${S} ${S}">
+  ${
+    adaptive
+      ? `<style>.ink{fill:#ffffff}@media (prefers-color-scheme: light){.ink{fill:#000000}}</style>`
+      : ''
+  }
   <defs>
     <path id="mark" fill-rule="evenodd" d="${d}"/>
     ${
@@ -66,10 +76,15 @@ function iconSvg(
         : ''
     }
   </defs>
-  <rect width="${S}" height="${S}" fill="${crt ? 'url(#glow)' : '#000000'}"/>
+  ${crt ? `<rect width="${S}" height="${S}" fill="url(#glow)"/>` : ''}
   <g transform="translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${k.toFixed(5)})">
+    ${
+      halo
+        ? `<use href="#mark" fill="none" stroke="#000000" stroke-width="${(halo / k).toFixed(2)}" stroke-linejoin="round"/>`
+        : ''
+    }
     ${split ? layer('#02b7b6', 0.85, split, split * 0.6) + layer('#b70202', 0.85, -split, -split * 0.6) : ''}
-    ${layer('#ffffff', 1, 0, 0)}
+    ${adaptive ? '<use href="#mark" class="ink"/>' : layer('#ffffff', 1, 0, 0)}
   </g>
   ${crt ? `<rect width="${S}" height="${S}" fill="url(#scanlines)"/>` : ''}
 </svg>
@@ -79,7 +94,7 @@ function iconSvg(
 async function png(svg, size) {
   return sharp(Buffer.from(svg), { density: 144 })
     .resize(size, size)
-    .png({ compressionLevel: 9, palette: size <= 48 })
+    .png({ compressionLevel: 9 })
     .toBuffer()
 }
 
@@ -112,16 +127,25 @@ async function main() {
   await mkdir(publicDir, { recursive: true })
   const logo = await readLogo()
 
-  const flat = (split) => iconSvg(logo, { fill: 0.9, split })
+  // transparent tab icon; the halo is ~1px wide at the target size
+  const tab = (size) =>
+    iconSvg(logo, {
+      fill: 0.86,
+      split: size >= 32 ? 10 : 0,
+      halo: (2 * S) / size,
+    })
   const screen = (size, fill = 0.8) =>
     iconSvg(logo, { fill, split: 10, crt: size })
 
-  await writeFile(path.join(publicDir, 'favicon.svg'), flat(10))
+  await writeFile(
+    path.join(publicDir, 'favicon.svg'),
+    iconSvg(logo, { fill: 0.92, split: 10, adaptive: true })
+  )
 
   const files = {
-    'favicon-16x16.png': [flat(0), 16],
-    'favicon-32x32.png': [flat(10), 32],
-    'favicon-48x48.png': [flat(10), 48],
+    'favicon-16x16.png': [tab(16), 16],
+    'favicon-32x32.png': [tab(32), 32],
+    'favicon-48x48.png': [tab(48), 48],
     'apple-touch-icon.png': [screen(180), 180],
     'icon-192.png': [screen(192), 192],
     'icon-512.png': [screen(512), 512],
@@ -133,12 +157,8 @@ async function main() {
   }
 
   const icoEntries = []
-  for (const [size, split] of [
-    [16, 0],
-    [32, 10],
-    [48, 10],
-  ]) {
-    icoEntries.push({ size, buffer: await png(flat(split), size) })
+  for (const size of [16, 32, 48]) {
+    icoEntries.push({ size, buffer: await png(tab(size), size) })
   }
   await writeFile(path.join(publicDir, 'favicon.ico'), packIco(icoEntries))
 
