@@ -28,48 +28,49 @@ const schemas = [
 >
   <HomeBio locale={locale}>
     <p class="big-text">
-      Olwtelet sou eu, <span class="nowrap"
+      Sou <span class="nowrap"
         ><button
           type="button"
           class="button-text bio__photo js-photo-toggle"
           aria-pressed="false"
           aria-label={t.bio.photoToggle}>Isaac Rodrigues</button
         >.</span
-      > É meu nick nos jogos e acabou assinando meu trabalho: dois nomes, um só sinal.
-      Estudo Ciência da Computação e sou desenvolvedor full-stack em
+      > Olwtelet é o nick que uso nos jogos e o nome com que assino meu trabalho.
+      Estudo Ciência da Computação e desenvolvo software em
       <span class="nowrap"
         ><button class="button-text js-channel-trigger" data-channel="8"
-          >Brasília, Brasil</button
+          >Brasília</button
         >.</span
       >
     </p>
     <p class="big-text">
-      Uma demo é como as barras coloridas: prova que há sinal, não que o canal
-      aguenta a programação. O cenário ideal nunca vai ao ar. Abaixo da
-      <a
-        href="https://pt.wikipedia.org/wiki/Capacidade_de_um_canal"
-        target="_blank"
-        rel="noopener noreferrer">capacidade do canal</a
-      >, a mensagem chega quase sem erro: não calando o ruído, mas codificando
-      contra ele.
+      Uma demonstração prova que o software funciona uma vez. O que me
+      interessa é se ele continua funcionando com dados errados, uso imprevisto
+      e alguém tentando invadir.
     </p>
     <p class="big-text">
-      Um ataque é ruído com intenção. Por isso segurança não é acabamento, é
-      estrutura: o que o sistema aceita, guarda e recusa. É assim que trabalho
-      na
+      Na
       <a
         href="https://ordfall.vercel.app/"
         target="_blank"
         rel="noopener noreferrer">Ordfall</a
+      >, construí o site institucional e trabalho com segurança: analiso
+      vulnerabilidades e reviso código, dependências e configurações. Também fiz
+      sites para um escritório de advocacia, um centro de treinamento de tênis,
+      uma ONG e a
+      <a
+        href="https://www.integratek.com.br/"
+        target="_blank"
+        rel="noopener noreferrer">Integratek</a
       >.
     </p>
     <p class="big-text">
-      Com IA, parte do ruído vem de fábrica. Se uma regra simples resolve
-      melhor, fico com a regra. Um modelo que não consigo testar, observar e
-      limitar é aposta, não solução.
+      Com IA, só adoto o que consigo testar, observar e limitar. No AgentForge,
+      projeto de código aberto, implemento o mesmo agente em dez frameworks e
+      meço latência, consumo de tokens e taxa de falha.
     </p>
     <p class="big-text">
-      Fora do código, faço outro tipo de programação:
+      Meu perfil de jogador está no
       <a
         href="https://konect.gg/olwtelet"
         target="_blank"
@@ -82,11 +83,11 @@ const schemas = [
         ><button class="button-text js-channel-trigger" data-channel="1"
           >Sintonize</button
         >:</span
-      > explore <a href={routes.projects[locale]}>meu trabalho</a> e meus
-      <a href={routes.certificates[locale]}>certificados</a>, visite meu
+      > veja os <a href={routes.projects[locale]}>projetos</a> e os
+      <a href={routes.certificates[locale]}>certificados</a>. Código no
       <a href={SITE.social.github} target="_blank" rel="noopener noreferrer"
         >GitHub</a
-      > ou me mande um <a href={`mailto:${SITE.email}`}>e-mail</a>.
+      >, contato por <a href={`mailto:${SITE.email}`}>e-mail</a>.
     </p>
   </HomeBio>
 </TVLayout>

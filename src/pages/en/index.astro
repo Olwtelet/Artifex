@@ -28,15 +28,15 @@ const schemas = [
 >
   <HomeBio locale={locale}>
     <p class="big-text">
-      Olwtelet is me, <span class="nowrap"
+      I'm <span class="nowrap"
         ><button
           type="button"
           class="button-text bio__photo js-photo-toggle"
           aria-pressed="false"
           aria-label={t.bio.photoToggle}>Isaac Rodrigues</button
         >.</span
-      > It's my gaming handle, and it ended up signing my work: two names, one signal.
-      I'm a Computer Science student and full-stack developer in
+      > Olwtelet is my gaming handle and the name I put on my work. I study
+      Computer Science and build software in
       <span class="nowrap"
         ><button class="button-text js-channel-trigger" data-channel="8"
           >Brasília, Brazil</button
@@ -44,33 +44,32 @@ const schemas = [
       >
     </p>
     <p class="big-text">
-      A demo is like color bars: it proves there's a signal, not that the
-      channel can carry the programming. The ideal scenario never goes on air.
-      Below
-      <a
-        href="https://en.wikipedia.org/wiki/Channel_capacity"
-        target="_blank"
-        rel="noopener noreferrer">channel capacity</a
-      >, a message arrives nearly error-free: not by silencing the noise, but by
-      coding against it.
+      A demo proves that software works once. What I care about is whether it
+      keeps working with bad data, unexpected use and someone trying to break
+      in.
     </p>
     <p class="big-text">
-      An attack is noise with intent. So security isn't the finish. It's the
-      structure: what the system accepts, keeps and refuses. That's how I work
-      at
+      At
       <a
         href="https://ordfall.vercel.app/"
         target="_blank"
         rel="noopener noreferrer">Ordfall</a
+      >, I built the company website and work on security: I analyze
+      vulnerabilities and review code, dependencies and configurations. I also
+      built websites for a law firm, a tennis training center, a nonprofit and
+      <a
+        href="https://www.integratek.com.br/"
+        target="_blank"
+        rel="noopener noreferrer">Integratek</a
       >.
     </p>
     <p class="big-text">
-      With AI, some of the noise is built in. If a simple rule works better, I
-      stick with the rule. A model I can't test, observe and constrain is a bet,
-      not a solution.
+      With AI, I use only what I can test, observe and constrain. In AgentForge,
+      one of my open-source projects, I implement the same agent in ten
+      frameworks and measure latency, token usage and failure rate.
     </p>
     <p class="big-text">
-      Away from code, I do another kind of programming:
+      My gaming profile is on
       <a
         href="https://konect.gg/olwtelet"
         target="_blank"
@@ -83,11 +82,11 @@ const schemas = [
         ><button class="button-text js-channel-trigger" data-channel="1"
           >Tune in</button
         >:</span
-      > explore <a href={routes.projects[locale]}>my work</a> and
-      <a href={routes.certificates[locale]}>certificates</a>, visit my
+      > browse the <a href={routes.projects[locale]}>projects</a> and
+      <a href={routes.certificates[locale]}>certificates</a>. Code is on
       <a href={SITE.social.github} target="_blank" rel="noopener noreferrer"
         >GitHub</a
-      > or send me an <a href={`mailto:${SITE.email}`}>e-mail</a>.
+      >; reach me by <a href={`mailto:${SITE.email}`}>e-mail</a>.
     </p>
   </HomeBio>
 </TVLayout>

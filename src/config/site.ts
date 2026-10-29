@@ -29,8 +29,8 @@ export const SITE = {
   } satisfies Record<Locale, string>,
   /** Home h1 — says outright that Olwtelet is Isaac Rodrigues. */
   headline: {
-    'pt-br': 'Olwtelet é Isaac Rodrigues — software projetado para o ruído',
-    en: 'Olwtelet is Isaac Rodrigues — software designed for the noise',
+    'pt-br': 'Olwtelet é Isaac Rodrigues',
+    en: 'Olwtelet is Isaac Rodrigues',
   } satisfies Record<Locale, string>,
   location: {
     city: 'Brasília',
