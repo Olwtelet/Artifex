@@ -21,6 +21,7 @@ import {
   localizeProject,
 } from '../src/data/projects.ts'
 import { useTranslations } from '../src/i18n/translations.ts'
+import { readLogo } from './logo.mjs'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(root, 'public', 'assets', 'og')
@@ -65,7 +66,31 @@ function colorBars({ y, height }) {
   ).join('')
 }
 
-/** Shared broadcast-frame chrome: noise, scanlines, frame, vignette. */
+const LOGO = await readLogo()
+
+/**
+ * The Olwtelet "A" as a station bug — the translucent channel logo a
+ * broadcaster keeps in the corner of the picture — with glitchText's split.
+ */
+function stationBug({
+  height = 150,
+  right = 80,
+  top = 140,
+  opacity = 0.6,
+} = {}) {
+  const [vx, vy, vw, vh] = LOGO.viewBox
+  const k = height / vh
+  const x = W - right - vw * k
+  const layer = (fill, dx, dy) =>
+    `<path fill="${fill}" fill-rule="evenodd" transform="translate(${(dx / k).toFixed(2)} ${(dy / k).toFixed(2)})" d="${LOGO.d}"/>`
+  return `<g opacity="${opacity}" transform="translate(${(x - vx * k).toFixed(2)} ${(top - vy * k).toFixed(2)}) scale(${k.toFixed(5)})">
+    ${layer('rgba(2,183,182,0.55)', 4, 3)}
+    ${layer('rgba(183,2,2,0.55)', -4, -3)}
+    ${layer('#ffffff', 0, 0)}
+  </g>`
+}
+
+/** Shared broadcast-frame chrome: noise, scanlines, station bug, frame, vignette. */
 function frame(content) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
@@ -87,6 +112,7 @@ function frame(content) {
   <rect width="${W}" height="${H}" fill="url(#scanlines)"/>
 
   ${content}
+  ${stationBug()}
 
   <rect width="${W}" height="${H}" fill="url(#vignette)"/>
 

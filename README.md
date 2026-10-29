@@ -29,8 +29,8 @@ olwtelet.dev
 │   ├── assets
 │   │   ├── fonts
 │   │   ├── images
-│   │   │   ├── .certificates  # certificate thumbnails (960x720 JPEG + WebP)
-│   │   │   └── .playlist      # Spotify playlist cover art
+│   │   │   ├── .certificates  # certificate thumbnails (JPEG + WebP)
+│   │   │   └── logo.svg       # the "A" mark — source of the icon set and OG station bug
 │   │   ├── og                 # generated Open Graph images (1200x630)
 │   │   └── videos
 │   ├── favicon.*              # generated icon set
@@ -41,7 +41,7 @@ olwtelet.dev
 ├── src
 │   ├── components             # Header, Footer, ProjectList, ProjectDossier, CertificateGallery, TV effects, etc.
 │   ├── config                 # site.ts — single source of truth for site metadata
-│   ├── data                   # projects.ts, certificates.ts, playlists.ts — typed content
+│   ├── data                   # projects.ts, certificates.ts — typed content
 │   ├── i18n                   # routes.ts (locale route map), translations.ts (UI strings)
 │   ├── layouts                # TVLayout, MarkdownLayout
 │   ├── modules                # Shared logic: navigation, keyboard, TV state
@@ -65,11 +65,10 @@ Portuguese is the default language and lives at the root; English lives under `/
 | Websites     | `/sites/`           | `/en/websites/`        |
 | Archive      | `/projetos/`        | `/en/projects/`        |
 | Project      | `/projetos/[slug]/` | `/en/projects/[slug]/` |
-| Playlists    | `/playlists/`       | `/en/playlists/`       |
 | Certificates | `/certificados/`    | `/en/certificates/`    |
 | Resume       | `/curriculo/`       | `/en/resume/`          |
 
-Older URLs keep working: `/pt-br/…` redirects to the matching Portuguese page at the root, and the former English `/open-source/`, `/websites/`, `/projects/`, `/projects/[slug]/` and `/resume/` redirect to their `/en/` equivalents. `/` and `/playlists/` now serve the Portuguese pages (English: `/en/` and `/en/playlists/`).
+Older URLs keep working: `/pt-br/…` redirects to the matching Portuguese page at the root, and the former English `/open-source/`, `/websites/`, `/projects/`, `/projects/[slug]/` and `/resume/` redirect to their `/en/` equivalents. `/` now serves the Portuguese home (English: `/en/`).
 
 ## ⚡ Quick Start
 
@@ -102,7 +101,7 @@ pnpm preview          # preview the production build locally
 pnpm check            # astro type checking
 pnpm lint             # eslint
 pnpm format:check     # prettier check
-pnpm generate:icons   # regenerate the favicon/icon set
+pnpm generate:icons   # regenerate the favicon/icon set from logo.svg
 pnpm generate:og      # regenerate Open Graph images
 pnpm optimize:images  # re-optimize heavy raster assets
 ```

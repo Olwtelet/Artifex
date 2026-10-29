@@ -65,11 +65,12 @@
 
         <div class="brand">
           <img
+            class="brand__logo"
             loading="lazy"
-            src="/assets/images/kiwivision.svg"
-            alt="kiwivision"
-            width="103"
-            height="10"
+            src="/assets/images/logo.svg"
+            alt="Olwtelet"
+            width="26"
+            height="33"
           />
           <br />
           <span>COMPUTER SPACE COMMAND</span>
@@ -304,5 +305,12 @@
 
   img {
     display: inline-block;
+  }
+
+  /* the master mark is white: print it black on the plastic, with the screen's RGB split */
+  .brand__logo {
+    margin-bottom: 4px;
+    filter: invert(1) drop-shadow(1px 1px 0 rgba(2, 183, 182, 0.7))
+      drop-shadow(-1px -1px 0 rgba(183, 2, 2, 0.7));
   }
 </style>

@@ -1,7 +1,12 @@
 /**
- * Generates the complete favicon/icon set from a single SVG source.
+ * Generates the complete favicon/icon set from the Olwtelet "A" mark
+ * (public/assets/images/logo.svg).
  *
  *   pnpm generate:icons
+ *
+ * The mark is dressed as a signal on the site's CRT: the red/cyan split of
+ * .glitchy-text, plus a soft screen glow and scanlines on the large icons.
+ * The tiny favicons stay flat so the A still reads at 16px.
  *
  * Outputs (all in public/):
  *   favicon.svg, favicon.ico (16+32+48), favicon-16x16.png, favicon-32x32.png,
@@ -13,46 +18,68 @@ import { writeFile, mkdir } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { readLogo } from './logo.mjs'
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const publicDir = path.join(root, 'public')
 
+/** Icon canvas, in SVG units. */
+const S = 512
+
 /**
- * A tiny CRT television broadcasting SMPTE color bars, on the site's black.
- * `pad` grows the safe area (used for the maskable variant).
+ * The mark centred on a black square.
+ * - fill: share of the square's height taken by the A
+ * - split: red/cyan offset in canvas units (0 keeps it flat white)
+ * - crt: output size in px to draw the screen glow and scanlines for
+ *   (scanline spacing is set in real pixels so it never aliases), or false
  */
-function tvSvg({ pad = 0 } = {}) {
-  const s = 64 + pad * 2
-  const o = pad // offset
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${s} ${s}">
-  <rect width="${s}" height="${s}" fill="#000000"/>
-  <g stroke="#f1f2f6" stroke-width="4" fill="none" stroke-linecap="round">
-    <path d="M${o + 20} ${o + 6} L${o + 32} ${o + 18} L${o + 46} ${o + 4}"/>
-    <rect x="${o + 6}" y="${o + 18}" width="${52}" height="${40}" rx="3"/>
+function iconSvg(
+  { viewBox: [vx, vy, vw, vh], d },
+  { fill, split = 0, crt = false }
+) {
+  const k = (S * fill) / vh
+  const tx = (S - vw * k) / 2 - vx * k
+  const ty = (S - vh * k) / 2 - vy * k
+  const layer = (color, opacity, dx, dy) => {
+    const alpha = opacity < 1 ? ` fill-opacity="${opacity}"` : ''
+    const shift =
+      dx || dy
+        ? ` transform="translate(${(dx / k).toFixed(2)} ${(dy / k).toFixed(2)})"`
+        : ''
+    return `<use href="#mark" fill="${color}"${alpha}${shift}/>`
+  }
+  const period = crt ? (Math.max(3, Math.round(crt / 128)) * S) / crt : 0
+
+  // the path is defined once and drawn by every colour layer
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${S} ${S}">
+  <defs>
+    <path id="mark" fill-rule="evenodd" d="${d}"/>
+    ${
+      crt
+        ? `<radialGradient id="glow" cx="50%" cy="42%" r="75%">
+      <stop offset="0" stop-color="#1e1e1e"/>
+      <stop offset="1" stop-color="#000000"/>
+    </radialGradient>
+    <pattern id="scanlines" width="${S}" height="${period.toFixed(3)}" patternUnits="userSpaceOnUse">
+      <rect width="${S}" height="${(period / 3).toFixed(3)}" fill="#000000" fill-opacity="0.15"/>
+    </pattern>`
+        : ''
+    }
+  </defs>
+  <rect width="${S}" height="${S}" fill="${crt ? 'url(#glow)' : '#000000'}"/>
+  <g transform="translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${k.toFixed(5)})">
+    ${split ? layer('#02b7b6', 0.85, split, split * 0.6) + layer('#b70202', 0.85, -split, -split * 0.6) : ''}
+    ${layer('#ffffff', 1, 0, 0)}
   </g>
-  <!-- SMPTE color bars on the screen -->
-  <g>
-    <rect x="${o + 12}" y="${o + 24}" width="8" height="28" fill="#c0c0c0"/>
-    <rect x="${o + 20}" y="${o + 24}" width="8" height="28" fill="#c0c000"/>
-    <rect x="${o + 28}" y="${o + 24}" width="8" height="28" fill="#00c0c0"/>
-    <rect x="${o + 36}" y="${o + 24}" width="8" height="28" fill="#00c000"/>
-    <rect x="${o + 44}" y="${o + 24}" width="8" height="28" fill="#c000c0"/>
-  </g>
-  <!-- scanlines -->
-  <g fill="#000000" opacity="0.25">
-    ${Array.from({ length: 7 })
-      .map(
-        (_, i) =>
-          `<rect x="${o + 12}" y="${o + 26 + i * 4}" width="40" height="1.5"/>`
-      )
-      .join('\n    ')}
-  </g>
-</svg>`
+  ${crt ? `<rect width="${S}" height="${S}" fill="url(#scanlines)"/>` : ''}
+</svg>
+`
 }
 
 async function png(svg, size) {
-  return sharp(Buffer.from(svg), { density: 300 })
+  return sharp(Buffer.from(svg), { density: 144 })
     .resize(size, size)
-    .png({ compressionLevel: 9, palette: true })
+    .png({ compressionLevel: 9, palette: size <= 48 })
     .toBuffer()
 }
 
@@ -83,34 +110,35 @@ function packIco(entries) {
 
 async function main() {
   await mkdir(publicDir, { recursive: true })
+  const logo = await readLogo()
 
-  const svg = tvSvg()
-  // maskable: content inside the central 60% (safe zone is 80%)
-  const maskableSvg = tvSvg({ pad: 22 })
+  const flat = (split) => iconSvg(logo, { fill: 0.9, split })
+  const screen = (size, fill = 0.8) =>
+    iconSvg(logo, { fill, split: 10, crt: size })
 
-  await writeFile(path.join(publicDir, 'favicon.svg'), svg)
+  await writeFile(path.join(publicDir, 'favicon.svg'), flat(10))
 
-  const sizes = {
-    'favicon-16x16.png': 16,
-    'favicon-32x32.png': 32,
-    'favicon-48x48.png': 48,
-    'apple-touch-icon.png': 180,
-    'icon-192.png': 192,
-    'icon-512.png': 512,
+  const files = {
+    'favicon-16x16.png': [flat(0), 16],
+    'favicon-32x32.png': [flat(10), 32],
+    'favicon-48x48.png': [flat(10), 48],
+    'apple-touch-icon.png': [screen(180), 180],
+    'icon-192.png': [screen(192), 192],
+    'icon-512.png': [screen(512), 512],
+    // maskable: the A stays inside the 80% safe circle
+    'icon-512-maskable.png': [screen(512, 0.52), 512],
   }
-
-  for (const [name, size] of Object.entries(sizes)) {
+  for (const [name, [svg, size]] of Object.entries(files)) {
     await writeFile(path.join(publicDir, name), await png(svg, size))
   }
 
-  await writeFile(
-    path.join(publicDir, 'icon-512-maskable.png'),
-    await png(maskableSvg, 512)
-  )
-
   const icoEntries = []
-  for (const size of [16, 32, 48]) {
-    icoEntries.push({ size, buffer: await png(svg, size) })
+  for (const [size, split] of [
+    [16, 0],
+    [32, 10],
+    [48, 10],
+  ]) {
+    icoEntries.push({ size, buffer: await png(flat(split), size) })
   }
   await writeFile(path.join(publicDir, 'favicon.ico'), packIco(icoEntries))
 
