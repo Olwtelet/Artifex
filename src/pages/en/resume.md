@@ -8,7 +8,7 @@ textNav:
 
 # Isaac Rodrigues
 
-Full-stack developer and Computer Science student in Brasília, Brazil, focused on applied AI and cybersecurity; known online as Olwtelet. Director of Ordfall (software engineering and cybersecurity for critical systems): vulnerability analysis; code, dependency and configuration review; and support for secure architecture design and for cloud, identity and infrastructure controls. At Integratek since June 2026: website (Astro, TypeScript, Docker), blog and WhatsApp-integrated quote forms, with ongoing SEO, performance and accessibility work. Client websites: Rocha & Sá, CT Thalita Rodrigues and Instituto Politécnico do Brasil. Open source: Argus, an OSINT (open-source intelligence) platform, and AgentForge, which compares the same agent across ten frameworks. Core stack: TypeScript, Python, React, Next.js, Node.js and FastAPI.
+Full-stack developer and Computer Science student in Brasília, Brazil, focused on applied AI and cybersecurity; known online as Olwtelet. Olwtelet Productions (my own studio for games, software and websites): Filmes HD Online Grátis is live; Veil, a browser strategy game, and Diseens, an academic passport platform, are in development. At Integratek since June 2026: website (Astro, TypeScript, Docker), blog and WhatsApp-integrated quote forms, with ongoing SEO, performance and accessibility work. Client websites: Rocha & Sá, CT Thalita Rodrigues and Instituto Politécnico do Brasil. Cybersecurity at Ordfall: vulnerability analysis and code, dependency and configuration review. Open source: Argus, an OSINT (open-source intelligence) platform, and AgentForge, which compares the same agent across ten frameworks. Core stack: TypeScript, Python, React, Next.js, Node.js and FastAPI.
 
 [GitHub](https://github.com/olwtelet)
 <br>
@@ -29,19 +29,13 @@ Full-stack developer and Computer Science student in Brasília, Brazil, focused 
 
 ### Some Projects
 
+- **Olwtelet Productions**: my studio for games, software and websites. Live: [Filmes HD Online Grátis](https://filmeshdonlinegratis.vercel.app/), a film curation site with live screenings on Discord that hosts no films (Astro, TypeScript, Supabase). In development: Veil, a chess-like strategy game that runs in the browser, and Diseens, an academic passport platform.
 - **[`Argus`](https://github.com/Olwtelet/Argus)**: self-hosted open-source intelligence platform that normalizes dozens of public feeds — aircraft, vessels, satellites, seismic and infrastructure data — onto one live map. Python/FastAPI backend, Next.js dashboard with MapLibre GL, Tauri desktop shell, Docker images, AGPL-3.0.
 - **[`AgentForge`](https://github.com/Olwtelet/AgentForge)**: ~90 runnable examples implementing the same agent across ten frameworks, with a shared agent contract and benchmark harness measuring latency, token usage, and failure rate on equal footing.
 - **[`Resumex`](https://github.com/Olwtelet/Resumex)**: fully offline pipeline that turns a story file into a finished vertical video, deriving caption timing from the speech synthesis output and rendering in a single deterministic FFmpeg pass.
 - **[`Obsidian Second Brain`](https://github.com/Olwtelet/Obsidian-Second-Brain)**: public vault of CS fundamentals, data-structure cheatsheets, and daily study logs.
 
 ### Work Experience
-
-**[Ordfall](https://ordfall.vercel.app/)**: Director — remote (Sep 2026 – present)
-
-- Built the company's institutional website, presenting its secure software, cloud, data protection, and cybersecurity services.
-- Develop and maintain applications at the intersection of software engineering, security, and digital governance.
-- Help define scalable, maintainable architectures, with security designed in from the start through production.
-- Perform vulnerability analysis and review code, dependencies, and security configurations; support cloud, identity, and infrastructure controls.
 
 **[Integratek](https://www.integratek.com.br/)**: Full-Stack Developer — ongoing client engagement (Jun 2026 – present)
 
@@ -50,6 +44,11 @@ Full-stack developer and Computer Science student in Brasília, Brazil, focused 
 - Implemented a blog and quote request forms integrated with WhatsApp to support lead generation.
 - Continuously improve SEO, performance, responsiveness, and accessibility, and ship new sections as the company needs them.
 - Also contribute to portal, dashboard, automation, AI, and infrastructure projects, from requirements gathering to post-deployment support.
+
+**[Ordfall](https://ordfall.vercel.app/)**: Cybersecurity Analyst — freelance, remote (Sep 2026 – present)
+
+- Perform vulnerability analysis and review code, dependencies, and security configurations.
+- Support cloud, identity, and infrastructure controls.
 
 ### Selected Client Work
 

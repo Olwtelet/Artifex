@@ -8,7 +8,7 @@ textNav:
 
 # Isaac Rodrigues
 
-Desenvolvedor full-stack e estudante de Ciência da Computação em Brasília, com foco em IA aplicada e cibersegurança; conhecido online como Olwtelet. Diretor da Ordfall (engenharia de software e cibersegurança para sistemas críticos): análise de vulnerabilidades; revisão de código, dependências e configurações; e apoio na definição de arquiteturas seguras e nos controles de nuvem, identidade e infraestrutura. Na Integratek desde junho de 2026: site (Astro, TypeScript, Docker), blog e formulários de orçamento integrados ao WhatsApp, com trabalho contínuo de SEO, desempenho e acessibilidade. Sites para clientes: Rocha & Sá, CT Thalita Rodrigues e Instituto Politécnico do Brasil. Código aberto: Argus, plataforma de OSINT (inteligência de fontes abertas), e AgentForge, que compara o mesmo agente em dez frameworks. Stack principal: TypeScript, Python, React, Next.js, Node.js e FastAPI.
+Desenvolvedor full-stack e estudante de Ciência da Computação em Brasília, com foco em IA aplicada e cibersegurança; conhecido online como Olwtelet. Olwtelet Productions (estúdio próprio de jogos, software e sites): Filmes HD Online Grátis no ar; em desenvolvimento, Veil (jogo de estratégia para navegador) e Diseens (plataforma de passaporte acadêmico). Na Integratek desde junho de 2026: site (Astro, TypeScript, Docker), blog e formulários de orçamento integrados ao WhatsApp, com trabalho contínuo de SEO, desempenho e acessibilidade. Sites para clientes: Rocha & Sá, CT Thalita Rodrigues e Instituto Politécnico do Brasil. Cibersegurança na Ordfall: análise de vulnerabilidades e revisão de código, dependências e configurações. Código aberto: Argus, plataforma de OSINT (inteligência de fontes abertas), e AgentForge, que compara o mesmo agente em dez frameworks. Stack principal: TypeScript, Python, React, Next.js, Node.js e FastAPI.
 
 [GitHub](https://github.com/olwtelet)
 <br>
@@ -29,19 +29,13 @@ Desenvolvedor full-stack e estudante de Ciência da Computação em Brasília, c
 
 ### Alguns Projetos
 
+- **Olwtelet Productions**: meu estúdio de jogos, software e sites. No ar: [Filmes HD Online Grátis](https://filmeshdonlinegratis.vercel.app/), site de curadoria de cinema com sessões ao vivo no Discord, sem hospedar filmes (Astro, TypeScript, Supabase). Em desenvolvimento: Veil, jogo de estratégia no estilo do xadrez para navegador, e Diseens, plataforma de passaporte acadêmico.
 - **[`Argus`](https://github.com/Olwtelet/Argus)**: plataforma self-hosted de inteligência de fontes abertas que normaliza dezenas de feeds públicos — aeronaves, embarcações, satélites, dados sísmicos e de infraestrutura — em um único mapa ao vivo. Backend Python/FastAPI, painel Next.js com MapLibre GL, casca desktop em Tauri, imagens Docker, AGPL-3.0.
 - **[`AgentForge`](https://github.com/Olwtelet/AgentForge)**: ~90 exemplos executáveis implementando o mesmo agente em dez frameworks, com contrato compartilhado e bancada de benchmark medindo latência, uso de tokens e taxa de falha em pé de igualdade.
 - **[`Resumex`](https://github.com/Olwtelet/Resumex)**: pipeline totalmente offline que transforma um arquivo de história em vídeo vertical pronto, derivando o tempo das legendas da síntese de voz e renderizando em uma única passada determinística do FFmpeg.
 - **[`Obsidian Second Brain`](https://github.com/Olwtelet/Obsidian-Second-Brain)**: cofre público com fundamentos de CC, cheatsheets de estruturas de dados e registros diários de estudo.
 
 ### Experiência Profissional
-
-**[Ordfall](https://ordfall.vercel.app/)**: Diretor — remoto (set 2026 – presente)
-
-- Construí o site institucional da empresa, apresentando seus serviços de software seguro, cloud, proteção de dados e cibersegurança.
-- Desenvolvo e mantenho aplicações na interseção entre engenharia de software, segurança e governança digital.
-- Ajudo a definir arquiteturas escaláveis e manuteníveis, com segurança incorporada desde o desenho até a produção.
-- Realizo análise de vulnerabilidades e revisão de código, dependências e configurações de segurança; apoio controles de cloud, identidade e infraestrutura.
 
 **[Integratek](https://www.integratek.com.br/)**: Desenvolvedor Full-Stack — contrato contínuo com cliente (jun 2026 – presente)
 
@@ -50,6 +44,11 @@ Desenvolvedor full-stack e estudante de Ciência da Computação em Brasília, c
 - Implementei um blog e formulários de orçamento integrados com o WhatsApp para apoiar a geração de leads.
 - Otimizo continuamente SEO, desempenho, responsividade e acessibilidade, e publico novas seções conforme a empresa precisa.
 - Também participo de projetos de portais, dashboards, automação, IA e infraestrutura, do levantamento de requisitos ao suporte pós-implantação.
+
+**[Ordfall](https://ordfall.vercel.app/)**: Analista de Cibersegurança — autônomo, remoto (set 2026 – presente)
+
+- Realizo análise de vulnerabilidades e revisão de código, dependências e configurações de segurança.
+- Apoio controles de cloud, identidade e infraestrutura.
 
 ### Trabalhos Selecionados para Clientes
 

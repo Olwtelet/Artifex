@@ -383,35 +383,6 @@ export const allProjects: Project[] = [
     stack: ['Next.js', 'React', 'TypeScript'],
     websiteUrl: 'https://thalitarodrigues.com/',
   },
-  {
-    slug: 'ordfall',
-    name: 'Ordfall',
-    collection: 'websites',
-    category: 'client-work',
-    status: 'active',
-    year: '2026',
-    role: {
-      en: 'Director',
-      'pt-br': 'Diretor',
-    },
-    summary: {
-      en: 'Institutional website for a software engineering and cybersecurity company, plus ongoing security work',
-      'pt-br':
-        'Site institucional de uma empresa de engenharia de software e cibersegurança, com atuação contínua em segurança',
-    },
-    overview: {
-      en: 'The institutional website of Ordfall, a Brazilian company that builds and secures software for critical systems — secure AI, cloud security, cyber resilience, and data protection. The site presents those services in Portuguese and English.',
-      'pt-br':
-        'O site institucional da Ordfall, empresa brasileira que desenvolve e protege software para sistemas críticos — IA segura, segurança em nuvem, resiliência cibernética e proteção de dados. O site apresenta esses serviços em português e inglês.',
-    },
-    roleDescription: {
-      en: 'Beyond building the website, I work on the company’s software and security side: helping define scalable, maintainable architectures with security designed in from the start, reviewing code, dependencies, and security configurations for vulnerabilities, and supporting cloud, identity, and infrastructure controls.',
-      'pt-br':
-        'Além de construir o site, atuo no lado de software e segurança da empresa: ajudo a definir arquiteturas escaláveis e manuteníveis com segurança desde o desenho, reviso código, dependências e configurações de segurança em busca de vulnerabilidades e apoio controles de cloud, identidade e infraestrutura.',
-    },
-    stack: ['Next.js'],
-    websiteUrl: 'https://ordfall.vercel.app/',
-  },
 ]
 
 export function getProject(slug: string): Project | undefined {
