@@ -2,7 +2,7 @@
 import TVLayout from '../../layouts/TVLayout.astro'
 import HomeBio from '../../components/HomeBio.astro'
 import { SITE } from '../../config/site'
-import { routes } from '../../i18n/routes'
+import { routes, projectRoute } from '../../i18n/routes'
 import { useTranslations } from '../../i18n/translations'
 import { absoluteUrl, websiteSchema, profilePageSchema } from '../../utils/seo'
 
@@ -34,42 +34,61 @@ const schemas = [
           class="button-text bio__photo js-photo-toggle"
           aria-pressed="false"
           aria-label={t.bio.photoToggle}>Isaac Rodrigues</button
-        >.</span
-      > Olwtelet is my gaming handle and the name I put on my work. I study
-      Computer Science and build software in
+        >,</span
+      > a programmer in
       <span class="nowrap"
         ><button class="button-text js-channel-trigger" data-channel="8"
           >Brasília, Brazil</button
         >.</span
-      >
+      > Olwtelet is my gaming handle and the name I put on my work. It's my username
+      on GitHub and LinkedIn and the name of Olwtelet Productions, an indie game studio
+      I direct that has no game out yet.
     </p>
     <p class="big-text">
-      A demo proves that software works once. What I care about is whether it
-      keeps working with bad data, unexpected use and someone trying to break
-      in.
-    </p>
-    <p class="big-text">
-      At
+      I'm currently the director of
       <a
         href="https://ordfall.vercel.app/"
         target="_blank"
         rel="noopener noreferrer">Ordfall</a
-      >, I built the company website and work on security: I analyze
-      vulnerabilities and review code, dependencies and configurations. I also
-      built websites for a law firm, a tennis training center, a nonprofit and
+      >, a Brazilian software engineering and cybersecurity company for critical
+      systems. There, I built the website and handle security: I analyze
+      vulnerabilities and review code, dependencies and configurations. A demo
+      proves that software works once. What I care about is whether it keeps
+      working with bad data, unexpected use and someone trying to break in.
+    </p>
+    <p class="big-text">
+      I study Computer Science and have been taking MIT OpenCourseWare courses
+      since 2024. I work as a full-stack developer (TypeScript, Python, React,
+      Next.js, Node.js, FastAPI), focused on applied AI and cybersecurity.
+    </p>
+    <p class="big-text">
+      For
       <a
         href="https://www.integratek.com.br/"
         target="_blank"
         rel="noopener noreferrer">Integratek</a
+      >, an IT infrastructure company I've worked with since June 2026, I
+      developed the website, blog and quote forms. I also built the websites for
+      the law firm
+      <a href={projectRoute('rocha-e-sa')[locale]}>Rocha &amp; Sá</a>, the
+      tennis training center
+      <a href={projectRoute('thalit-academy')[locale]}>CT Thalita Rodrigues</a>
+      and the nonprofit
+      <a href={projectRoute('instituto-politecnico-do-brasil')[locale]}
+        >Instituto Politécnico do Brasil</a
       >.
     </p>
     <p class="big-text">
-      With AI, I use only what I can test, observe and constrain. In AgentForge,
-      one of my open-source projects, I implement the same agent in ten
-      frameworks and measure latency, token usage and failure rate.
+      I created and maintain
+      <a href={projectRoute('argus')[locale]}>Argus</a>, which brings dozens of
+      public feeds (aircraft, vessels, satellites, earthquakes) onto one live
+      map. With AI, I use only what I can test, observe and constrain: in
+      <a href={projectRoute('agentforge')[locale]}>AgentForge</a>, I implement
+      the same agent in ten frameworks and measure latency, token usage and
+      failure rate. Both are open source.
     </p>
     <p class="big-text">
-      My gaming profile is on
+      My gaming profile, under the same handle, is on
       <a
         href="https://konect.gg/olwtelet"
         target="_blank"

@@ -8,7 +8,7 @@ textNav:
 
 # Isaac Rodrigues
 
-Desenvolvedor full-stack e estudante de Ciência da Computação em Brasília, com foco em IA aplicada e cibersegurança. Online, uso o nome Olwtelet. Na Ordfall, construí o site institucional e atuo em segurança: análise de vulnerabilidades; revisão de código, dependências e configurações; e apoio à definição de arquiteturas seguras, do desenho à produção. Na Integratek, desenvolvo o site da empresa (Astro, TypeScript, Docker) e cuido de SEO, desempenho e acessibilidade. Também entrego sites para clientes e mantenho projetos de código aberto como Argus e AgentForge. Stack principal: TypeScript, Python, React, Next.js, Node.js e FastAPI.
+Desenvolvedor full-stack e estudante de Ciência da Computação em Brasília, com foco em IA aplicada e cibersegurança; conhecido online como Olwtelet. Diretor da Ordfall (engenharia de software e cibersegurança para sistemas críticos): análise de vulnerabilidades; revisão de código, dependências e configurações; e apoio na definição de arquiteturas seguras e nos controles de nuvem, identidade e infraestrutura. Na Integratek desde junho de 2026: site (Astro, TypeScript, Docker), blog e formulários de orçamento integrados ao WhatsApp, com trabalho contínuo de SEO, desempenho e acessibilidade. Sites para clientes: Rocha & Sá, CT Thalita Rodrigues e Instituto Politécnico do Brasil. Código aberto: Argus, plataforma de OSINT (inteligência de fontes abertas), e AgentForge, que compara o mesmo agente em dez frameworks. Stack principal: TypeScript, Python, React, Next.js, Node.js e FastAPI.
 
 [GitHub](https://github.com/olwtelet)
 <br>
@@ -36,7 +36,7 @@ Desenvolvedor full-stack e estudante de Ciência da Computação em Brasília, c
 
 ### Experiência Profissional
 
-**[Ordfall](https://ordfall.vercel.app/)**: Desenvolvedor Full-Stack & Analista de Cibersegurança — autônomo, remoto (set 2026 – presente)
+**[Ordfall](https://ordfall.vercel.app/)**: Diretor — remoto (set 2026 – presente)
 
 - Construí o site institucional da empresa, apresentando seus serviços de software seguro, cloud, proteção de dados e cibersegurança.
 - Desenvolvo e mantenho aplicações na interseção entre engenharia de software, segurança e governança digital.

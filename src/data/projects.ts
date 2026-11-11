@@ -391,8 +391,8 @@ export const allProjects: Project[] = [
     status: 'active',
     year: '2026',
     role: {
-      en: 'Full-Stack Developer & Cybersecurity Analyst',
-      'pt-br': 'Desenvolvedor Full-Stack & Analista de Cibersegurança',
+      en: 'Director',
+      'pt-br': 'Diretor',
     },
     summary: {
       en: 'Institutional website for a software engineering and cybersecurity company, plus ongoing security work',

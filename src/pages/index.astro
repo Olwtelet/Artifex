@@ -2,7 +2,7 @@
 import TVLayout from '../layouts/TVLayout.astro'
 import HomeBio from '../components/HomeBio.astro'
 import { SITE } from '../config/site'
-import { routes } from '../i18n/routes'
+import { routes, projectRoute } from '../i18n/routes'
 import { useTranslations } from '../i18n/translations'
 import { absoluteUrl, websiteSchema, profilePageSchema } from '../utils/seo'
 
@@ -34,43 +34,62 @@ const schemas = [
           class="button-text bio__photo js-photo-toggle"
           aria-pressed="false"
           aria-label={t.bio.photoToggle}>Isaac Rodrigues</button
-        >.</span
-      > Olwtelet é o nick que uso nos jogos e o nome com que assino meu trabalho.
-      Estudo Ciência da Computação e desenvolvo software em
+        >,</span
+      > programador em
       <span class="nowrap"
         ><button class="button-text js-channel-trigger" data-channel="8"
           >Brasília</button
         >.</span
-      >
+      > Olwtelet é o nick que uso nos jogos e o nome com que assino meu trabalho.
+      É meu usuário no GitHub e no LinkedIn e o nome da Olwtelet Productions, estúdio
+      independente de jogos que dirijo e que ainda não lançou nenhum jogo.
     </p>
     <p class="big-text">
-      Uma demonstração prova que o software funciona uma vez. O que me
-      interessa é se ele continua funcionando com dados errados, uso imprevisto
-      e alguém tentando invadir.
-    </p>
-    <p class="big-text">
-      Na
+      Atualmente sou diretor da
       <a
         href="https://ordfall.vercel.app/"
         target="_blank"
         rel="noopener noreferrer">Ordfall</a
-      >, construí o site institucional e trabalho com segurança: analiso
-      vulnerabilidades e reviso código, dependências e configurações. Também fiz
-      sites para um escritório de advocacia, um centro de treinamento de tênis,
-      uma ONG e a
+      >, empresa brasileira de engenharia de software e cibersegurança para
+      sistemas críticos. Lá, construí o site e cuido da segurança: analiso
+      vulnerabilidades e reviso código, dependências e configurações. Uma
+      demonstração prova que o software funciona uma vez. O que me interessa é
+      se ele continua funcionando com dados errados, uso imprevisto e alguém
+      tentando invadir.
+    </p>
+    <p class="big-text">
+      Estudo Ciência da Computação e faço cursos do MIT OpenCourseWare desde
+      2024. Trabalho como desenvolvedor full-stack (TypeScript, Python, React,
+      Next.js, Node.js, FastAPI), com foco em IA aplicada e cibersegurança.
+    </p>
+    <p class="big-text">
+      Para a
       <a
         href="https://www.integratek.com.br/"
         target="_blank"
         rel="noopener noreferrer">Integratek</a
+      >, empresa de infraestrutura de TI que atendo desde junho de 2026,
+      desenvolvi o site, o blog e os formulários de orçamento. Também fiz os
+      sites do escritório de advocacia
+      <a href={projectRoute('rocha-e-sa')[locale]}>Rocha &amp; Sá</a>, do centro
+      de treinamento de tênis
+      <a href={projectRoute('thalit-academy')[locale]}>CT Thalita Rodrigues</a>
+      e da ONG
+      <a href={projectRoute('instituto-politecnico-do-brasil')[locale]}
+        >Instituto Politécnico do Brasil</a
       >.
     </p>
     <p class="big-text">
-      Com IA, só adoto o que consigo testar, observar e limitar. No AgentForge,
-      projeto de código aberto, implemento o mesmo agente em dez frameworks e
-      meço latência, consumo de tokens e taxa de falha.
+      Criei e mantenho o
+      <a href={projectRoute('argus')[locale]}>Argus</a>, que reúne dezenas de
+      fontes públicas (aeronaves, embarcações, satélites, terremotos) em um mapa
+      ao vivo. Com IA, só adoto o que consigo testar, observar e limitar: no
+      <a href={projectRoute('agentforge')[locale]}>AgentForge</a>, implemento o
+      mesmo agente em dez frameworks e meço latência, consumo de tokens e taxa
+      de falha. Os dois são de código aberto.
     </p>
     <p class="big-text">
-      Meu perfil de jogador está no
+      Meu perfil de jogador, com o mesmo nick, está no
       <a
         href="https://konect.gg/olwtelet"
         target="_blank"

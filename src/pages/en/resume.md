@@ -8,7 +8,7 @@ textNav:
 
 # Isaac Rodrigues
 
-Full-stack developer and Computer Science student in Brasília, Brazil, focused on applied AI and cybersecurity. Online, I go by Olwtelet. At Ordfall, I built the corporate website and work on security: vulnerability analysis; code, dependency and configuration review; and support in defining secure architectures, from design to production. At Integratek, I develop the company website (Astro, TypeScript, Docker), with ongoing SEO, performance and accessibility work. I also deliver client websites and maintain open-source projects such as Argus and AgentForge. Core stack: TypeScript, Python, React, Next.js, Node.js and FastAPI.
+Full-stack developer and Computer Science student in Brasília, Brazil, focused on applied AI and cybersecurity; known online as Olwtelet. Director of Ordfall (software engineering and cybersecurity for critical systems): vulnerability analysis; code, dependency and configuration review; and support for secure architecture design and for cloud, identity and infrastructure controls. At Integratek since June 2026: website (Astro, TypeScript, Docker), blog and WhatsApp-integrated quote forms, with ongoing SEO, performance and accessibility work. Client websites: Rocha & Sá, CT Thalita Rodrigues and Instituto Politécnico do Brasil. Open source: Argus, an OSINT (open-source intelligence) platform, and AgentForge, which compares the same agent across ten frameworks. Core stack: TypeScript, Python, React, Next.js, Node.js and FastAPI.
 
 [GitHub](https://github.com/olwtelet)
 <br>
@@ -36,7 +36,7 @@ Full-stack developer and Computer Science student in Brasília, Brazil, focused 
 
 ### Work Experience
 
-**[Ordfall](https://ordfall.vercel.app/)**: Full-Stack Developer & Cybersecurity Analyst — freelance, remote (Sep 2026 – present)
+**[Ordfall](https://ordfall.vercel.app/)**: Director — remote (Sep 2026 – present)
 
 - Built the company's institutional website, presenting its secure software, cloud, data protection, and cybersecurity services.
 - Develop and maintain applications at the intersection of software engineering, security, and digital governance.
