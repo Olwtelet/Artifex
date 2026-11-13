@@ -439,6 +439,31 @@ function dossierRoutes() {
   )
 }
 
+// --- Resume page is called "Resumo" in Portuguese ---
+{
+  const html = page('/curriculo/')
+  const strip = text(slice(html, '<div class="archive-strip"', '</div>'))
+  check(
+    'PT resume strip says RESUMO',
+    strip.includes('SIGNAL ARCHIVE / RESUMO'),
+    strip
+  )
+  check('PT resume tab title is Resumo', html.includes('<title>Resumo</title>'))
+  check(
+    'PT resume page has no "Currículo"',
+    !/curr[íi]culo/i.test(text(html)),
+    (text(html).match(/.{20}curr[íi]culo.{20}/i) || [''])[0]
+  )
+  const en = text(
+    slice(page('/en/resume/'), '<div class="archive-strip"', '</div>')
+  )
+  check(
+    'EN resume strip still says RESUME',
+    en.includes('SIGNAL ARCHIVE / RESUME'),
+    en
+  )
+}
+
 // --- end of checks ---
 
 for (const failure of failures) console.log(`FAIL ${failure}`)

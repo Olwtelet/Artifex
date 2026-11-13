@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/MarkdownLayout.astro
-title: 'Currículo'
-description: 'Currículo de Olwtelet (Isaac Rodrigues) — estudante de Ciência da Computação e desenvolvedor full-stack em Brasília que atua com produtos web, IA aplicada, automação e cibersegurança.'
+title: 'Resumo'
+description: 'Resumo de Olwtelet (Isaac Rodrigues) — estudante de Ciência da Computação e desenvolvedor full-stack em Brasília que atua com produtos web, IA aplicada, automação e cibersegurança.'
 textNav:
   external: true
 ---
