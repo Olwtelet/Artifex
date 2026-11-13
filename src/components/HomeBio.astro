@@ -8,12 +8,15 @@ interface Props {
 
 const { locale }: Props = Astro.props
 const headline = SITE.headline[locale]
-const prefix = locale === 'en' ? 'NOW RECEIVING:' : 'RECEBENDO AGORA:'
+// The heading is an English title on both locales; mark it for screen readers.
+const headlineLang = locale === 'en' ? undefined : 'en'
 ---
 
 <article class="bio">
   <h1 class="bio__signal">
-    <span aria-hidden="true">{prefix}&nbsp;</span>{headline}
+    <span class="bio__dot" aria-hidden="true"></span><span lang={headlineLang}
+      >{headline}</span
+    >
   </h1>
   <slot />
 </article>
@@ -27,7 +30,7 @@ const prefix = locale === 'en' ? 'NOW RECEIVING:' : 'RECEBENDO AGORA:'
     color: var(--text-primary);
     margin-bottom: 1.6rem;
 
-    & span::before {
+    & .bio__dot::before {
       content: '● ';
       color: #f00;
       animation: blink 1.4s step-end infinite;

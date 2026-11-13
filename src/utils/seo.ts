@@ -21,7 +21,7 @@ export function personSchema(locale: Locale) {
     '@type': 'Person',
     '@id': `${SITE.url}/#person`,
     name: SITE.author,
-    // "Olwtelet" is the gaming handle he works under — the same person
+    // "Olwtelet" is the pseudonym he works under — the same person
     alternateName: [SITE.displayName, SITE.fullName],
     url: SITE.url,
     jobTitle: SITE.jobTitle[locale],

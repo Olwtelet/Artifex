@@ -4,6 +4,7 @@ import { localizeProject, fileNumber, nextProject } from '../data/projects'
 import type { Locale } from '../config/site'
 import { projectRoute, routes } from '../i18n/routes'
 import { useTranslations } from '../i18n/translations'
+import ProjectPreview from './ProjectPreview.astro'
 
 interface Props {
   project: Project
@@ -19,13 +20,11 @@ const next = nextProject(project)
 const returnPath =
   project.collection === 'open-source'
     ? routes.openSource[locale]
-    : routes.websites[locale]
+    : routes.projects[locale]
 
 const sections = [
-  { title: t.dossier.overview, text: lp.overview },
-  { title: t.dossier.problem, text: lp.problem },
-  { title: t.dossier.myRole, text: lp.roleDescription },
-  { title: t.dossier.approach, text: lp.approach },
+  { title: t.dossier.overview, text: lp.overview, isOverview: true },
+  { title: t.dossier.myRole, text: lp.roleDescription, isOverview: false },
 ].filter((s) => Boolean(s.text))
 ---
 
@@ -67,10 +66,15 @@ const sections = [
 
   {
     sections.map((section) => (
-      <section class="dossier__section">
-        <h2>{section.title}</h2>
-        <p>{section.text}</p>
-      </section>
+      <>
+        <section class="dossier__section">
+          <h2>{section.title}</h2>
+          <p>{section.text}</p>
+        </section>
+        {section.isOverview && lp.preview && (
+          <ProjectPreview preview={lp.preview} slug={lp.slug} locale={locale} />
+        )}
+      </>
     ))
   }
 

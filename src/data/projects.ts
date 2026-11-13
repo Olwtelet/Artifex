@@ -17,6 +17,22 @@ export type ProjectCollection = 'open-source' | 'websites'
 type LocalizedText = Record<Locale, string>
 type LocalizedList = Record<Locale, string[]>
 
+/** How a project preview was made: a capture of the live site, media from the repository, or a drawn diagram. */
+export type PreviewKind = 'screenshot' | 'repo' | 'diagram'
+
+export type ProjectPreview = {
+  kind: PreviewKind
+  /** Basename under /assets/previews/ (both .webp and .jpg exist). Required unless kind is 'diagram'. */
+  image?: string
+  width?: number
+  height?: number
+  /** Shown in the window title bar, e.g. 'integratek.com.br' or 'github.com/Olwtelet/Resumex'. */
+  source: string
+  /** Where the preview window opens, in a new tab. */
+  href: string
+  alt: LocalizedText
+}
+
 export type Project = {
   slug: string
   name: string
@@ -29,15 +45,14 @@ export type Project = {
   /** Short one-liner used on listing pages and meta descriptions. */
   summary: LocalizedText
   overview?: LocalizedText
-  problem?: LocalizedText
   roleDescription?: LocalizedText
-  approach?: LocalizedText
 
   highlights?: LocalizedList
   stack?: string[]
 
   websiteUrl?: string
   repositoryUrl?: string
+  preview?: ProjectPreview
 }
 
 const role = {
@@ -67,43 +82,27 @@ export const allProjects: Project[] = [
       'pt-br': 'Criador e mantenedor',
     },
     summary: {
-      en: 'Self-hosted situational awareness platform that folds dozens of public feeds into one live map',
+      en: 'Self-hosted platform that puts dozens of public data feeds on one live map',
       'pt-br':
-        'Plataforma de consciência situacional self-hosted que reúne dezenas de fontes públicas em um mapa ao vivo',
+        'Plataforma self-hosted que reúne dezenas de fontes públicas em um mapa ao vivo',
     },
     overview: {
-      en: 'Argus is an open-source intelligence and situational awareness platform. It collects, normalizes, and plots dozens of public data sources onto a single interactive map — aircraft, vessels, satellites, earthquakes, fires, air quality, weather alerts, power plants, submarine cables and internet outages among them — and it runs entirely on the operator’s own infrastructure, with no central service in the middle.',
+      en: 'Argus is an open-source intelligence and situational awareness platform that collects, normalizes, and plots dozens of public data sources on one interactive map, from aircraft, vessels, and satellites to earthquakes, fires, and internet outages. While most tools that unify this data are hosted services, it runs entirely on the operator’s own infrastructure, with no central service in the middle.',
       'pt-br':
-        'O Argus é uma plataforma de inteligência de fontes abertas e consciência situacional. Ele coleta, normaliza e plota dezenas de fontes públicas em um único mapa interativo — aeronaves, embarcações, satélites, terremotos, queimadas, qualidade do ar, alertas meteorológicos, usinas, cabos submarinos e quedas de internet, entre outros — e roda inteiramente na infraestrutura do próprio operador, sem serviço central no meio.',
-    },
-    problem: {
-      en: 'The data is public, but it is scattered across dozens of APIs that speak different formats, and most tools that unify it are hosted services: you send them your queries, and you stop being able to run the thing on your own terms.',
-      'pt-br':
-        'Os dados são públicos, mas estão espalhados por dezenas de APIs que falam formatos diferentes, e a maioria das ferramentas que os unifica é serviço hospedado: você manda as suas consultas para eles e deixa de conseguir rodar a coisa nos seus próprios termos.',
-    },
-    approach: {
-      en: 'The system is split into four parts — a FastAPI backend that collects and normalizes the feeds, a Next.js dashboard drawing the map with MapLibre GL, a Tauri desktop shell, and the mesh services. Everything is configured through environment variables and no API key is required to start, so a first run works before the operator has signed up for anything. It ships as Docker images and is licensed AGPL-3.0, which keeps network-hosted forks open too.',
-      'pt-br':
-        'O sistema é dividido em quatro partes — um backend FastAPI que coleta e normaliza as fontes, um painel Next.js que desenha o mapa com MapLibre GL, uma casca desktop em Tauri e os serviços de mesh. Tudo é configurado por variáveis de ambiente e nenhuma chave de API é obrigatória para começar, então a primeira execução funciona antes de o operador se cadastrar em qualquer lugar. É distribuído como imagens Docker e licenciado sob AGPL-3.0, o que mantém abertos também os forks hospedados em rede.',
+        'O Argus é uma plataforma de inteligência de fontes abertas e consciência situacional que coleta, normaliza e plota dezenas de fontes públicas em um único mapa interativo, de aeronaves, embarcações e satélites a terremotos, queimadas e quedas de internet. Enquanto a maioria das ferramentas que unificam esses dados é serviço hospedado, ele roda inteiramente na infraestrutura do próprio operador, sem serviço central no meio.',
     },
     highlights: {
       en: [
-        'Independent map layers for aircraft, vessels, satellites, orbital imagery, and infrastructure',
         'SIGINT sources: KiwiSDR, PSK Reporter, SatNOGS, TinyGS, Meshtastic, and APRS',
         'OSINT aggregation of regional news through GDELT and public Telegram channels',
-        'Infonet — a peer-to-peer layer that syncs events between nodes with end-to-end encryption',
+        'Infonet: peer-to-peer sync of events between nodes, with end-to-end encryption',
         'Ground change detection from SAR radar imagery',
-        'Security by design: AES-GCM encryption, fail-closed trust, and signature-verified desktop updates',
-        'Official Docker images with local, LAN, and headless run modes',
       ],
       'pt-br': [
-        'Camadas independentes de mapa para aeronaves, embarcações, satélites, imagens orbitais e infraestrutura',
         'Fontes de SIGINT: KiwiSDR, PSK Reporter, SatNOGS, TinyGS, Meshtastic e APRS',
         'Agregação de OSINT com notícias regionais via GDELT e canais públicos do Telegram',
-        'Infonet — uma camada peer-to-peer que sincroniza eventos entre nós com criptografia ponta a ponta',
+        'Infonet: sincronização peer-to-peer de eventos entre nós, com criptografia ponta a ponta',
         'Detecção de mudanças no solo a partir de imagens de radar SAR',
-        'Segurança desde a arquitetura: criptografia AES-GCM, confiança fail-closed e atualizações desktop verificadas por assinatura',
-        'Imagens Docker oficiais com modos de execução local, LAN e headless',
       ],
     },
     stack: [
@@ -117,6 +116,16 @@ export const allProjects: Project[] = [
       'Docker',
     ],
     repositoryUrl: 'https://github.com/Olwtelet/Argus',
+    preview: {
+      kind: 'diagram',
+      source: 'github.com/Olwtelet/Argus',
+      href: 'https://github.com/Olwtelet/Argus',
+      alt: {
+        en: 'Diagram of the Argus map layers: aircraft, vessels, satellites, earthquakes, fires, weather alerts and submarine cables',
+        'pt-br':
+          'Esquema das camadas do mapa do Argus: aeronaves, embarcações, satélites, terremotos, queimadas, alertas meteorológicos e cabos submarinos',
+      },
+    },
   },
   {
     slug: 'agentforge',
@@ -125,41 +134,41 @@ export const allProjects: Project[] = [
     category: 'open-source',
     status: 'work-in-progress',
     summary: {
-      en: 'The same agent, built ten different ways — a runnable comparison of agent frameworks',
+      en: 'The same agent built in ten frameworks, as a runnable comparison',
       'pt-br':
-        'O mesmo agente, construído de dez formas diferentes — uma comparação executável de frameworks de agentes',
+        'O mesmo agente feito em dez frameworks, numa comparação executável',
     },
     overview: {
-      en: 'AgentForge answers a question that framework documentation cannot: what does the same agent actually look like in each of them? It holds around ninety runnable examples across ten frameworks — AG2, Agno, AutoGen, CrewAI, Google ADK, LangGraph, LlamaIndex, the OpenAI Agents SDK, Pydantic AI, and smolagents — each example isolating one concept.',
+      en: 'AgentForge shows what the same agent looks like in ten frameworks (AG2, Agno, AutoGen, CrewAI, Google ADK, LangGraph, LlamaIndex, the OpenAI Agents SDK, Pydantic AI, and smolagents), through around ninety runnable examples that each isolate one concept. Every implementation returns through a shared agent contract and calls the same tool implementations, so the benchmark does not favour whichever framework got the better-written tools.',
       'pt-br':
-        'O AgentForge responde a uma pergunta que a documentação dos frameworks não responde: como é, de fato, o mesmo agente em cada um deles? São cerca de noventa exemplos executáveis em dez frameworks — AG2, Agno, AutoGen, CrewAI, Google ADK, LangGraph, LlamaIndex, OpenAI Agents SDK, Pydantic AI e smolagents — cada exemplo isolando um conceito.',
-    },
-    problem: {
-      en: 'Choosing an agent framework usually means reading ten marketing pages that all promise the same things. What is missing is the boring comparison: the same task, the same tools, written each way, so the differences are in the code instead of in the pitch.',
-      'pt-br':
-        'Escolher um framework de agentes geralmente significa ler dez páginas de marketing que prometem as mesmas coisas. O que falta é a comparação chata: a mesma tarefa, as mesmas ferramentas, escritas de cada jeito, para que as diferenças estejam no código e não no discurso.',
-    },
-    approach: {
-      en: 'Every implementation returns through a shared agent contract (`AgentResult` and `TokenUsage`) and calls the same shared tool implementations, which is what keeps the benchmark from quietly favouring whichever framework got the better-written tools. Results are written as JSONL and rendered into Markdown reports. Unit tests run with no credentials and no network, using mocked HTTP, so the repository stays reproducible for anyone who clones it.',
-      'pt-br':
-        'Toda implementação retorna por um contrato compartilhado de agente (`AgentResult` e `TokenUsage`) e chama as mesmas implementações de ferramentas, que é o que impede o benchmark de favorecer discretamente o framework que ganhou as ferramentas mais bem escritas. Os resultados são gravados em JSONL e renderizados em relatórios Markdown. Os testes unitários rodam sem credenciais e sem rede, com HTTP mockado, então o repositório permanece reproduzível para quem clonar.',
+        'O AgentForge mostra como é o mesmo agente em dez frameworks (AG2, Agno, AutoGen, CrewAI, Google ADK, LangGraph, LlamaIndex, OpenAI Agents SDK, Pydantic AI e smolagents), em cerca de noventa exemplos executáveis, cada um isolando um conceito. Toda implementação retorna pelo mesmo contrato de agente e chama as mesmas implementações de ferramentas, e assim o benchmark não favorece o framework que ganhou as ferramentas mais bem escritas.',
     },
     highlights: {
       en: [
-        'Capability matrix tracking tools, streaming, memory, human-in-the-loop, multi-agent, RAG, MCP, tracing, and evals across frameworks',
-        'Benchmark harness that pins the model, temperature, prompts, and tools, then measures latency, token usage, tool calls, and failure rate',
+        'Capability matrix covering tools, streaming, memory, multi-agent, RAG, MCP, and evals',
+        'Benchmark that pins model, prompts, and tools to measure latency, tokens, and failure rate',
         'Each example is a self-contained project with pinned dependencies',
         'CI runs linting, compilation, offline unit tests, and secret scanning on every change',
       ],
       'pt-br': [
-        'Matriz de capacidades acompanhando ferramentas, streaming, memória, human-in-the-loop, multiagente, RAG, MCP, tracing e evals entre os frameworks',
-        'Bancada de benchmark que fixa modelo, temperatura, prompts e ferramentas e mede latência, uso de tokens, chamadas de ferramentas e taxa de falha',
+        'Matriz de capacidades: ferramentas, streaming, memória, multiagente, RAG, MCP e evals',
+        'Benchmark que fixa modelo, prompts e ferramentas e mede latência, tokens e taxa de falha',
         'Cada exemplo é um projeto independente, com dependências fixadas',
         'CI roda lint, compilação, testes unitários offline e varredura de segredos a cada mudança',
       ],
     },
     stack: ['Python', 'uv', 'pytest', 'LLMs', 'RAG', 'MCP', 'Streamlit'],
     repositoryUrl: 'https://github.com/Olwtelet/AgentForge',
+    preview: {
+      kind: 'diagram',
+      source: 'github.com/Olwtelet/AgentForge',
+      href: 'https://github.com/Olwtelet/AgentForge',
+      alt: {
+        en: 'Diagram of the AgentForge repository: the ten agent-framework folders and the three metrics compared (latency, token usage and failure rate)',
+        'pt-br':
+          'Esquema do repositório AgentForge: as pastas dos dez frameworks de agentes e as três métricas comparadas (latência, consumo de tokens e taxa de falha)',
+      },
+    },
   },
   {
     slug: 'resumex',
@@ -170,39 +179,42 @@ export const allProjects: Project[] = [
     summary: {
       en: 'Turns a story file into a finished vertical video, entirely offline',
       'pt-br':
-        'Transforma um arquivo de história em vídeo vertical pronto, totalmente offline',
+        'Converte um arquivo de história em um vídeo vertical pronto, totalmente offline',
     },
     overview: {
-      en: 'Resumex takes a written story and returns a finished 1080×1920 MP4 with narration and synchronized captions. The whole pipeline runs on the machine: no API keys, no cloud services, no network calls in the default path.',
+      en: 'Resumex takes a written story and returns a finished 1080×1920 MP4 with narration and synchronized captions whose timing is read directly from the speech synthesis output. The whole pipeline runs on the machine: no API keys, no cloud services, no network calls in the default path.',
       'pt-br':
-        'O Resumex pega uma história escrita e devolve um MP4 pronto em 1080×1920, com narração e legendas sincronizadas. O pipeline inteiro roda na máquina: sem chaves de API, sem serviços em nuvem, sem chamadas de rede no caminho padrão.',
-    },
-    problem: {
-      en: 'Producing short-form video from written material is mostly repetitive assembly — narrate, transcribe, time the captions, compose, encode — and the usual tooling pushes each of those steps through a different paid service.',
-      'pt-br':
-        'Produzir vídeo curto a partir de material escrito é, na maior parte, montagem repetitiva — narrar, transcrever, cronometrar as legendas, compor, codificar — e as ferramentas usuais empurram cada uma dessas etapas para um serviço pago diferente.',
-    },
-    approach: {
-      en: 'Caption timing is read directly from the speech synthesis output instead of transcribing the audio back, which removes an entire error-prone stage. Rendering is a single deterministic FFmpeg pass, so the same input yields the same file. Completed work is tracked in SQLite, making batch runs resumable rather than repeated.',
-      'pt-br':
-        'O tempo das legendas é lido diretamente da saída da síntese de voz, em vez de transcrever o áudio de volta, o que elimina uma etapa inteira sujeita a erro. A renderização é uma única passada determinística do FFmpeg, então a mesma entrada gera o mesmo arquivo. O trabalho concluído é registrado em SQLite, tornando as execuções em lote retomáveis em vez de repetidas.',
+        'O Resumex pega uma história escrita e devolve um MP4 pronto em 1080×1920, com narração e legendas sincronizadas, cronometradas direto da saída da síntese de voz. O pipeline inteiro roda na máquina: sem chaves de API, sem serviços em nuvem, sem chamadas de rede no caminho padrão.',
     },
     highlights: {
       en: [
         'Local text-to-speech with Kokoro, running on CPU (or a silent mode)',
-        'Accepts .txt, .md, and .json stories; custom footage or generated gradient backgrounds',
+        'Accepts .txt, .md and .json stories; custom footage or generated gradient backgrounds',
         'Optional local Ollama models to draft titles or score a story before rendering',
         'Optional private upload to YouTube through browser-based OAuth',
       ],
       'pt-br': [
         'Síntese de voz local com Kokoro, rodando na CPU (ou um modo silencioso)',
         'Aceita histórias em .txt, .md e .json; imagens próprias ou fundos em gradiente gerados',
-        'Modelos Ollama locais opcionais para rascunhar títulos ou pontuar uma história antes de renderizar',
+        'Ollama local opcional para rascunhar títulos ou pontuar a história antes de renderizar',
         'Envio privado opcional para o YouTube via OAuth pelo navegador',
       ],
     },
     stack: ['Python', 'FFmpeg', 'Kokoro', 'SQLite', 'Ollama'],
     repositoryUrl: 'https://github.com/Olwtelet/Resumex',
+    preview: {
+      kind: 'repo',
+      image: 'resumex',
+      width: 1192,
+      height: 696,
+      source: 'github.com/Olwtelet/Resumex',
+      href: 'https://github.com/Olwtelet/Resumex',
+      alt: {
+        en: 'Three real frames from a video made by resumex demo: a 9:16 gradient background with white captions and the spoken word highlighted in amber',
+        'pt-br':
+          'Três quadros reais de um vídeo feito pelo resumex demo: fundo em gradiente 9:16 com legendas brancas e a palavra falada destacada em âmbar',
+      },
+    },
   },
   {
     slug: 'obsidian-second-brain',
@@ -211,17 +223,27 @@ export const allProjects: Project[] = [
     category: 'open-source',
     status: 'work-in-progress',
     summary: {
-      en: 'A public study vault: CS fundamentals, code snippets, and daily logs, all cross-linked',
+      en: 'A public study vault of CS fundamentals, code snippets and daily logs, all cross-linked',
       'pt-br':
-        'Um cofre público de estudos: fundamentos de CC, trechos de código e registros diários, todos interligados',
+        'Cofre público de estudos: fundamentos de CC, trechos de código e registros diários, tudo interligado',
     },
     overview: {
-      en: 'A public Obsidian vault where I keep what I am learning: computer science fundamentals, notes on JavaScript, TypeScript, React, Python and C, a "Grimorie" of solved snippets, saved clippings, and daily logs from my independent coursework. It is organized with Zettelkasten and PARA so the notes link to each other rather than sitting in folders, and it grows continuously instead of being finished.',
+      en: 'A public Obsidian vault where I keep what I am learning: computer science fundamentals, notes on JavaScript, TypeScript, React, Python and C, a "Grimorie" of solved snippets, saved clippings and daily logs from my independent coursework. I organize it with Zettelkasten and PARA so the notes link to each other, and it keeps growing instead of being finished.',
       'pt-br':
-        'Um cofre público do Obsidian onde guardo o que estou aprendendo: fundamentos de ciência da computação, notas de JavaScript, TypeScript, React, Python e C, um "Grimorie" de trechos resolvidos, recortes salvos e registros diários dos meus estudos independentes. É organizado com Zettelkasten e PARA, para que as notas se liguem umas às outras em vez de ficarem paradas em pastas, e cresce continuamente em vez de ser concluído.',
+        'Um cofre público do Obsidian onde guardo o que estou aprendendo: fundamentos de ciência da computação, notas de JavaScript, TypeScript, React, Python e C, um "Grimorie" de trechos resolvidos, recortes salvos e registros diários dos meus estudos independentes. Organizo tudo com Zettelkasten e PARA, de modo que as notas se liguem umas às outras, e o cofre continua crescendo em vez de ser concluído.',
     },
     stack: ['Obsidian', 'Markdown', 'Git'],
     repositoryUrl: 'https://github.com/Olwtelet/Obsidian-Second-Brain',
+    preview: {
+      kind: 'diagram',
+      source: 'github.com/Olwtelet/Obsidian-Second-Brain',
+      href: 'https://github.com/Olwtelet/Obsidian-Second-Brain',
+      alt: {
+        en: 'Diagram of the Obsidian Second Brain vault: its main folders and linked notes',
+        'pt-br':
+          'Esquema do cofre Obsidian Second Brain: as pastas principais e as notas ligadas entre si',
+      },
+    },
   },
   {
     slug: 'instituto-politecnico-do-brasil',
@@ -234,25 +256,28 @@ export const allProjects: Project[] = [
     summary: {
       en: 'Institutional website for a nonprofit working in education, training, and civic outreach',
       'pt-br':
-        'Site institucional para uma ONG que atua em educação, capacitação e ação cívica',
+        'Site institucional de uma ONG que atua em educação, capacitação e ação cívica',
     },
     overview: {
-      en: 'The institutional website of a nonprofit that operates nationwide across education, professional training, sports, and civic outreach. The site is where the institution explains who it is to the partners, applicants, and public bodies who look it up.',
+      en: 'This is the institutional website of a nonprofit that works in education, professional training, sports, and civic outreach; it is where the institution explains who it is to the partners, applicants, and public bodies who look it up. Instead of building from scratch, I adapted a Tailwind CSS template, which kept the cost down and left a structure plain enough for the institution to maintain on its own.',
       'pt-br':
-        'O site institucional de uma organização sem fins lucrativos que atua em todo o país com educação, capacitação profissional, esporte e ação cívica. O site é onde a instituição explica quem é para os parceiros, candidatos e órgãos públicos que a procuram.',
-    },
-    problem: {
-      en: 'An institution with several distinct fronts needs a page that makes its scope legible quickly — and, just as importantly, one that its own team can keep current without calling a developer for every update.',
-      'pt-br':
-        'Uma instituição com várias frentes distintas precisa de uma página que torne o escopo legível rapidamente — e, tão importante quanto, que a própria equipe consiga manter atualizada sem chamar um desenvolvedor a cada mudança.',
-    },
-    approach: {
-      en: 'Rather than build from zero, I adapted and customized a Tailwind CSS template to carry the mission, projects, leadership, and contact channels. That decision was the point: it kept the cost down and left a front-end structure plain enough for the institution to maintain on its own.',
-      'pt-br':
-        'Em vez de construir do zero, adaptei e personalizei um template de Tailwind CSS para carregar a missão, os projetos, a liderança e os canais de contato. Essa decisão era justamente o ponto: reduziu o custo e deixou uma estrutura de front-end simples o bastante para a instituição manter sozinha.',
+        'É o site institucional de uma organização sem fins lucrativos que atua com educação, capacitação profissional, esporte e ação cívica; é por ele que a instituição explica quem é aos parceiros, candidatos e órgãos públicos que a procuram. Em vez de começar do zero, adaptei um template de Tailwind CSS, o que reduziu o custo e deixou uma estrutura simples o bastante para a instituição manter sozinha.',
     },
     stack: ['Tailwind CSS', 'JavaScript'],
     websiteUrl: 'https://instituto-politecnico-do-brasil.vercel.app',
+    preview: {
+      kind: 'screenshot',
+      image: 'instituto-politecnico-do-brasil',
+      width: 1200,
+      height: 750,
+      source: 'instituto-politecnico-do-brasil.vercel.app',
+      href: 'https://instituto-politecnico-do-brasil.vercel.app',
+      alt: {
+        en: 'Home page of the Instituto Politécnico do Brasil website, headed “Todo talento merece um ponto de partida”',
+        'pt-br':
+          'Página inicial do site do Instituto Politécnico do Brasil, com o título “Todo talento merece um ponto de partida”',
+      },
+    },
   },
   {
     slug: 'rocha-e-sa',
@@ -263,27 +288,30 @@ export const allProjects: Project[] = [
     year: '2026',
     role: role.fullStack,
     summary: {
-      en: 'Website for a Brazilian law firm working in civil and corporate law',
+      en: 'Website for a law firm, built static-first with Astro',
       'pt-br':
-        'Site para um escritório de advocacia brasileiro de direito civil e empresarial',
+        'Site de um escritório de advocacia, feito com Astro e renderização estática',
     },
     overview: {
-      en: 'The website of a Brazilian law firm practising civil and corporate law, built to present the practice areas clearly and turn searches into contacts.',
+      en: 'This is the website of a law firm, made to present its practice areas clearly and lead people who find it through search to get in touch. I built it static-first with Astro, so pages arrive as finished HTML instead of waiting on JavaScript.',
       'pt-br':
-        'O site de um escritório de advocacia brasileiro que atua em direito civil e empresarial, feito para apresentar as áreas de atuação com clareza e transformar buscas em contatos.',
-    },
-    problem: {
-      en: 'A law firm is usually found before it is met. The site had to do the work a first impression does — establish credibility and make the practice areas obvious — while ranking for people searching for a lawyer in the first place.',
-      'pt-br':
-        'Um escritório de advocacia costuma ser encontrado antes de ser conhecido. O site precisava fazer o trabalho de uma primeira impressão — estabelecer credibilidade e deixar as áreas de atuação evidentes — enquanto ranqueia para quem está procurando um advogado.',
-    },
-    approach: {
-      en: 'Built static-first with Astro, so pages arrive as finished HTML instead of waiting on JavaScript. SEO was treated as structure rather than a plugin: semantic markup, per-page metadata, and load times that hold up on mobile connections, which is where most of these searches start.',
-      'pt-br':
-        'Construído com Astro e renderização estática, então as páginas chegam como HTML pronto em vez de esperar por JavaScript. O SEO foi tratado como estrutura, não como plugin: marcação semântica, metadados por página e tempos de carregamento que se sustentam em conexão móvel, que é onde a maioria dessas buscas começa.',
+        'É o site de um escritório de advocacia, feito para apresentar as áreas de atuação com clareza e fazer com que quem o encontra pela busca entre em contato. Usei Astro com renderização estática, então as páginas chegam como HTML pronto, sem esperar por JavaScript.',
     },
     stack: ['Astro', 'TypeScript', 'Tailwind CSS'],
     websiteUrl: 'https://rochaesa.vercel.app/',
+    preview: {
+      kind: 'screenshot',
+      image: 'rocha-e-sa',
+      width: 1200,
+      height: 750,
+      source: 'rochaesa.vercel.app',
+      href: 'https://rochaesa.vercel.app/',
+      alt: {
+        en: 'Home page of the Rocha & Sá law firm website, in Brasília',
+        'pt-br':
+          'Página inicial do site do escritório Rocha & Sá Advogados, em Brasília',
+      },
+    },
   },
   {
     slug: 'integratek',
@@ -294,46 +322,47 @@ export const allProjects: Project[] = [
     year: '2026',
     role: role.fullStack,
     summary: {
-      en: 'Business website and lead channel for an IT infrastructure company, still shipping',
+      en: 'Website and lead channel for an IT infrastructure company, still evolving',
       'pt-br':
-        'Site institucional e canal de leads para uma empresa de infraestrutura de TI, ainda em evolução',
+        'Site e canal de leads de uma empresa de infraestrutura de TI, ainda em evolução',
     },
     overview: {
-      en: 'The business website of an IT infrastructure company working with networking, structured cabling, CCTV, and access control for corporate, residential, and gaming-focused clients.',
+      en: 'The business website of an IT infrastructure company working with networking, structured cabling, CCTV and access control for corporate, residential and gaming-focused clients. It had to explain that technical catalogue to non-technical buyers and get them into a conversation as quickly as possible.',
       'pt-br':
-        'O site institucional de uma empresa de infraestrutura de TI que trabalha com redes, cabeamento estruturado, CFTV e controle de acesso para clientes corporativos, residenciais e voltados a gaming.',
-    },
-    problem: {
-      en: 'Infrastructure work is sold by conversation, not by cart. The site needed to explain a technical catalogue to non-technical buyers and then hand them off to a real conversation as quickly as possible.',
-      'pt-br':
-        'Trabalho de infraestrutura se vende por conversa, não por carrinho. O site precisava explicar um catálogo técnico para compradores não técnicos e então passá-los para uma conversa real o mais rápido possível.',
+        'O site institucional de uma empresa de infraestrutura de TI que trabalha com redes, cabeamento estruturado, CFTV e controle de acesso para clientes corporativos, residenciais e voltados a gaming. Ele precisava explicar esse catálogo técnico para quem não é da área e levar a pessoa a uma conversa o quanto antes.',
     },
     roleDescription: {
-      en: 'I designed and developed the site end to end, and I continue to maintain it — this is an ongoing engagement, not a delivered-and-closed project, so new sections ship as the company needs them.',
+      en: 'I designed and developed the site end to end and still maintain it, adding new sections as the company needs them.',
       'pt-br':
-        'Projetei e desenvolvi o site de ponta a ponta, e continuo mantendo-o — este é um trabalho em andamento, não um projeto entregue e encerrado, então novas seções são publicadas conforme a empresa precisa.',
-    },
-    approach: {
-      en: 'Quote requests hand off to WhatsApp instead of a contact form nobody checks, which matches how the company already talks to clients. The build is containerized with Docker so deployments are reproducible rather than dependent on one machine.',
-      'pt-br':
-        'Os pedidos de orçamento passam para o WhatsApp em vez de um formulário que ninguém confere, o que combina com o jeito que a empresa já fala com os clientes. O build é containerizado com Docker, então os deploys são reproduzíveis em vez de depender de uma máquina específica.',
+        'Projetei e desenvolvi o site de ponta a ponta e continuo fazendo a manutenção, com novas seções publicadas conforme a empresa precisa.',
     },
     highlights: {
       en: [
-        'Blog for company updates and technical articles',
         'Quote request forms that hand off directly to WhatsApp',
+        'Blog for company updates and technical articles',
         'Containerized with Docker for reproducible deployment',
-        'Maintained continuously, with new sections added over time',
       ],
       'pt-br': [
-        'Blog para novidades e artigos técnicos da empresa',
         'Formulários de orçamento que passam direto para o WhatsApp',
+        'Blog para novidades e artigos técnicos da empresa',
         'Containerizado com Docker para deploy reproduzível',
-        'Mantido continuamente, com novas seções adicionadas ao longo do tempo',
       ],
     },
     stack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Docker'],
     websiteUrl: 'https://www.integratek.com.br/',
+    preview: {
+      kind: 'screenshot',
+      image: 'integratek',
+      width: 1200,
+      height: 750,
+      source: 'integratek.com.br',
+      href: 'https://www.integratek.com.br/',
+      alt: {
+        en: 'Home page of the Integratek website, headed “Tecnologia que sustenta a sua operação”',
+        'pt-br':
+          'Página inicial do site da Integratek, com o título “Tecnologia que sustenta a sua operação”',
+      },
+    },
   },
   {
     slug: 'thalit-academy',
@@ -349,29 +378,19 @@ export const allProjects: Project[] = [
     summary: {
       en: 'Website for a tennis and beach tennis training centre in Brasília',
       'pt-br':
-        'Site para um centro de treinamento de tênis e beach tennis em Brasília',
+        'Site de um centro de treinamento de tênis e beach tennis em Brasília',
     },
     overview: {
-      en: 'The website of Centro de Treinamento Thalita Rodrigues, a tennis and beach tennis training centre based at Clube da Portuguesa in Águas Claras, Brasília. It serves children, teenagers, and adults, from a first trial lesson through to competitive play.',
+      en: 'The website of Centro de Treinamento Thalita Rodrigues, a tennis and beach tennis training centre for children, teenagers and adults at Clube da Portuguesa in Brasília. I built it to lead visitors to book a trial lesson while still serving students who are already enrolled.',
       'pt-br':
-        'O site do Centro de Treinamento Thalita Rodrigues, um centro de treinamento de tênis e beach tennis no Clube da Portuguesa, em Águas Claras, Brasília. Atende crianças, jovens e adultos, da primeira aula experimental até o nível competitivo.',
-    },
-    problem: {
-      en: 'A training centre lives or dies by the trial lesson: everything on the site has to lead a curious visitor to booking one, while still serving the students already enrolled who come back for schedules, tournament results, and technique material.',
-      'pt-br':
-        'Um centro de treinamento vive da aula experimental: tudo no site precisa levar o visitante curioso a agendar uma, sem deixar de servir os alunos já matriculados, que voltam para ver horários, resultados de torneios e material de técnica.',
-    },
-    approach: {
-      en: 'The site is built with Next.js and splits into two jobs at once: a conversion path that ends in a scheduled trial lesson or a WhatsApp conversation, and an ongoing content area — technique guides, training videos, articles, tournament registration and results — that gives enrolled students a reason to return. Reusable components and design tokens keep the sports identity consistent, and a separate data layer leaves room for Supabase-backed authentication, profiles, and content management.',
-      'pt-br':
-        'O site é feito com Next.js e cumpre duas funções ao mesmo tempo: um caminho de conversão que termina em uma aula experimental agendada ou em uma conversa no WhatsApp, e uma área de conteúdo contínuo — guias de técnica, vídeos de treino, artigos, inscrição e resultados de torneios — que dá aos alunos matriculados um motivo para voltar. Componentes reutilizáveis e design tokens mantêm a identidade esportiva consistente, e uma camada de dados separada deixa espaço para autenticação, perfis e gestão de conteúdo com Supabase.',
+        'O site do Centro de Treinamento Thalita Rodrigues, um centro de treinamento de tênis e beach tennis para crianças, jovens e adultos no Clube da Portuguesa, em Brasília. Fiz o site para levar o visitante a agendar uma aula experimental, sem deixar de atender os alunos já matriculados.',
     },
     highlights: {
       en: [
-        'Online trial-lesson scheduling, with WhatsApp as the direct contact route',
-        'Sections for tennis and beach tennis classes, methodology, and athlete profiles',
-        'Internal tournament (Circuito Interno CT) registration and results',
-        'Technique guides, training videos, and articles for enrolled students',
+        'Online trial-lesson booking, with WhatsApp as the direct contact route',
+        'Sections for tennis and beach tennis classes, methodology and athlete profiles',
+        'Registration and results for the internal tournament (Circuito Interno CT)',
+        'Technique guides, training videos and articles for enrolled students',
       ],
       'pt-br': [
         'Agendamento de aula experimental online, com o WhatsApp como via de contato direto',
@@ -382,6 +401,19 @@ export const allProjects: Project[] = [
     },
     stack: ['Next.js', 'React', 'TypeScript'],
     websiteUrl: 'https://thalitarodrigues.com/',
+    preview: {
+      kind: 'screenshot',
+      image: 'thalit-academy',
+      width: 1200,
+      height: 750,
+      source: 'thalitarodrigues.com',
+      href: 'https://thalitarodrigues.com/',
+      alt: {
+        en: 'Home page of the Centro de Treinamento Thalita Rodrigues website, with its classes, training, tournaments and schedule menu',
+        'pt-br':
+          'Página inicial do site do Centro de Treinamento Thalita Rodrigues, com o menu de aulas, treinamento, torneios e agenda',
+      },
+    },
   },
 ]
 
@@ -417,13 +449,12 @@ export type LocalizedProject = {
   role?: string
   summary: string
   overview?: string
-  problem?: string
   roleDescription?: string
-  approach?: string
   highlights?: string[]
   stack?: string[]
   websiteUrl?: string
   repositoryUrl?: string
+  preview?: Omit<ProjectPreview, 'alt'> & { alt: string }
 }
 
 export function localizeProject(
@@ -440,12 +471,14 @@ export function localizeProject(
     role: project.role?.[locale],
     summary: project.summary[locale],
     overview: project.overview?.[locale],
-    problem: project.problem?.[locale],
     roleDescription: project.roleDescription?.[locale],
-    approach: project.approach?.[locale],
     highlights: project.highlights?.[locale],
     stack: project.stack,
     websiteUrl: project.websiteUrl,
     repositoryUrl: project.repositoryUrl,
+    preview: project.preview && {
+      ...project.preview,
+      alt: project.preview.alt[locale],
+    },
   }
 }

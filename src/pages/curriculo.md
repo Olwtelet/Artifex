@@ -8,7 +8,7 @@ textNav:
 
 # Isaac Rodrigues
 
-Desenvolvedor full-stack e estudante de Ciência da Computação em Brasília, com foco em IA aplicada e cibersegurança; conhecido online como Olwtelet. Olwtelet Productions (estúdio próprio de jogos, software e sites): Filmes HD Online Grátis no ar; em desenvolvimento, Veil (jogo de estratégia para navegador) e Diseens (plataforma de passaporte acadêmico). Na Integratek desde junho de 2026: site (Astro, TypeScript, Docker), blog e formulários de orçamento integrados ao WhatsApp, com trabalho contínuo de SEO, desempenho e acessibilidade. Sites para clientes: Rocha & Sá, CT Thalita Rodrigues e Instituto Politécnico do Brasil. Cibersegurança na Ordfall: análise de vulnerabilidades e revisão de código, dependências e configurações. Código aberto: Argus, plataforma de OSINT (inteligência de fontes abertas), e AgentForge, que compara o mesmo agente em dez frameworks. Stack principal: TypeScript, Python, React, Next.js, Node.js e FastAPI.
+Desenvolvedor full-stack e estudante de Ciência da Computação em Brasília, com foco em IA aplicada e cibersegurança. Assina o trabalho como Olwtelet. Olwtelet Productions (estúdio próprio de jogos, software e sites): Filmes HD Online Grátis no ar; em desenvolvimento, Veil (jogo de estratégia para navegador) e Diseens (plataforma de passaporte acadêmico). Na Integratek desde junho de 2026: site (Astro, TypeScript, Docker), blog e formulários de orçamento integrados ao WhatsApp, com trabalho contínuo de SEO, desempenho e acessibilidade. Sites para clientes: Rocha & Sá, CT Thalita Rodrigues e Instituto Politécnico do Brasil. Cibersegurança na Ordfall: análise de vulnerabilidades e revisão de código, dependências e configurações. Código aberto: Argus, plataforma de OSINT (inteligência de fontes abertas), e AgentForge, que compara o mesmo agente em dez frameworks. Stack principal: TypeScript, Python, React, Next.js, Node.js e FastAPI.
 
 [GitHub](https://github.com/olwtelet)
 <br>
@@ -54,7 +54,7 @@ Desenvolvedor full-stack e estudante de Ciência da Computação em Brasília, c
 
 **[Rocha & Sá](https://rochaesa.vercel.app/)**: site de escritório de advocacia (jul 2026)
 
-- Construí o site de um escritório brasileiro de direito civil e empresarial usando Astro, TypeScript e Tailwind CSS.
+- Construí o site de um escritório de advocacia brasileiro usando Astro, TypeScript e Tailwind CSS.
 - Foco em fundamentos de SEO, carregamento rápido e apresentação clara das áreas de atuação.
 
 **[CT Thalita Rodrigues](https://thalitarodrigues.com/)**: plataforma de centro de treinamento de tênis (ago 2026)

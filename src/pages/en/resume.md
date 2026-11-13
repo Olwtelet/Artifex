@@ -8,7 +8,7 @@ textNav:
 
 # Isaac Rodrigues
 
-Full-stack developer and Computer Science student in Brasília, Brazil, focused on applied AI and cybersecurity; known online as Olwtelet. Olwtelet Productions (my own studio for games, software and websites): Filmes HD Online Grátis is live; Veil, a browser strategy game, and Diseens, an academic passport platform, are in development. At Integratek since June 2026: website (Astro, TypeScript, Docker), blog and WhatsApp-integrated quote forms, with ongoing SEO, performance and accessibility work. Client websites: Rocha & Sá, CT Thalita Rodrigues and Instituto Politécnico do Brasil. Cybersecurity at Ordfall: vulnerability analysis and code, dependency and configuration review. Open source: Argus, an OSINT (open-source intelligence) platform, and AgentForge, which compares the same agent across ten frameworks. Core stack: TypeScript, Python, React, Next.js, Node.js and FastAPI.
+Full-stack developer and Computer Science student in Brasília, Brazil, focused on applied AI and cybersecurity. Works under the pseudonym Olwtelet. Olwtelet Productions (my own studio for games, software and websites): Filmes HD Online Grátis is live; Veil, a browser strategy game, and Diseens, an academic passport platform, are in development. At Integratek since June 2026: website (Astro, TypeScript, Docker), blog and WhatsApp-integrated quote forms, with ongoing SEO, performance and accessibility work. Client websites: Rocha & Sá, CT Thalita Rodrigues and Instituto Politécnico do Brasil. Cybersecurity at Ordfall: vulnerability analysis and code, dependency and configuration review. Open source: Argus, an OSINT (open-source intelligence) platform, and AgentForge, which compares the same agent across ten frameworks. Core stack: TypeScript, Python, React, Next.js, Node.js and FastAPI.
 
 [GitHub](https://github.com/olwtelet)
 <br>
@@ -54,7 +54,7 @@ Full-stack developer and Computer Science student in Brasília, Brazil, focused 
 
 **[Rocha & Sá](https://rochaesa.vercel.app/)**: law firm website (Jul 2026)
 
-- Built the website for a Brazilian civil and corporate law firm using Astro, TypeScript, and Tailwind CSS.
+- Built the website for a Brazilian law firm using Astro, TypeScript, and Tailwind CSS.
 - Focused on SEO fundamentals, fast loads, and a clear presentation of practice areas.
 
 **[CT Thalita Rodrigues](https://thalitarodrigues.com/)**: tennis training centre platform (Aug 2026)

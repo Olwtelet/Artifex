@@ -11,7 +11,10 @@
     "format:check": "prettier --check \"src/**/*.{astro,svelte,ts,js,css,md}\"",
     "generate:icons": "node scripts/generate-icons.mjs",
     "generate:og": "node scripts/generate-og.mjs",
-    "optimize:images": "node scripts/optimize-images.mjs"
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "check:site": "node scripts/check-site.mjs",
+    "capture:previews": "node scripts/capture-previews.mjs",
+    "test:capture": "node --test scripts/capture-previews.test.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.5.1",

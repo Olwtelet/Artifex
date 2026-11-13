@@ -1,0 +1,370 @@
+---
+// Drawn previews for projects without a visual interface. Everything shown
+// comes from the repositories themselves: folder names, the metrics the
+// benchmark measures, the map layers. No invented numbers.
+import type { Locale } from '../config/site'
+
+interface Props {
+  slug: string
+  locale: Locale
+}
+
+const { slug, locale } = Astro.props
+const en = locale === 'en'
+
+const frameworks = [
+  'ag2',
+  'agno',
+  'autogen',
+  'crewai',
+  'google-adk',
+  'langgraph',
+  'llama-index',
+  'openai-agents-sdk',
+  'pydantic-ai',
+  'smolagents',
+]
+const metrics = en
+  ? ['latency', 'token usage', 'failure rate']
+  : ['latência', 'consumo de tokens', 'taxa de falha']
+
+const layers = [
+  { symbol: '▲', tone: 'amber', label: en ? 'aircraft' : 'aeronaves' },
+  { symbol: '◆', tone: 'cyan', label: en ? 'vessels' : 'embarcações' },
+  { symbol: '●', tone: 'white', label: en ? 'satellites' : 'satélites' },
+  { symbol: '◎', tone: 'red', label: en ? 'earthquakes' : 'terremotos' },
+  { symbol: '✶', tone: 'orange', label: en ? 'fires' : 'queimadas' },
+  {
+    symbol: '▭',
+    tone: 'yellow',
+    label: en ? 'weather alerts' : 'alertas meteorológicos',
+  },
+  {
+    symbol: '∿',
+    tone: 'blue',
+    label: en ? 'submarine cables' : 'cabos submarinos',
+  },
+]
+
+const vault = [
+  'CodeConcepts/',
+  'Studies/',
+  'Clippings/',
+  'Filosofia/',
+  'Artigos de programação/',
+  'RoadMap - Fundamentos do desenvolvimento web.md',
+]
+---
+
+<div class="diagram" data-diagram={slug}>
+  {
+    slug === 'agentforge' && (
+      <div class="diagram__cols">
+        <ul class="diagram__tree">
+          <li class="diagram__root">AgentForge/</li>
+          {frameworks.map((name) => (
+            <li>{name}/</li>
+          ))}
+          <li>study-agents-differences/</li>
+        </ul>
+        <div class="diagram__panel">
+          <p class="diagram__heading">
+            {en ? 'Same agent · 10 frameworks' : 'Mesmo agente · 10 frameworks'}
+          </p>
+          <p class="diagram__heading">{en ? 'Measured' : 'Medido'}</p>
+          <ul class="diagram__metrics">
+            {metrics.map((metric) => (
+              <li>{metric}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )
+  }
+  {
+    slug === 'argus' && (
+      <div class="diagram__cols">
+        <svg
+          class="diagram__map"
+          viewBox="0 0 320 200"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <g class="diagram__grid">
+            {[40, 80, 120, 160].map((y) => (
+              <line x1="0" y1={y} x2="320" y2={y} />
+            ))}
+            {[40, 80, 120, 160, 200, 240, 280].map((x) => (
+              <line x1={x} y1="0" x2={x} y2="200" />
+            ))}
+          </g>
+          <path
+            class="tone-blue diagram__cable"
+            fill="none"
+            stroke="currentColor"
+            d="M0 150 C 80 120, 150 175, 320 130"
+          />
+          <rect
+            class="tone-yellow diagram__alert"
+            fill="none"
+            stroke="currentColor"
+            x="196"
+            y="26"
+            width="84"
+            height="46"
+          />
+          <ellipse class="diagram__orbit" cx="160" cy="100" rx="140" ry="38" />
+          <circle
+            class="tone-white"
+            fill="currentColor"
+            cx="292"
+            cy="86"
+            r="4"
+          />
+          <polygon
+            class="tone-amber"
+            fill="currentColor"
+            points="70,52 77,66 63,66"
+          />
+          <polygon
+            class="tone-amber"
+            fill="currentColor"
+            points="232,108 239,122 225,122"
+          />
+          <polygon
+            class="tone-cyan"
+            fill="currentColor"
+            points="120,150 127,157 120,164 113,157"
+          />
+          <polygon
+            class="tone-cyan"
+            fill="currentColor"
+            points="40,128 47,135 40,142 33,135"
+          />
+          <circle
+            class="tone-red diagram__quake"
+            fill="none"
+            stroke="currentColor"
+            cx="150"
+            cy="70"
+            r="5"
+          />
+          <circle
+            class="tone-red diagram__quake"
+            fill="none"
+            stroke="currentColor"
+            cx="150"
+            cy="70"
+            r="11"
+          />
+          <circle
+            class="tone-orange"
+            fill="currentColor"
+            cx="250"
+            cy="160"
+            r="3"
+          />
+          <circle
+            class="tone-orange"
+            fill="currentColor"
+            cx="258"
+            cy="154"
+            r="2.5"
+          />
+        </svg>
+        <ul class="diagram__legend">
+          {layers.map((layer) => (
+            <li>
+              <span class={`tone-${layer.tone}`} aria-hidden="true">
+                {layer.symbol}
+              </span>{' '}
+              {layer.label}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+  {
+    slug === 'obsidian-second-brain' && (
+      <div class="diagram__cols">
+        <ul class="diagram__tree">
+          <li class="diagram__root">Obsidian-Second-Brain/</li>
+          {vault.map((entry) => (
+            <li>{entry}</li>
+          ))}
+        </ul>
+        <svg
+          class="diagram__graph"
+          viewBox="0 0 200 160"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <g class="diagram__edges">
+            <line x1="100" y1="80" x2="40" y2="30" />
+            <line x1="100" y1="80" x2="165" y2="35" />
+            <line x1="100" y1="80" x2="30" y2="110" />
+            <line x1="100" y1="80" x2="170" y2="120" />
+            <line x1="100" y1="80" x2="95" y2="145" />
+            <line x1="40" y1="30" x2="30" y2="110" />
+            <line x1="165" y1="35" x2="170" y2="120" />
+            <line x1="95" y1="145" x2="170" y2="120" />
+          </g>
+          <circle
+            class="diagram__node diagram__node--hub"
+            cx="100"
+            cy="80"
+            r="9"
+          />
+          <circle class="diagram__node" cx="40" cy="30" r="5" />
+          <circle class="diagram__node" cx="165" cy="35" r="5" />
+          <circle class="diagram__node" cx="30" cy="110" r="5" />
+          <circle class="diagram__node" cx="170" cy="120" r="5" />
+          <circle class="diagram__node" cx="95" cy="145" r="5" />
+        </svg>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  /* No aspect-ratio here: inside the shrink-to-fit page column, a tall
+     single-column diagram would transfer its height into a wider width. */
+  .diagram {
+    padding: 1em;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    text-transform: none;
+    color: var(--text-primary);
+
+    @media (min-width: 40rem) {
+      min-height: 22em;
+      display: grid;
+      align-items: center;
+    }
+  }
+
+  .diagram__cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.5em;
+    align-items: center;
+    height: 100%;
+
+    @media (max-width: 40rem) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .diagram__tree {
+    min-width: 0;
+
+    & li {
+      overflow-wrap: anywhere;
+
+      &:not(.diagram__root)::before {
+        content: '├─ ';
+        color: var(--text-secondary);
+      }
+
+      &:last-child::before {
+        content: '└─ ';
+      }
+    }
+  }
+
+  .diagram__root {
+    color: var(--text-secondary);
+  }
+
+  .diagram__heading {
+    text-transform: uppercase;
+    letter-spacing: 0.15ch;
+    color: var(--text-secondary);
+    margin-bottom: 0.4em;
+  }
+
+  .diagram__metrics li::before {
+    content: '▸ ';
+    color: var(--text-secondary);
+  }
+
+  .diagram__map,
+  .diagram__graph {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .diagram__grid line {
+    stroke: rgba(255, 255, 255, 0.12);
+    stroke-width: 1;
+  }
+
+  .diagram__cable {
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .diagram__alert {
+    fill: none;
+    stroke-width: 1.5;
+    stroke-dasharray: 4 3;
+  }
+
+  .diagram__orbit {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.35);
+    stroke-dasharray: 2 4;
+  }
+
+  .diagram__quake {
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .diagram__legend li {
+    overflow-wrap: anywhere;
+  }
+
+  .diagram__edges line {
+    stroke: rgba(255, 255, 255, 0.35);
+    stroke-width: 1;
+  }
+
+  .diagram__node {
+    fill: var(--text-primary);
+  }
+
+  .diagram__node--hub {
+    fill: var(--text-secondary);
+  }
+
+  .tone-amber {
+    color: #f5b942;
+  }
+
+  .tone-cyan {
+    color: #4fd1e8;
+  }
+
+  .tone-white {
+    color: #fff;
+  }
+
+  .tone-red {
+    color: #ff5a5a;
+  }
+
+  .tone-orange {
+    color: #ff9a3c;
+  }
+
+  .tone-yellow {
+    color: #ffe14d;
+  }
+
+  .tone-blue {
+    color: #5b8cff;
+  }
+</style>

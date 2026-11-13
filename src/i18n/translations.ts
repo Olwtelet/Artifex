@@ -9,7 +9,7 @@ const translations = {
     skipToContent: 'Skip to content',
     nav: {
       openSource: 'open-source',
-      websites: 'websites',
+      projects: 'projects',
     },
     footer: {
       resume: 'RESUME',
@@ -43,9 +43,7 @@ const translations = {
       role: 'ROLE',
       category: 'CATEGORY',
       overview: 'OVERVIEW',
-      problem: 'THE PROBLEM',
       myRole: 'MY ROLE',
-      approach: 'APPROACH',
       features: 'FEATURES',
       stack: 'STACK',
       links: 'LINKS',
@@ -78,15 +76,24 @@ const translations = {
     bio: {
       photoToggle: 'Identify signal: show a photo of Isaac Rodrigues',
     },
+    preview: {
+      label: 'PREVIEW',
+      kind: {
+        screenshot: 'SCREENSHOT',
+        repo: 'FROM THE REPO',
+        diagram: 'DIAGRAM',
+      },
+      open: (source: string) => `Open ${source} in a new tab`,
+    },
   },
   'pt-br': {
     skipToContent: 'Pular para o conteúdo',
     nav: {
       openSource: 'código-aberto',
-      websites: 'sites',
+      projects: 'projetos',
     },
     footer: {
-      resume: 'CURRÍCULO',
+      resume: 'RESUMO',
       email: 'E-MAIL',
       linkedin: 'LINKEDIN',
     },
@@ -117,9 +124,7 @@ const translations = {
       role: 'FUNÇÃO',
       category: 'CATEGORIA',
       overview: 'VISÃO GERAL',
-      problem: 'O PROBLEMA',
       myRole: 'MINHA FUNÇÃO',
-      approach: 'ABORDAGEM',
       features: 'FUNCIONALIDADES',
       stack: 'STACK',
       links: 'LINKS',
@@ -151,6 +156,15 @@ const translations = {
     },
     bio: {
       photoToggle: 'Identificar sinal: mostrar uma foto de Isaac Rodrigues',
+    },
+    preview: {
+      label: 'PRÉVIA',
+      kind: {
+        screenshot: 'CAPTURA',
+        repo: 'DO REPOSITÓRIO',
+        diagram: 'ESQUEMA',
+      },
+      open: (source: string) => `Abrir ${source} em nova aba`,
     },
   },
 } as const

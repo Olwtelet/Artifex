@@ -12,7 +12,7 @@ const t = useTranslations(locale)
 const title = SITE.displayName
 const socialTitle = `${SITE.displayName} — ${SITE.author}`
 const description =
-  'Olwtelet é o nick de Isaac Rodrigues, estudante de Ciência da Computação e desenvolvedor full-stack em Brasília, com foco em IA aplicada e cibersegurança.'
+  'Olwtelet é o pseudônimo de Isaac Rodrigues, desenvolvedor de software em Brasília. Notas e arquivo do que ele constrói.'
 
 const schemas = [
   websiteSchema(locale),
@@ -28,88 +28,89 @@ const schemas = [
 >
   <HomeBio locale={locale}>
     <p class="big-text">
-      Sou <span class="nowrap"
+      Meu nome é <span class="nowrap"
         ><button
           type="button"
           class="button-text bio__photo js-photo-toggle"
           aria-pressed="false"
           aria-label={t.bio.photoToggle}>Isaac Rodrigues</button
-        >,</span
-      > programador em
+        >.</span
+      > Sou desenvolvedor de software em
       <span class="nowrap"
         ><button class="button-text js-channel-trigger" data-channel="8"
-          >Brasília</button
+          >Brasília, Brasil</button
         >.</span
-      > Olwtelet é o nick que uso nos jogos e o nome com que assino meu trabalho.
-      É meu usuário no GitHub e no LinkedIn e o nome do meu estúdio, a Olwtelet Productions.
+      > Olwtelet é o pseudônimo que utilizo desde meus primeiros projetos na internet
+      e que hoje reúne meu trabalho como programador, pesquisador independente e criador.
     </p>
     <p class="big-text">
-      No estúdio, faço jogos, software e sites. Estou desenvolvendo o Veil, um
-      jogo de estratégia no estilo do xadrez que roda no navegador, e a Diseens,
-      uma plataforma de passaporte acadêmico. Já está no ar o
+      Na Olwtelet Productions, desenvolvo projetos próprios de software, jogos e
+      aplicações web. Atualmente trabalho no Veil, um jogo de estratégia para
+      navegador inspirado no xadrez, e na Diseens, uma plataforma de passaporte
+      acadêmico. Também sou responsável pelo
       <a
         href="https://filmeshdonlinegratis.vercel.app/"
         target="_blank"
         rel="noopener noreferrer">Filmes HD Online Grátis</a
-      >, site de curadoria de cinema: as sessões acontecem ao vivo no Discord e
-      o site não hospeda filmes.
+      >, um projeto independente de curadoria cinematográfica com sessões
+      organizadas ao vivo pelo Discord.
     </p>
     <p class="big-text">
-      Estudo Ciência da Computação e faço cursos do MIT OpenCourseWare desde
-      2024. Trabalho como desenvolvedor full-stack (TypeScript, Python, React,
-      Next.js, Node.js, FastAPI), com foco em IA aplicada e cibersegurança.
+      Estudo Ciência da Computação e acompanho materiais do MIT OpenCourseWare
+      desde 2024. No desenvolvimento, trabalho principalmente com TypeScript,
+      Python, React, Next.js, Node.js e FastAPI. Tenho particular interesse em
+      inteligência artificial, cibersegurança e arquitetura de sistemas.
     </p>
     <p class="big-text">
-      Para a
-      <a
-        href="https://www.integratek.com.br/"
-        target="_blank"
-        rel="noopener noreferrer">Integratek</a
-      >, empresa de infraestrutura de TI que atendo desde junho de 2026,
-      desenvolvi o site, o blog e os formulários de orçamento. Também fiz os
-      sites do escritório de advocacia
-      <a href={projectRoute('rocha-e-sa')[locale]}>Rocha &amp; Sá</a>, do centro
-      de treinamento de tênis
+      Também atuo no desenvolvimento de soluções para clientes. Desde junho de
+      2026, trabalho com a
+      <a href={projectRoute('integratek')[locale]}>Integratek</a>, onde
+      desenvolvi o site institucional, o blog e os formulários de orçamento.
+      Outros trabalhos incluem os sites da
+      <a href={projectRoute('rocha-e-sa')[locale]}>Rocha &amp; Sá</a>, do
       <a href={projectRoute('thalit-academy')[locale]}>CT Thalita Rodrigues</a>
-      e da ONG
+      e do
       <a href={projectRoute('instituto-politecnico-do-brasil')[locale]}
         >Instituto Politécnico do Brasil</a
       >.
     </p>
     <p class="big-text">
-      Uma demonstração prova que o software funciona uma vez. O que me interessa
-      é se ele continua funcionando com dados errados, uso imprevisto e alguém
-      tentando invadir. Na Ordfall, trabalho com cibersegurança: analiso
-      vulnerabilidades e reviso código, dependências e configurações.
+      Na Ordfall, participo de projetos relacionados à cibersegurança, com
+      atividades de análise de vulnerabilidades e revisão de código,
+      dependências e configurações.
     </p>
     <p class="big-text">
-      Criei e mantenho o
-      <a href={projectRoute('argus')[locale]}>Argus</a>, que reúne dezenas de
-      fontes públicas (aeronaves, embarcações, satélites, terremotos) em um mapa
-      ao vivo. Com IA, só adoto o que consigo testar, observar e limitar: no
-      <a href={projectRoute('agentforge')[locale]}>AgentForge</a>, implemento o
-      mesmo agente em dez frameworks e meço latência, consumo de tokens e taxa
-      de falha. Os dois são de código aberto.
+      Entre meus projetos independentes estão o
+      <a href={projectRoute('argus')[locale]}>Argus</a>, uma plataforma que
+      reúne fontes públicas de dados sobre aeronaves, embarcações, satélites e
+      terremotos em um mapa interativo, e o
+      <a href={projectRoute('agentforge')[locale]}>AgentForge</a>, um ambiente
+      de comparação entre dez frameworks de agentes de IA. O segundo utiliza
+      implementações equivalentes para avaliar latência, consumo de tokens e
+      taxa de falhas. Ambos têm código aberto.
     </p>
     <p class="big-text">
-      Meu perfil de jogador, com o mesmo nick, está no
+      Além da programação, mantenho meu perfil de jogador sob o pseudônimo
+      Olwtelet no
       <a
         href="https://konect.gg/olwtelet"
         target="_blank"
-        rel="noopener noreferrer">konect</a
+        rel="noopener noreferrer">Konect</a
       >
       <span class="nowrap"
         ><span class="bio__soon">em breve neste canal</span>.</span
       >
+    </p>
+    <p class="big-text">
       <span class="nowrap"
         ><button class="button-text js-channel-trigger" data-channel="1"
           >Sintonize</button
         >:</span
-      > veja os <a href={routes.projects[locale]}>projetos</a> e os
-      <a href={routes.certificates[locale]}>certificados</a>. Código no
-      <a href={SITE.social.github} target="_blank" rel="noopener noreferrer"
-        >GitHub</a
-      >, contato por <a href={`mailto:${SITE.email}`}>e-mail</a>.
+      > este site funciona como um arquivo do meu trabalho:
+      <a href={routes.projects[locale]}>projetos</a>,
+      <a href={routes.openSource[locale]}>experimentos</a>,
+      <a href={routes.certificates[locale]}>certificados</a> e outras iniciativas
+      que desenvolvo ao longo do tempo.
     </p>
   </HomeBio>
 </TVLayout>

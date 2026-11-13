@@ -27,10 +27,10 @@ export const SITE = {
     'pt-br': 'Desenvolvedor Full-Stack',
     en: 'Full-Stack Developer',
   } satisfies Record<Locale, string>,
-  /** Home h1 — says outright that Olwtelet is Isaac Rodrigues. */
+  /** Home h1 — an English title on both locales, chosen by the owner. */
   headline: {
-    'pt-br': 'Olwtelet é Isaac Rodrigues',
-    en: 'Olwtelet is Isaac Rodrigues',
+    'pt-br': 'Notes from Olwtelet',
+    en: 'Notes from Olwtelet',
   } satisfies Record<Locale, string>,
   location: {
     city: 'Brasília',

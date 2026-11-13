@@ -38,7 +38,7 @@ export const PAGES = {
       url: '/projetos/',
     },
     {
-      aliases: ['curriculo', 'currículo', 'cv'],
+      aliases: ['curriculo', 'currículo', 'resumo', 'cv'],
       url: '/curriculo/',
       external: true,
     },

@@ -1,6 +1,6 @@
 # olwtelet.dev
 
-Personal website of **Isaac Rodrigues** — Computer Science student and full-stack developer focused on applied AI and cybersecurity. Built as a TV/off-air-inspired interactive experience, showcasing projects, open-source work, certificates, and a bit of personality.
+Personal website of **Isaac Rodrigues**, who signs his work as **Olwtelet** — a software developer in Brasília and Computer Science student. It works as an archive of what he builds: projects, open-source work and certificates, presented as a TV/off-air-inspired interactive experience.
 
 🔗 [olwtelet.vercel.app](https://olwtelet.vercel.app)
 

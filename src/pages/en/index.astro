@@ -12,7 +12,7 @@ const t = useTranslations(locale)
 const title = SITE.displayName
 const socialTitle = `${SITE.displayName} — ${SITE.author}`
 const description =
-  'Olwtelet is the gaming handle of Isaac Rodrigues, a Computer Science student and full-stack developer in Brasília focused on applied AI and cybersecurity.'
+  'Olwtelet is the pseudonym of Isaac Rodrigues, a software developer in Brasília, Brazil. Notes and an archive of what he builds.'
 
 const schemas = [
   websiteSchema(locale),
@@ -28,88 +28,88 @@ const schemas = [
 >
   <HomeBio locale={locale}>
     <p class="big-text">
-      I'm <span class="nowrap"
+      My name is <span class="nowrap"
         ><button
           type="button"
           class="button-text bio__photo js-photo-toggle"
           aria-pressed="false"
           aria-label={t.bio.photoToggle}>Isaac Rodrigues</button
-        >,</span
-      > a programmer in
+        >.</span
+      > I'm a software developer in
       <span class="nowrap"
         ><button class="button-text js-channel-trigger" data-channel="8"
           >Brasília, Brazil</button
         >.</span
-      > Olwtelet is my gaming handle and the name I put on my work. It's my username
-      on GitHub and LinkedIn and the name of my studio, Olwtelet Productions.
+      > Olwtelet is the pseudonym I've used since my first projects on the internet,
+      and today it brings together my work as a programmer, independent researcher
+      and creator.
     </p>
     <p class="big-text">
-      At the studio, I make games, software and websites. I'm building Veil, a
-      chess-like strategy game that runs in the browser, and Diseens, an
-      academic passport platform. I've already launched
+      At Olwtelet Productions, I develop my own software, games and web
+      applications. I'm currently working on Veil, a chess-inspired strategy
+      game for the browser, and Diseens, an academic passport platform. I'm also
+      responsible for
       <a
         href="https://filmeshdonlinegratis.vercel.app/"
         target="_blank"
         rel="noopener noreferrer">Filmes HD Online Grátis</a
-      >, a film curation site: screenings happen live on Discord, and the site
-      hosts no films.
+      >, an independent film curation project with screenings held live on
+      Discord.
     </p>
     <p class="big-text">
-      I study Computer Science and have been taking MIT OpenCourseWare courses
-      since 2024. I work as a full-stack developer (TypeScript, Python, React,
-      Next.js, Node.js, FastAPI), focused on applied AI and cybersecurity.
+      I study Computer Science and have followed MIT OpenCourseWare materials
+      since 2024. In development, I work mainly with TypeScript, Python, React,
+      Next.js, Node.js and FastAPI. I'm particularly interested in artificial
+      intelligence, cybersecurity and systems architecture.
     </p>
     <p class="big-text">
-      For
-      <a
-        href="https://www.integratek.com.br/"
-        target="_blank"
-        rel="noopener noreferrer">Integratek</a
-      >, an IT infrastructure company I've worked with since June 2026, I
-      developed the website, blog and quote forms. I also built the websites for
-      the law firm
-      <a href={projectRoute('rocha-e-sa')[locale]}>Rocha &amp; Sá</a>, the
-      tennis training center
+      I also build solutions for clients. Since June 2026, I've worked with
+      <a href={projectRoute('integratek')[locale]}>Integratek</a>, where I built
+      the company website, the blog and the quote forms. Other work includes the
+      websites for
+      <a href={projectRoute('rocha-e-sa')[locale]}>Rocha &amp; Sá</a>,
       <a href={projectRoute('thalit-academy')[locale]}>CT Thalita Rodrigues</a>
-      and the nonprofit
+      and
       <a href={projectRoute('instituto-politecnico-do-brasil')[locale]}
         >Instituto Politécnico do Brasil</a
       >.
     </p>
     <p class="big-text">
-      A demo proves that software works once. What I care about is whether it
-      keeps working with bad data, unexpected use and someone trying to break
-      in. At Ordfall, I work in cybersecurity: I analyze vulnerabilities and
-      review code, dependencies and configurations.
+      At Ordfall, I take part in cybersecurity projects, analyzing
+      vulnerabilities and reviewing code, dependencies and configurations.
     </p>
     <p class="big-text">
-      I created and maintain
-      <a href={projectRoute('argus')[locale]}>Argus</a>, which brings dozens of
-      public feeds (aircraft, vessels, satellites, earthquakes) onto one live
-      map. With AI, I use only what I can test, observe and constrain: in
-      <a href={projectRoute('agentforge')[locale]}>AgentForge</a>, I implement
-      the same agent in ten frameworks and measure latency, token usage and
-      failure rate. Both are open source.
+      My independent projects include
+      <a href={projectRoute('argus')[locale]}>Argus</a>, a platform that brings
+      public data on aircraft, vessels, satellites and earthquakes together on
+      an interactive map, and
+      <a href={projectRoute('agentforge')[locale]}>AgentForge</a>, an
+      environment for comparing ten AI agent frameworks. The second uses
+      equivalent implementations to measure latency, token usage and failure
+      rate. Both are open source.
     </p>
     <p class="big-text">
-      My gaming profile, under the same handle, is on
+      Outside programming, I keep my gamer profile under the pseudonym Olwtelet
+      on
       <a
         href="https://konect.gg/olwtelet"
         target="_blank"
-        rel="noopener noreferrer">konect</a
+        rel="noopener noreferrer">Konect</a
       >
       <span class="nowrap"
         ><span class="bio__soon">coming soon to this channel</span>.</span
       >
+    </p>
+    <p class="big-text">
       <span class="nowrap"
         ><button class="button-text js-channel-trigger" data-channel="1"
           >Tune in</button
         >:</span
-      > browse the <a href={routes.projects[locale]}>projects</a> and
-      <a href={routes.certificates[locale]}>certificates</a>. Code is on
-      <a href={SITE.social.github} target="_blank" rel="noopener noreferrer"
-        >GitHub</a
-      >; reach me by <a href={`mailto:${SITE.email}`}>e-mail</a>.
+      > this site works as an archive of my work:
+      <a href={routes.projects[locale]}>projects</a>,
+      <a href={routes.openSource[locale]}>experiments</a>,
+      <a href={routes.certificates[locale]}>certificates</a> and other initiatives
+      I develop over time.
     </p>
   </HomeBio>
 </TVLayout>

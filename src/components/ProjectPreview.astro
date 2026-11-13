@@ -1,0 +1,133 @@
+---
+import type { Locale } from '../config/site'
+import type { LocalizedProject } from '../data/projects'
+import { useTranslations } from '../i18n/translations'
+import PreviewDiagram from './PreviewDiagram.astro'
+
+interface Props {
+  preview: NonNullable<LocalizedProject['preview']>
+  slug: string
+  locale: Locale
+}
+
+const { preview, slug, locale }: Props = Astro.props
+const t = useTranslations(locale)
+const base = preview.image ? `/assets/previews/${preview.image}` : ''
+const label = `${preview.alt} — ${t.preview.open(preview.source)}`
+---
+
+<figure class="preview" data-preview-kind={preview.kind}>
+  <a
+    class="preview__window"
+    href={preview.href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={label}
+  >
+    <span class="preview__bar" aria-hidden="true">
+      <span class="preview__source">{t.preview.label} · {preview.source}</span>
+      <span class="preview__kind">{t.preview.kind[preview.kind]}</span>
+    </span>
+    <span class="preview__screen">
+      {
+        preview.kind === 'diagram' ? (
+          <PreviewDiagram slug={slug} locale={locale} />
+        ) : (
+          <picture>
+            <source srcset={`${base}.webp`} type="image/webp" />
+            <img
+              src={`${base}.jpg`}
+              width={preview.width}
+              height={preview.height}
+              alt={preview.alt}
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+        )
+      }
+    </span>
+  </a>
+</figure>
+
+<style>
+  .preview {
+    margin: 0 0 1.8rem;
+    /* The page column sizes itself to its content; without this, the
+       nowrap source in the title bar and the diagrams widen it on phones. */
+    contain: inline-size;
+  }
+
+  .preview__window {
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.35);
+    color: var(--text-primary);
+    text-decoration: none;
+    /* neutralize the global link rainbow: it would fill the whole window */
+    background-image: none !important;
+
+    &:hover,
+    &:focus {
+      border-color: var(--text-secondary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--text-secondary);
+      outline-offset: 3px;
+    }
+  }
+
+  .preview__bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 1ch;
+    padding: 0.35rem 0.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    font-size: 0.72rem;
+    letter-spacing: 0.2ch;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .preview__source {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .preview__kind {
+    flex-shrink: 0;
+    color: var(--text-secondary);
+
+    &::before {
+      content: '● ';
+      color: #f00;
+    }
+  }
+
+  .preview__screen {
+    display: block;
+    position: relative;
+
+    & img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* faint scanlines, like the rest of the set; never hides content */
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.12) 0 1px,
+        transparent 1px 3px
+      );
+    }
+  }
+</style>
