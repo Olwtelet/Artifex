@@ -8,7 +8,7 @@ Personal website of **Isaac Rodrigues**, who signs his work as **Olwtelet** — 
 
 ## ✨ Overview
 
-This is **Portfolio V2**, a full rebuild of my personal site adapted from a TV/CRT-themed template. It moves away from a traditional portfolio layout in favor of a more expressive, retro-terminal experience — complete with channel-switching navigation, static/noise effects, an editable text-based breadcrumb, per-project "signal file" dossiers, a certificate gallery, and a fully bilingual (PT-BR / EN) statically-rendered structure.
+This is **Portfolio V2**, a full rebuild of my personal site around a TV/CRT theme. It moves away from a traditional portfolio layout in favor of a more expressive, retro-terminal experience — complete with channel-switching navigation, static/noise effects, an editable text-based breadcrumb, per-project "signal file" dossiers, a certificate gallery, and a fully bilingual (PT-BR / EN) statically-rendered structure.
 
 ## 🛠 Tech Stack
 
@@ -132,6 +132,10 @@ Full-Stack Developer building web products, automation tools, and applied AI exp
 - [Bluesky](https://bsky.app/profile/Olwtelet.dev)
 - [Instagram](https://instagram.com/olwtelets)
 - [Email](mailto:olwtelet@outlook.com)
+
+## 📄 License
+
+© 2026 Isaac Rodrigues (Olwtelet). **All rights reserved.** This is not open-source software: the code, text, design and media here may be viewed on GitHub but not copied, modified, redistributed or reused without written permission. Third-party packages, fonts and client material belong to their owners. See [LICENSE](LICENSE).
 
 ---
 
