@@ -382,7 +382,7 @@ function dossierRoutes() {
     '/en/open-source/',
     '/en/websites/',
     '/en/certificates/',
-    '/curriculo/',
+    '/resumo/',
     '/en/resume/',
   ]
   for (const route of listings) {
@@ -423,7 +423,7 @@ function dossierRoutes() {
       !/todo o país|nationwide/i.test(article)
     )
   }
-  const ptResume = text(page('/curriculo/'))
+  const ptResume = text(page('/resumo/'))
   const enResume = text(page('/en/resume/'))
   check(
     'PT resume says "Assina o trabalho como Olwtelet"',
@@ -441,7 +441,7 @@ function dossierRoutes() {
 
 // --- Resume page is called "Resumo" in Portuguese ---
 {
-  const html = page('/curriculo/')
+  const html = page('/resumo/')
   const strip = text(slice(html, '<div class="archive-strip"', '</div>'))
   check(
     'PT resume strip says RESUMO',
@@ -461,6 +461,54 @@ function dossierRoutes() {
     'EN resume strip still says RESUME',
     en.includes('SIGNAL ARCHIVE / RESUME'),
     en
+  )
+}
+
+// --- Resume lives at /resumo/; the old address redirects there ---
+{
+  const redirectsTo = (route, target) => {
+    const html = page(route)
+    return html.includes(`content="0;url=${target}"`)
+  }
+  check(
+    '/resumo/ is the PT resume page',
+    page('/resumo/').includes('<title>Resumo</title>')
+  )
+  check(
+    '/curriculo/ redirects to /resumo/',
+    redirectsTo('/curriculo/', '/resumo/'),
+    page('/curriculo/').slice(0, 160)
+  )
+  check(
+    '/pt-br/curriculo/ redirects straight to /resumo/',
+    redirectsTo('/pt-br/curriculo/', '/resumo/'),
+    page('/pt-br/curriculo/').slice(0, 160)
+  )
+  const footer = slice(page('/'), '<footer class="footer"', '</footer>')
+  check(
+    'PT footer RESUMO links /resumo/',
+    footer.includes('href="/resumo/"'),
+    footer.slice(0, 200)
+  )
+  const enHead = slice(page('/en/resume/'), '<head', '</head>')
+  check(
+    'EN resume points its PT alternate at /resumo/',
+    enHead.includes(
+      'hreflang="pt-BR" href="https://olwtelet.vercel.app/resumo/"'
+    )
+  )
+  const linking = allHtml()
+    .filter(
+      (file) =>
+        !/Redirecting to:/.test(readFileSync(file, 'utf8').slice(0, 200))
+    )
+    .filter((file) =>
+      /href="[^"]*\/curriculo\//.test(readFileSync(file, 'utf8'))
+    )
+  check(
+    'no page links to /curriculo/ any more',
+    linking.length === 0,
+    linking.join(', ')
   )
 }
 

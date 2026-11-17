@@ -15,7 +15,9 @@ const legacyRedirects = {
   '/pt-br': '/',
   '/pt-br/codigo-aberto': '/codigo-aberto/',
   '/pt-br/sites': '/sites/',
-  '/pt-br/curriculo': '/curriculo/',
+  '/pt-br/curriculo': '/resumo/',
+  // the Portuguese resume moved from /curriculo/ to /resumo/
+  '/curriculo': '/resumo/',
   '/pt-br/projetos': '/projetos/',
   '/open-source': '/en/open-source/',
   '/websites': '/en/websites/',

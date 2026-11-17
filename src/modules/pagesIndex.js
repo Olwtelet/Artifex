@@ -39,7 +39,7 @@ export const PAGES = {
     },
     {
       aliases: ['curriculo', 'currículo', 'resumo', 'cv'],
-      url: '/curriculo/',
+      url: '/resumo/',
       external: true,
     },
     {

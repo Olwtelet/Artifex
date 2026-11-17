@@ -66,7 +66,7 @@ Portuguese is the default language and lives at the root; English lives under `/
 | Archive      | `/projetos/`        | `/en/projects/`        |
 | Project      | `/projetos/[slug]/` | `/en/projects/[slug]/` |
 | Certificates | `/certificados/`    | `/en/certificates/`    |
-| Resume       | `/curriculo/`       | `/en/resume/`          |
+| Resume       | `/resumo/`          | `/en/resume/`          |
 
 Older URLs keep working: `/pt-br/…` redirects to the matching Portuguese page at the root, and the former English `/open-source/`, `/websites/`, `/projects/`, `/projects/[slug]/` and `/resume/` redirect to their `/en/` equivalents. `/` now serves the Portuguese home (English: `/en/`).
 

@@ -13,7 +13,7 @@ export const routes = {
   openSource: { 'pt-br': '/codigo-aberto/', en: '/en/open-source/' },
   websites: { 'pt-br': '/sites/', en: '/en/websites/' },
   certificates: { 'pt-br': '/certificados/', en: '/en/certificates/' },
-  resume: { 'pt-br': '/curriculo/', en: '/en/resume/' },
+  resume: { 'pt-br': '/resumo/', en: '/en/resume/' },
   projects: { 'pt-br': '/projetos/', en: '/en/projects/' },
 } satisfies Record<string, LocalizedPath>
 
